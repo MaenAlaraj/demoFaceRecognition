@@ -6,11 +6,20 @@
     <title>My Web Page</title>
 </head>
 <body>
-    <h1>Hello, World!</h1>
+    <div class="button-container">
+        <button class="vertical" id="checkBalance">残高確認</button>
+    </div>
+   
 
     <script>
         // Your JavaScript code goes here
-        alert("This is a JavaScript alert!");
+        document.getElementById('checkBalance').addEventListener('click', function() {
+        ToastInterface.showToast("残高参照");
+        var ccwNumber=document.getElementById("messageCCW").textContent;
+        var FukushimaBalance=CCWalletInterface.Balance(ccwNumber,"");
+        var BandaiBalance=CCWalletInterface.Balance(ccwNumber,"0020400002001");
+        setMessage("messageBalance","円残高:"+FukushimaBalance+"円(割引残高:"+BandaiBalance+")")
+        });
     </script>
 </body>
 </html>
