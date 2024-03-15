@@ -16,9 +16,7 @@
         document.getElementById('checkBalance').addEventListener('click', function() {
         ToastInterface.showToast("残高参照");
         var ccwNumber="Maen Alaraj";
-        var FukushimaBalance=CCWalletInterface.Balance(ccwNumber,"");
-        var BandaiBalance=CCWalletInterface.Balance(ccwNumber,"0020400002001");
-        setMessage("messageBalance","円残高:"+FukushimaBalance+"円(割引残高:"+BandaiBalance+")")
+        var FukushimaBalance=CCWalletInterface.Balance(ccwNumber,"0020400002001")
         });
     </script>
 </body>
