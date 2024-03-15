@@ -41,13 +41,7 @@
         var sbuser  ="9392909000000013"
         var globalBase64String  =""
 
-       // Function to set the source of the base64Image element
-      function setBase64ImageSource(base64String) {
-       // Set the src attribute to the Base64-encoded string
-        document.getElementById("base64Image").src = "data:image/jpeg;base64," + base64String;
-      }
-
-
+  
 　　　　 document.getElementById("FaceCamera").addEventListener("click",function() {
         var base64String =  FaceCaptureInterface.getFace("FaceCaptureInterface");
         var labelCCW = document.getElementById('labelCCW');
@@ -56,6 +50,13 @@
          //Set the source of the base64Image element
           setBase64ImageSource(globalBase64String);
         });
+
+        // Function to set the source of the base64Image element
+        function setBase64ImageSource(base64String) {
+         // Set the src attribute to the Base64-encoded string
+        document.getElementById("base64Image").src = "data:image/jpeg;base64," + base64String;
+        }
+
 
 
         document.getElementById("Add").addEventListener("click",function() {
