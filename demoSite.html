@@ -1,18 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Web Page</title>
+     <base target="_top">
+    <style>
+        /* Add custom CSS for positioning */
+          .container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+          }
+          .button-container {
+            display: flex;
+            flex-direction: column;
+             margin-bottom: 10px;
+          }
+    
+    
+          #base64Image {
+            margin-top: 10px; /* Adjust the margin as needed */
+          }
+    </style>
 </head>
 <body>
     <div class="button-container">
-        <button class="vertical" id="checkBalance">残高確認</button>
+        <button class="vertical" id="checkBalance">顔撮影</button>
+         <button id="Add" class="vertical">顔登録</button>
     </div>
-   
+     <div class="button-container">
+  　　　  <img id="base64Image" src="" alt="Base64 Image" height="250" width="250">
+   　　　 <label id="labelCCW"></label>
+  　　</div>
 
     <script>
         // Your JavaScript code goes here
+
+        // Define a global variable to hold the result
+        var userid = "9392908016971552"
+        var terminalid = ""
+        var ccwuser = "tetsu"
+        var sbuser  ="9392909000000013"
+        var globalBase64String  =""
+
+       // Function to set the source of the base64Image element
+      function setBase64ImageSource(base64String) {
+       // Set the src attribute to the Base64-encoded string
+        document.getElementById("base64Image").src = "data:image/jpeg;base64," + base64String;
+      }
+
+
+　　　　 document.getElementById("FaceCamera").addEventListener("click",function() {
+        var base64String =  FaceCaptureInterface.getFace("FaceCaptureInterface");
+        var labelCCW = document.getElementById('labelCCW');
+        labelCCW.innerText =""
+        globalBase64String =  base64String;
+         //Set the source of the base64Image element
+          setBase64ImageSource(globalBase64String);
+        });
+
+
+        document.getElementById("Add").addEventListener("click",function() {
+        var info=CCWalletInterface.AddFaces(sbuser,userid,"A",globalBase64String);
+        var labelCCW = document.getElementById('labelCCW');
+        labelCCW.innerText =""
+        labelCCW.innerText =  info;
+        });
+        
+        
         document.getElementById('checkBalance').addEventListener('click', function() {
         ToastInterface.showToast("Maen");
         var ccwNumber="Maen";
