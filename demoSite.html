@@ -79,7 +79,7 @@
 
         //顔の参照   command = "S"
         document.getElementById("Search").addEventListener("click",function() {
-        var info=CCWalletInterface.SearchFaces(sbuser,userid,"S");
+        var info=CCWalletInterface.SearchFaces(sbuser,userid,"S",globalBase64String);
         var labelCCW = document.getElementById('labelCCW');
         labelCCW.innerText =""
         labelCCW.innerText =  info;
