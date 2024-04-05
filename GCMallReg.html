@@ -72,10 +72,9 @@
             alert("顔 button clicked!");
 
             //Set the Camera
-            var base64String =  FaceCaptureInterface.getFace("FaceCaptureInterface");
+            globalBase64String =  FaceCaptureInterface.getFace("FaceCaptureInterface");
             var labelCCW = document.getElementById('labelCCW');
-            labelCCW.innerText =""
-            globalBase64String =  base64String;            
+            labelCCW.innerText =""       
             //Set the source of the base64Image element
             setBase64ImageSource(globalBase64String);
 
