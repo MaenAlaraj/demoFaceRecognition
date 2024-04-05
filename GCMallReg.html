@@ -43,7 +43,6 @@
 
     <script>        
         document.getElementById("qrButton").addEventListener("click", function() {
-            alert("QR button clicked!");
             var qrstring = QRInterface.get_QRInfo("QR");
             var qrlist=qrstring.split(":")
             if(qrlist[0]=="USER" && qrlist.length==3)
