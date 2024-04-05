@@ -36,7 +36,7 @@
         <button id="qrButton">QR</button>
         <button id="faceButton">顔</button>
         <div class="button-info">
-            <img src="face_image.jpg" alt="Face Image">
+              <img id="base64Image" src="" alt="Base64 Image" height="250" width="250">
              <label id="labelCCW"></label>
             <p>顔</p>
         </div>
@@ -69,11 +69,11 @@
         });
 
         document.getElementById("faceButton").addEventListener("click", function() {
-            alert("顔 button clicked!");
+            
 
             //Set the Camera
             var base64String =  FaceCaptureInterface.getFace("FaceCaptureInterface");
-            setTimeout(null, 15000);
+            //setTimeout(null, 15000);
             var labelCCW = document.getElementById('labelCCW');
             labelCCW.innerText =""
             
@@ -81,9 +81,9 @@
             setBase64ImageSource(base64String);
 
             //Set the S (Search Operation)
-            var info=CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);           
-            labelCCW.innerText =""
-            labelCCW.innerText =  info;
+            //var info=CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);           
+            //labelCCW.innerText =""
+            //labelCCW.innerText =  info;
             
         });
     </script>
