@@ -41,18 +41,16 @@
         </div>
     </div>
 
-    <script>
-        // JavaScript code can be added here
-        // For now, let's just add an alert when each button is clicked
+    <script>        
         document.getElementById("qrButton").addEventListener("click", function() {
             alert("QR button clicked!");
             var qrstring = QRInterface.get_QRInfo("QR");
+            var gckid=CCWalletInterface.GetgckID(qrstring)
             var qrlist=qrstring.split(":")
             if(qrlist[0]=="USER" && qrlist.length==3)
             {
                 var gckid=CCWalletInterface.GetgckID(qrlist[2])
                 ToastInterface.showToast(gckid)
-                setMessage("messageCCW",gckid)
             }else
             {
                 ToastInterface.showToast("CCWではないQRが読み込まれました")
