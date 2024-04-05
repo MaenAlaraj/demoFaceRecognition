@@ -1,15 +1,39 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Web Page</title>
+    <title>Button Page</title>
+    <style>
+        .button-container {
+            text-align: center;
+        }
+        .button-container button {
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <h1>Hello, World!</h1>
+    <h1>Button Page</h1>
+    
+    <div class="button-container">
+        <button id="qrButton">QR</button>
+        <button id="faceButton">顔</button>
+    </div>
 
     <script>
-        // Your JavaScript code goes here
-        alert("This is a JavaScript alert!");
+        // JavaScript code can be added here
+        // For now, let's just add an alert when each button is clicked
+        document.getElementById("qrButton").addEventListener("click", function() {
+            alert("QR button clicked!");
+        });
+
+        document.getElementById("faceButton").addEventListener("click", function() {
+            alert("顔 button clicked!");
+        });
     </script>
 </body>
 </html>
