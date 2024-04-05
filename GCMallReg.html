@@ -37,17 +37,30 @@
         <button id="faceButton">顔</button>
         <div class="button-info">
             <img src="face_image.jpg" alt="Face Image">
+             <label id="labelCCW"></label>
             <p>顔</p>
         </div>
     </div>
 
-    <script>        
+    <script>
+
+         var gckid = ""
+        var sbuser  ="9392909000000013"
+        var globalBase64String  =""
+        
+         // Function to set the source of the base64Image element
+        function setBase64ImageSource(base64String) {
+         // Set the src attribute to the Base64-encoded string
+        document.getElementById("base64Image").src = "data:image/jpeg;base64," + base64String;
+        }
+
+        
         document.getElementById("qrButton").addEventListener("click", function() {
             var qrstring = QRInterface.get_QRInfo("QR");
             var qrlist=qrstring.split(":")
             if(qrlist[0]=="USER" && qrlist.length==3)
             {
-                var gckid=CCWalletInterface.GetgckID(qrlist[2])
+                gckid=CCWalletInterface.GetgckID(qrlist[2])
                 ToastInterface.showToast(gckid)
             }else
             {
@@ -57,6 +70,20 @@
 
         document.getElementById("faceButton").addEventListener("click", function() {
             alert("顔 button clicked!");
+
+            //Set the Camera
+            var base64String =  FaceCaptureInterface.getFace("FaceCaptureInterface");
+            var labelCCW = document.getElementById('labelCCW');
+            labelCCW.innerText =""
+            globalBase64String =  base64String;            
+            //Set the source of the base64Image element
+            setBase64ImageSource(globalBase64String);
+
+            //Set the S (Search Operation)
+            var info=CCWalletInterface.SearchFaces(sbuser,gckid,"S",globalBase64String);           
+            labelCCW.innerText =""
+            labelCCW.innerText =  info;
+            
         });
     </script>
 </body>
