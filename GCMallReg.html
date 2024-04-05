@@ -73,6 +73,7 @@
 
             //Set the Camera
             var base64String =  FaceCaptureInterface.getFace("FaceCaptureInterface");
+            ToastInterface.showToast(base64String)
             //setTimeout(null, 15000);
             var labelCCW = document.getElementById('labelCCW');
             labelCCW.innerText =""
