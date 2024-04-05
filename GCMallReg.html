@@ -45,7 +45,7 @@
         document.getElementById("qrButton").addEventListener("click", function() {
             alert("QR button clicked!");
             var qrstring = QRInterface.get_QRInfo("QR");
-            var gckid=CCWalletInterface.GetgckID(qrstring)
+            ToastInterface.showToast(qrstring)
             var qrlist=qrstring.split(":")
             if(qrlist[0]=="USER" && qrlist.length==3)
             {
