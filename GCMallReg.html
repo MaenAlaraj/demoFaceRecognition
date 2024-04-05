@@ -46,7 +46,7 @@
 
          var gckid = ""
         var sbuser  ="9392909000000013"
-        var globalBase64String  =""
+       
         
          // Function to set the source of the base64Image element
         function setBase64ImageSource(base64String) {
@@ -72,14 +72,15 @@
             alert("顔 button clicked!");
 
             //Set the Camera
-            globalBase64String =  FaceCaptureInterface.getFace("FaceCaptureInterface");
+            var base64String =  FaceCaptureInterface.getFace("FaceCaptureInterface");
             var labelCCW = document.getElementById('labelCCW');
-            labelCCW.innerText =""       
+            labelCCW.innerText =""
+            
             //Set the source of the base64Image element
-            setBase64ImageSource(globalBase64String);
+            setBase64ImageSource(base64String);
 
             //Set the S (Search Operation)
-            var info=CCWalletInterface.SearchFaces(sbuser,gckid,"S",globalBase64String);           
+            var info=CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);           
             labelCCW.innerText =""
             labelCCW.innerText =  info;
             
