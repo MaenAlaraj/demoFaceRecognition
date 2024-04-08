@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demo GC Mall</title>
+    <title>Demo Registeration Form</title>
     <style>
         .button-container {
             text-align: center;
@@ -48,7 +48,7 @@
 
          var gckid = ""
          var sbuser  ="9392909000000013"
-         var globalBase64String  =""
+         
         
          // Function to set the source of the base64Image element
         function setBase64ImageSource(base64String) 
@@ -74,21 +74,19 @@
         document.getElementById("faceButton").addEventListener("click", function() {
             //Set the Camera
             var base64String =  FaceCaptureInterface.getFace("FaceCaptureInterface");              
-             ToastInterface.showToast(base64String)
-             globalBase64String =  base64String;
-            
+                        
             //Set the source of the base64Image element
-            setBase64ImageSource(globalBase64String);
+            setBase64ImageSource(base64String);
             
-            //var labelCCW = document.getElementById('labelCCW');
-            //labelCCW.innerText =""
+             var labelCCW = document.getElementById('labelCCW');
+             labelCCW.innerText =""
 
 
             
             //Set the S (Search Operation)
-            //var info=CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);           
-            //labelCCW.innerText =""
-            //labelCCW.innerText =  info;
+              var info=CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);           
+              labelCCW.innerText =""
+              labelCCW.innerText =  info;
             
         });
     </script>
