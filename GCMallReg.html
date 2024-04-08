@@ -91,7 +91,7 @@
               labelCCW.innerText =  info;
               if (info.includes(errorsSubstring))
               {
-                   alert("ORリーダーが立ち上がります。");
+                　myFunction();
                   var qrstring = QRInterface.get_QRInfo("QR");
                   ToastInterface.showToast(qrstring)
               }else 
@@ -99,6 +99,25 @@
                   ToastInterface.showToast("部分文字列「エラー」が見つかりません")
               }      
         });
+
+
+            
+            // Define a function to sleep
+            function sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+            
+            // Use the sleep function
+            async function myFunction() {
+                console.log("Before sleep");
+                await sleep(3000); // Sleep for 3 seconds
+                console.log("After sleep");
+            }
+
+
+
+
+        
     </script>
 </body>
 </html>
