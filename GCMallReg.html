@@ -91,13 +91,13 @@
               labelCCW.innerText =  info;
               if (info.includes(errorsSubstring))
               {
+                   alert("ORリーダーが立ち上がります。");
                   var qrstring = QRInterface.get_QRInfo("QR");
                   ToastInterface.showToast(qrstring)
               }else 
               {
                   ToastInterface.showToast("部分文字列「エラー」が見つかりません")
-              }
-            
+              }      
         });
     </script>
 </body>
