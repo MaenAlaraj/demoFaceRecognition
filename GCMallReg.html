@@ -96,7 +96,7 @@
                   const match = qrstring.match(/,(.*?),/);
                   extractedUserID = match ? match[1] : null;
                   labelCCW.innerText ="ユーザーID：" + extractedUserID;
-                  var info=CCWalletInterface.SearchFaces(sbuser,extractedUserID,"A",base64String);           
+                  var info=CCWalletInterface.AddFaces(sbuser,extractedUserID,"A",base64String);           
              　　 labelCCW.innerText =""
               　　labelCCW.innerText =  info;
               }else 
