@@ -51,6 +51,7 @@
 
          var gckid = ""
          var sbuser  ="9392909000000013"
+         const errorsSubstring = "エラー";
          
         
          // Function to set the source of the base64Image element
@@ -83,13 +84,19 @@
             
              var labelCCW = document.getElementById('labelCCW');
              labelCCW.innerText =""
-
-
-            
+      
             //Set the S (Search Operation)
               var info=CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);           
               labelCCW.innerText =""
               labelCCW.innerText =  info;
+              if (info.includes(errorsSubstring)) 
+              {
+                  var qrstring = QRInterface.get_QRInfo("QR");
+                  ToastInterface.showToast(qrstring)
+              } else 
+              {
+                  ToastInterface.showToast("部分文字列「エラー」が見つかりません")
+              }
             
         });
     </script>
