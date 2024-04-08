@@ -91,7 +91,9 @@
               labelCCW.innerText =  info;
               if (info.includes(errorsSubstring))
               {
-                　
+                  // Reset the image view
+                  resetBase64Image();
+                　labelCCW.innerText =""
                   var qrstring = QRInterface.get_QRInfo("QR");
                   ToastInterface.showToast(qrstring)
               }else 
@@ -103,7 +105,11 @@
 
             
 
-
+        // Function to reset the image view
+        function resetBase64Image() {
+            // Clear the src attribute of the base64Image element
+            document.getElementById("base64Image").src = "";
+        }
 
         
     </script>
