@@ -85,7 +85,7 @@
              var labelCCW = document.getElementById('labelCCW');
              labelCCW.innerText =""
       
-            //Set the S (Search Operation)
+            　//Set the S (Search Operation)
               var info=CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);           
               labelCCW.innerText =""
               labelCCW.innerText =  info;
@@ -97,8 +97,10 @@
                   var qrstring = QRInterface.get_QRInfo("QR");
                   const match = qrstring.match(/,(.*?),/);
                   extractedUserID = match ? match[1] : null;
-                  labelCCW.innerText =extractedUserID;
-                   ToastInterface.showToast(extractedUserID)
+                  labelCCW.innerText ="ユーザーID：" + extractedUserID;
+                  var info=CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);           
+             　　 labelCCW.innerText =""
+              　　labelCCW.innerText =  info;
               }else 
               {
                   ToastInterface.showToast("部分文字列「エラー」が見つかりません")
