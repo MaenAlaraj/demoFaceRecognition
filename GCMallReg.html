@@ -89,7 +89,7 @@
               var info=CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);           
               labelCCW.innerText =""
               labelCCW.innerText =  info;
-              if (info.includes(errorsSubstring)) {
+              if (info.includes(errorsSubstring))
               {
                   var qrstring = QRInterface.get_QRInfo("QR");
                   ToastInterface.showToast(qrstring)
