@@ -51,7 +51,7 @@
 
          var gckid = ""
          var sbuser  ="9392909000000013"
-         const errorsSubstring = "エラー";
+         const errorsSubstring = "生体認証検証エラー";
          
         
          // Function to set the source of the base64Image element
@@ -89,7 +89,7 @@
               var info=CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);           
               labelCCW.innerText =""
               labelCCW.innerText =  info;
-              if (info == "生体認証検証エラー") 
+              if (info.indexOf(errorsSubstring) !== -1) {
               {
                   var qrstring = QRInterface.get_QRInfo("QR");
                   ToastInterface.showToast(qrstring)
