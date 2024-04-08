@@ -91,14 +91,12 @@
               labelCCW.innerText =  info;
               if (info.includes(errorsSubstring))
               {
-                  // Reset the image view
-                  resetBase64Image();
                 　labelCCW.innerText =""
                   var qrstring = QRInterface.get_QRInfo("QR");
                   const match = qrstring.match(/,(.*?),/);
                   extractedUserID = match ? match[1] : null;
                   labelCCW.innerText ="ユーザーID：" + extractedUserID;
-                  var info=CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);           
+                  var info=CCWalletInterface.SearchFaces(sbuser,extractedUserID,"A",base64String);           
              　　 labelCCW.innerText =""
               　　labelCCW.innerText =  info;
               }else 
@@ -109,13 +107,6 @@
 
 
             
-
-        // Function to reset the image view
-        function resetBase64Image() {
-            // Clear the src attribute of the base64Image element
-            document.getElementById("base64Image").src = "";
-        }
-
         
     </script>
 </body>
