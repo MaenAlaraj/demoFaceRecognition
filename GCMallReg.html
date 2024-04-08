@@ -27,6 +27,9 @@
             margin: 5px 0;
             font-size: 14px;
         }
+         #base64Image {
+            margin-top: 10px; /* Adjust the margin as needed */
+          }
     </style>
 </head>
 <body>
@@ -35,18 +38,17 @@
     <div class="button-container">
         <button id="qrButton">QR</button>
         <button id="faceButton">顔</button>
-        <div class="button-info">
+     </div>
+    <div class="button-container">
               <img id="base64Image" src="" alt="Base64 Image" height="250" width="250">
              <label id="labelCCW"></label>
-            <p>顔</p>
-        </div>
     </div>
 
     <script>
 
          var gckid = ""
          var sbuser  ="9392909000000013"
-       
+         var globalBase64String  =""
         
          // Function to set the source of the base64Image element
         function setBase64ImageSource(base64String) 
@@ -71,17 +73,18 @@
 
         document.getElementById("faceButton").addEventListener("click", function() {
             //Set the Camera
-            var base64String =  FaceCaptureInterface.getFace("FaceCaptureInterface");
-           
-           
+            var base64String =  FaceCaptureInterface.getFace("FaceCaptureInterface");              
              ToastInterface.showToast(base64String)
-            
-            var labelCCW = document.getElementById('labelCCW');
-            labelCCW.innerText =""
+             globalBase64String =  base64String;
             
             //Set the source of the base64Image element
-            setBase64ImageSource(base64String);
+            setBase64ImageSource(globalBase64String);
+            
+            //var labelCCW = document.getElementById('labelCCW');
+            //labelCCW.innerText =""
 
+
+            
             //Set the S (Search Operation)
             //var info=CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);           
             //labelCCW.innerText =""
