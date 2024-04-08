@@ -97,7 +97,8 @@
                   var qrstring = QRInterface.get_QRInfo("QR");
                   const match = qrstring.match(/,(.*?),/);
                   extractedUserID = match ? match[1] : null;
-                  ToastInterface.showToast(extractedUserID)
+                  labelCCW.innerText =extractedUserID;
+                   ToastInterface.showToast(extractedUserID)
               }else 
               {
                   ToastInterface.showToast("部分文字列「エラー」が見つかりません")
