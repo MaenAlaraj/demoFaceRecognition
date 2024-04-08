@@ -52,7 +52,7 @@
          var gckid = ""
          var sbuser  ="9392909000000013"
          const errorsSubstring = "生体認証検証エラー";
-         
+         var extractedUserID =""
         
          // Function to set the source of the base64Image element
         function setBase64ImageSource(base64String) 
@@ -95,7 +95,9 @@
                   resetBase64Image();
                 　labelCCW.innerText =""
                   var qrstring = QRInterface.get_QRInfo("QR");
-                  ToastInterface.showToast(qrstring)
+                  const match = str.match(/,(.*?),/);
+                  extractedUserID = match ? match[1] : null;
+                  ToastInterface.showToast(extractedUserID)
               }else 
               {
                   ToastInterface.showToast("部分文字列「エラー」が見つかりません")
