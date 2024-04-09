@@ -45,8 +45,10 @@
 
      <div class="button-container">
              <label id="labelCCW"></label>
-    </div>
-
+     </div>
+     <div class="button-container">
+             <label id="label_NK_OP"></label>
+     </div>
     <script>
 
          var gckid = ""
@@ -85,7 +87,10 @@
             
              var labelCCW = document.getElementById('labelCCW');
              labelCCW.innerText =""
-      
+
+             var label_NK_OP = document.getElementById('label_NK_OP');
+             label_NK_OP.innerText =""
+            
             　//Set the S (Search Operation)
               var info=CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);           
               labelCCW.innerText =""
@@ -97,10 +102,10 @@
                   const match = qrstring.match(/,(.*?),/);
                   extractedUserID = match ? match[1] : null;
                   extractedUserID = prefix + extractedUserID
-                  labelCCW.innerText ="ユーザーID：" + extractedUserID;
-                  //var info=CCWalletInterface.AddFaces(sbuser,extractedUserID,"A",base64String);           
-             　　 //labelCCW.innerText =""
-              　　//labelCCW.innerText =  info;
+                  labelCCW.innerText ="ユーザー名：" + extractedUserID;
+                  var info=CCWalletInterface.AddFaces(sbuser,extractedUserID,"A",base64String);           
+             　　  label_NK_OP.innerText =""
+              　　 label_NK_OP.innerText =  info;
               }  
         });
 
