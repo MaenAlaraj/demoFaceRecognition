@@ -106,7 +106,11 @@
                   var info=CCWalletInterface.AddFaces(sbuser,extractedUserID,"A",base64String);           
              　　  label_NK_OP.innerText =""
               　　 label_NK_OP.innerText =  info;
-              }  
+              }else
+              {
+                  abel_NK_OP.innerText = "このユーザーの顔はすでに登録されています。"
+              }
+                  
         });
 
 
