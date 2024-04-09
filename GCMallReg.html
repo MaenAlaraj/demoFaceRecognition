@@ -50,7 +50,8 @@
     <script>
 
          var gckid = ""
-         var sbuser  ="9392909000000013"
+         var prefix = "93929"
+         var sbuser  =prefix + "09000000013"
          const errorsSubstring = "生体認証検証エラー";
          var extractedUserID =""
         
@@ -95,7 +96,7 @@
                   var qrstring = QRInterface.get_QRInfo("QR");
                   const match = qrstring.match(/,(.*?),/);
                   extractedUserID = match ? match[1] : null;
-                  extractedUserID = "93929" + extractedUserID
+                  extractedUserID = prefix + extractedUserID
                   labelCCW.innerText ="ユーザーID：" + extractedUserID;
                   var info=CCWalletInterface.AddFaces(sbuser,extractedUserID,"A",base64String);           
              　　 labelCCW.innerText =""
