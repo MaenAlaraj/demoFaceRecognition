@@ -147,7 +147,25 @@
               {
                   abel_NK_OP.innerText = "このユーザーの顔はすでに登録されています。"
               }                  
-        });        
+        });
+
+
+        document.getElementById("qrButton").addEventListener("click", function() {
+                 openLinkAndPassUserID();
+                 ToastInterface.showToast("openLinkAndPassUserID")
+        });
+
+        // Function to open another link and pass the value of extractedUserID to a label
+        function openLinkAndPassUserID() {
+            // Get the extractedUserID value
+            var userID = extractedUserID;
+            
+            // Construct the URL with the userID as a query parameter
+            var url = "https://maenalaraj.github.io/demoFaceRecognition/GC_MAll_Products?userID=" + userID;
+            
+            // Open the link in a new tab
+            window.open(url, '_blank');
+        }
     </script>
 </body>
 </html>
