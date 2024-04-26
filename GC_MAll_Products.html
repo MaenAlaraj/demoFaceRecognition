@@ -177,7 +177,7 @@ document.getElementById('authenticate').addEventListener('click', function() {
     }
     }*/
 
-     var qrlist=qrstring.split(":")
+     var qrlist=qrstring.split(",")
      if(qrlist.length==3)
      {
          gckid=CCWalletInterface.GetgckID(qrlist[2])
@@ -185,6 +185,7 @@ document.getElementById('authenticate').addEventListener('click', function() {
      }else
      {
          ToastInterface.showToast(qrlist.length)
+         ToastInterface.showToast(qrlist[2])
      }
     document.getElementById('authContainer').style.display = 'none';
     document.getElementById('mainContainer').style.display = 'block';
