@@ -79,12 +79,6 @@
     <button id="faceButton">顔</button>
     <img id="base64Image" src="" alt="Base64 Image" height="250" width="250">
 </div>
-<div class="button-container">
-    <label id="labelCCW"></label>
-</div>
- <div class="button-container">
-    <label id="label_NK_OP"></label>
-</div>
 <body>
 <div id="mainContainer" style="display: none;">
     <p id="user"></p>
@@ -185,7 +179,6 @@ document.getElementById('authenticate').addEventListener('click', function() {
     const match = qrstring.match(/,(.*?),/);
     extractedUserID = match ? match[1] : null;
     extractedUserID = prefix + extractedUserID
-    labelCCW.innerText ="ユーザー名：" + extractedUserID;
     ToastInterface.showToast(extractedUserID)
     
     document.getElementById('authContainer').style.display = 'none';
