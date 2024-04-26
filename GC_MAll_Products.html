@@ -178,6 +178,10 @@ function setTotal(){
           }else
           {
                ToastInterface.showToast("このユーザーの顔はすでに登録されています。")
+               setMessage("GCユーザー:"+extractedUserID,"user")
+               document.getElementById('authContainer').style.display = 'none';
+               document.getElementById('mainContainer').style.display = 'block';
+               setBalance()   
           }             
     });
 document.getElementById('authenticate').addEventListener('click', function() {
