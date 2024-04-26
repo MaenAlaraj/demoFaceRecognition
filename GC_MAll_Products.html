@@ -112,6 +112,13 @@
     </div>
 </div>
 <script>
+ var gckid = ""
+ var prefix = "93929"
+ var sbuser  =prefix + "09000000013"
+ const errorsSubstring = "生体認証検証エラー";
+ var extractedUserID =""
+
+    
 const items = [];
 var total=0;
 var discount_total=0
@@ -177,16 +184,12 @@ document.getElementById('authenticate').addEventListener('click', function() {
     }
     }*/
 
-     var qrlist=qrstring.split(",")
-     if(qrlist.length==3)
-     {
-         gckid=CCWalletInterface.GetgckID(qrlist[2])
-         ToastInterface.showToast(gckid)
-     }else
-     {
-         ToastInterface.showToast(qrlist.length)
-         ToastInterface.showToast(qrlist[2])
-     }
+    const match = qrstring.match(/,(.*?),/);
+    extractedUserID = match ? match[1] : null;
+    extractedUserID = prefix + extractedUserID
+    labelCCW.innerText ="ユーザー名：" + extractedUserID;
+    ToastInterface.showToast(extractedUserID)
+    
     document.getElementById('authContainer').style.display = 'none';
     document.getElementById('mainContainer').style.display = 'block';
     setBalance()    
