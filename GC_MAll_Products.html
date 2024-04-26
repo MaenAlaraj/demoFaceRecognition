@@ -72,9 +72,20 @@
     </style>
 </head>
 <div class="auth-container" id="authContainer">
-    <p>端末支払い・ベクトル通貨デモアプリ</p>
-    <p>ばんだいコインのチャージQRを読み込ませてください</p>
+    <p>GC Mall デモアプリ</p>
+    <p>GCのQRか顔を読み込ませてください</p>
     <button id="authenticate">認証</button>
+    <button id="qrButton">QR</button>
+    <button id="faceButton">顔</button>
+</div>
+<div class="button-container">
+    <img id="base64Image" src="" alt="Base64 Image" height="250" width="250">
+</div>
+<div class="button-container">
+    <label id="labelCCW"></label>
+</div>
+ <div class="button-container">
+    <label id="label_NK_OP"></label>
 </div>
 <body>
 <div id="mainContainer" style="display: none;">
@@ -86,9 +97,6 @@
         <li>
             <span>コード      </span>
             <span>値段</span>
-            <span>割引率</span>
-            <span>削除</span>
-
         <!-- ここに読み込んだ商品をリストとして表示します -->
         </li>
     </ul>
@@ -97,10 +105,74 @@
 <div id="totalAmount">トータル: 0円</div>
     <div class=".vertical">
 <button id="payment">支払い</button>
-        <button id="charge">割引券</button>
     </div>
 </div>
 <script>
+ var gckid = ""
+ var prefix = "93929"
+ var sbuser  =prefix + "09000000013"
+ const errorsSubstring = "生体認証検証エラー";
+ var extractedUserID =""
+
+ // Function to set the source of the base64Image element
+function setBase64ImageSource(base64String) 
+{
+ // Set the src attribute to the Base64-encoded string
+document.getElementById("base64Image").src = "data:image/jpeg;base64," + base64String;
+}
+
+
+document.getElementById("qrButton").addEventListener("click", function() {
+    var qrstring = QRInterface.get_QRInfo("QR");
+    var qrlist=qrstring.split(":")
+    if(qrlist[0]=="USER" && qrlist.length==3)
+    {
+        gckid=CCWalletInterface.GetgckID(qrlist[2])
+        ToastInterface.showToast(gckid)
+    }else
+    {
+        ToastInterface.showToast("CCWではないQRが読み込まれました")
+    }
+});
+
+document.getElementById("faceButton").addEventListener("click", function() {
+    //Set the Camera
+    var base64String =  FaceCaptureInterface.getFace("FaceCaptureInterface");              
+                
+    //Set the source of the base64Image element
+    setBase64ImageSource(base64String);
+    
+     var labelCCW = document.getElementById('labelCCW');
+     labelCCW.innerText =""
+
+     var label_NK_OP = document.getElementById('label_NK_OP');
+     label_NK_OP.innerText =""
+    
+     //Set the S (Search Operation)
+      var info=CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);           
+      labelCCW.innerText =""
+      labelCCW.innerText =  info;
+      if (info.includes(errorsSubstring))
+      {
+         labelCCW.innerText =""
+          var qrstring = QRInterface.get_QRInfo("QR");
+          const match = qrstring.match(/,(.*?),/);
+          extractedUserID = match ? match[1] : null;
+          extractedUserID = prefix + extractedUserID
+          labelCCW.innerText ="ユーザー名：" + extractedUserID;
+          var info=CCWalletInterface.AddFaces(sbuser,extractedUserID,"A",base64String);           
+         label_NK_OP.innerText =""
+         label_NK_OP.innerText =  info;
+      }else
+      {
+          abel_NK_OP.innerText = "このユーザーの顔はすでに登録されています。"
+      }          
+});
+
+
+
+
+    
 const items = [];
 var total=0;
 var discount_total=0
