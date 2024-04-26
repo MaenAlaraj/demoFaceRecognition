@@ -174,11 +174,11 @@ function setTotal(){
               extractedUserID = match ? match[1] : null;
               extractedUserID = prefix + extractedUserID
               var info = CCWalletInterface.AddFaces(sbuser,extractedUserID,"A",base64String);  
-              setMessage("GCユーザー:"+extractedUserID,"user")
+              setMessage("GCユーザー:"+info,"user")
           }else
           {
                ToastInterface.showToast("このユーザーの顔はすでに登録されています。")
-               setMessage("GCユーザー:"+extractedUserID,"user")
+               setMessage("GCユーザー:"+info,"user")
                document.getElementById('authContainer').style.display = 'none';
                document.getElementById('mainContainer').style.display = 'block';
                setBalance()   
