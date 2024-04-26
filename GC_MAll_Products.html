@@ -177,12 +177,13 @@ function setTotal(){
               setMessage("GCユーザー:"+info,"user")
           }else
           {
-               ToastInterface.showToast("このユーザーの顔はすでに登録されています。")
-              ToastInterface.showToast(info)
-               setMessage("GCユーザー:"+info,"user")
-               document.getElementById('authContainer').style.display = 'none';
-               document.getElementById('mainContainer').style.display = 'block';
-               setBalance()   
+              ToastInterface.showToast("このユーザーの顔はすでに登録されています。")
+              var CCW_FaceResponse_LIST=info.split(":")
+              ToastInterface.showToast(CCW_FaceResponse_LIST[1])
+              setMessage("GCユーザー:"+CCW_FaceResponse_LIST[1],"user")
+              document.getElementById('authContainer').style.display = 'none';
+              document.getElementById('mainContainer').style.display = 'block';
+              setBalance()   
           }             
     });
 document.getElementById('authenticate').addEventListener('click', function() {
