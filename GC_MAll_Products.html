@@ -184,7 +184,7 @@ document.getElementById('authenticate').addEventListener('click', function() {
          ToastInterface.showToast(gckid)
      }else
      {
-         ToastInterface.showToast("CCWではないQRが読み込まれました")
+         ToastInterface.showToast(qrlist.length)
      }
     document.getElementById('authContainer').style.display = 'none';
     document.getElementById('mainContainer').style.display = 'block';
