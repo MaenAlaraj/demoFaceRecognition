@@ -159,7 +159,7 @@ function setTotal(){
 document.getElementById('authenticate').addEventListener('click', function() {
     // ここでユーザー認証のロジックを実行
     var qrstring = QRInterface.get_QRInfo("QR");
-    var qrstr_list=qrstring.split(",")
+    /*var qrstr_list=qrstring.split(",")
     if(qrstr_list[0]=="BNDI"){
     user=CCWalletInterface.CodeTblMnt(qrstr_list[0]+","+qrstr_list[1],"","S")
     user_freeArea=CCWalletInterface.FreeAreaMnt(user,"","S")
@@ -175,10 +175,20 @@ document.getElementById('authenticate').addEventListener('click', function() {
     discount_rate=0
     setMessage("町外ユーザー:"+qrstr_list[1],"user")
     }
+    }*/
+
+     var qrlist=qrstring.split(":")
+     if(qrlist.length==3)
+     {
+         gckid=CCWalletInterface.GetgckID(qrlist[2])
+         ToastInterface.showToast(gckid)
+     }else
+     {
+         ToastInterface.showToast("CCWではないQRが読み込まれました")
+     }
     document.getElementById('authContainer').style.display = 'none';
     document.getElementById('mainContainer').style.display = 'block';
-    setBalance()
-    }
+    setBalance()    
 });
 function isPositiveInteger(str) {
     return /^[0-9]\d*$/.test(str);
