@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GC Mall 商品読み込みページ</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            border: none;
+            background-color: #007BFF;
+            color: #FFF;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .scroll-container {
+            width: 300px;
+            height: calc(3 * (1.8em + 10px)); /* Assuming each item height is around 1.8em + padding/margin */
+            overflow-y: auto;
+            border: 1px solid #ddd;
+        }
+
+        .vertical{
+        display:flex;
+
+
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin: 5px 0;
+            padding: 5px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .remove-item {
+            background-color: red;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            color: white;
+        }
+         #totalAmount {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<div class="auth-container" id="authContainer">
+    <p>端末支払い・ベクトル通貨デモアプリ</p>
+    <p>ばんだいコインのチャージQRを読み込ませてください</p>
+    <button id="authenticate">認証</button>
+</div>
+<body>
+<div id="mainContainer" style="display: none;">
+    <p id="user"></p>
+<p id="message"></p>
+    <button id="loadProduct">商品の読み込み</button>
+<div class="scroll-container">
+    <ul id="productList">
+        <li>
+            <span>コード      </span>
+            <span>値段</span>
+            <span>割引率</span>
+            <span>削除</span>
+
+        <!-- ここに読み込んだ商品をリストとして表示します -->
+        </li>
+    </ul>
+</div>
+    <p id="Balance"></p>
+<div id="totalAmount">トータル: 0円</div>
+    <div class=".vertical">
+<button id="payment">支払い</button>
+        <button id="charge">割引券</button>
+    </div>
+</div>
+<script>
+const items = [];
+var total=0;
+var discount_total=0
+var AccountNo="";
+var user="";
+var user_freeArea="";
+const recipient="9392909001070002"
+const Discount_terminalID="1070400001107"
+const payment_terminalID="0020400002001"
+var Balance;
+var discount_rate=0.0;
+var discount_Balance;
+
+function setBalance(){
+    var Balance_STR=CCWalletInterface.Balance(user,payment_terminalID)
+    var Balance_LIST=Balance_STR.split(" ")
+    Balance=parseInt(Balance_LIST[0].split(":")[1])-parseInt(Balance_LIST[1].split(":")[1])
+    var discountBalance_STR=CCWalletInterface.Balance(user,Discount_terminalID)
+    var discountBalance_LIST=discountBalance_STR.split(" ")
+    discount_Balance=parseInt(discountBalance_LIST[0].split(":")[1])-parseInt(discountBalance_LIST[1].split(":")[1])
+    document.getElementById('message').innerText="円残高:"+Balance+"円(割引残高:"+discount_Balance+"円)"
+}
+
+function setTotal(){
+        total=0
+        discount_total=0
+        for (const item of items) {
+        var discount_price=parseInt(item.price*item.discount/100)
+        if(discount_total+discount_price>discount_Balance){
+        discount_price=discount_Balance-discount_total
+        }
+        var price=item.price-discount_price
+        total+=price
+        discount_total+=discount_price
+
+        }
+
+        if(total!=0){
+           document.getElementById('totalAmount').innerText = 'トータル: ' + total + '円 (割引：'+discount_total+"円)";
+        }
+        else{
+           document.getElementById('totalAmount').innerText = 'トータル: ' + total + '円';
+        }
+}
+document.getElementById('authenticate').addEventListener('click', function() {
+    // ここでユーザー認証のロジックを実行
+    var qrstring = QRInterface.get_QRInfo("QR");
+    var qrstr_list=qrstring.split(",")
+    if(qrstr_list[0]=="BNDI"){
+    user=CCWalletInterface.CodeTblMnt(qrstr_list[0]+","+qrstr_list[1],"","S")
+    user_freeArea=CCWalletInterface.FreeAreaMnt(user,"","S")
+    if(user_freeArea.includes("BNDIPlus_Townspeople")){
+    discount_rate=1.0
+    setMessage("町民ユーザー:"+qrstr_list[1],"user")
+    }
+    else if(user_freeArea.includes("BNDIPlus_Virtualpeople")){
+    discount_rate=0.5
+    setMessage("仮想町民ユーザー:"+qrstr_list[1],"user")
+    }
+    else{
+    discount_rate=0
+    setMessage("町外ユーザー:"+qrstr_list[1],"user")
+    }
+    document.getElementById('authContainer').style.display = 'none';
+    document.getElementById('mainContainer').style.display = 'block';
+    setBalance()
+    }
+});
+function isPositiveInteger(str) {
+    return /^[0-9]\d*$/.test(str);
+}
+function setMessage(str,id="message") {
+    if(id=="error_message"){
+    ToastInterface.showToast(str)
+    }
+    else{
+    let message = document.getElementById(id);
+    message.innerText=str
+    }
+}
+    document.getElementById('loadProduct').addEventListener('click', function() {
+        var qrstring = QRInterface.get_QRInfo("QR");
+        console.log(qrstring)
+        var qrstr_list=qrstring.split(",")
+        if(qrstr_list.length==5){
+        if(!isPositiveInteger(qrstr_list[2]) || !isPositiveInteger(qrstr_list[3])){
+        setMessage("商品QRではないものが読み込まれました。","error_message")
+        }
+        else{
+        let item = {
+            index:items.length,
+            name: qrstr_list[4],
+            price: parseInt(qrstr_list[2]),
+            discount: parseInt(qrstr_list[3])*discount_rate,
+            seller:qrstr_list[1]
+        };
+        var discount_price=parseInt(item.price*item.discount/100)
+        if(discount_total+discount_price>discount_Balance){
+            discount_price=discount_Balance-discount_total
+        }
+        var price=item.price-discount_price
+        let listItem = document.createElement('li');
+        if(total+price<Balance){
+        item.listItem=listItem
+        items.push(item);
+        total+=price
+        discount_total+=discount_price
+        if(discount_total>0){
+        document.getElementById('totalAmount').innerText = 'トータル: ' + total + '円 (割引：'+discount_total+"円)";
+        }
+        else{
+        document.getElementById('totalAmount').innerText = 'トータル: ' + total + '円';
+        }
+        let list = document.getElementById('productList');
+
+        let itemName = document.createElement('span');
+        itemName.textContent = item.name;
+
+        let itemPrice = document.createElement('span');
+        itemPrice.textContent = item.price+" 円";
+
+        let itemDiscount = document.createElement('span');
+        itemDiscount.textContent = item.discount+"%";
+
+        let removeBtn = document.createElement('div');
+        removeBtn.innerHTML = "❌";
+        removeBtn.className = 'remove-item';
+        removeBtn.onclick = function() {
+            list.removeChild(listItem);
+            const index = items.indexOf(item);
+            if (index > -1) {
+                items.splice(index, 1);
+            }
+            setTotal()
+
+        };
+
+        listItem.appendChild(itemName);
+        listItem.appendChild(itemPrice);
+        listItem.appendChild(itemDiscount);
+        listItem.appendChild(removeBtn);
+
+        list.appendChild(listItem);
+
+        }else{
+        setMessage("残高が足りません。","error_message")
+        }
+        }}else{
+        setMessage("商品QRではないものが読み込まれました","error_message")
+        }
+    }
+    );
+
+    document.getElementById('payment').addEventListener('click', function() {
+    if(total==0 && discount_total==0){
+    ToastInterface.showToast("商品がありません。商品を読み込ませた後に支払いをするか、終了ボタンを押してください。")
+    }
+    else{
+    var info=CCWalletInterface.C1toC2MovenPoint(user,discount_total,recipient,"ユーザー割引",recipient+"に"+discount_total+"円の割引",Discount_terminalID)
+    if(info.includes("エラー")){
+    ToastInterface.showToast(info)
+    }
+    info=CCWalletInterface.C1toC2MovenPoint(user,total,recipient,"ユーザー支払い",recipient+"に"+total+"円の支払い",payment_terminalID)
+    if(info.includes("エラー")){
+    ToastInterface.showToast(info)
+    }
+    let list = document.getElementById('productList');
+    for (const item of items) {
+    list.removeChild(item.listItem);
+    }
+    document.getElementById('authContainer').style.display = 'block';
+    document.getElementById('mainContainer').style.display = 'none';
+    ToastInterface.showToast("ご購入ありがとうございます！")
+
+    user="";
+    user_freeArea="";
+    discount_rate=0;
+    setBalance()
+    setTotal()
+}
+
+
+    });
+
+    document.getElementById('charge').addEventListener('click', function() {
+    try{
+    var qrstring = QRInterface.get_QRInfo("QR");
+    console.log(qrstring)
+    var qrstr_list=qrstring.split(".")
+    if(!qrstr_list.length==4){
+    throw new Error('Parameter is not a number!');
+    }
+    if(!isPositiveInteger(qrstr_list[3])){
+    throw new Error('Parameter is not a number!');
+    }
+    var terminalID;
+    var target;
+    if(qrstr_list[1]=="Do"){
+    terminalID=payment_terminalID;
+    target="円残高"
+    }
+    else if(qrstr_list[1]=="BNDI"){
+    terminalID=Discount_terminalID;
+    target="割引残高"
+    }
+    else{
+    throw new Error('Parameter is not a number!');
+    }
+    var info=CCWalletInterface.getGiftPointFromQR(user,qrstr_list[1]+qrstr_list[3]+"チャージ:"+qrstr_list[2],qrstring,terminalID)
+    if(info.includes("エラー")){
+    ToastInterface.showToast(info)
+    }
+    else{
+    ToastInterface.showToast(target+"が"+qrstr_list[3]+"円分増加しました。")
+    setBalance()
+    setTotal()
+    }
+    }catch (e) {
+    setMessage("チャージ用のQRではありません","error_message")
+    }
+
+    });
+</script>
+
+</body>
+</html>
