@@ -3,54 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demo Registeration Form</title>
-    <style>
-        .button-container {
-            text-align: center;
+    <title>GC Mall</title>
+  <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
         }
-        .button-container button {
-            margin: 5px;
+
+        button {
+            margin: 10px;
             padding: 10px 20px;
-            font-size: 16px;
+            border: none;
+            background-color: #007BFF;
+            color: #FFF;
             cursor: pointer;
+            transition: background-color 0.3s;
         }
-        .button-container .button-info {
-            margin-top: 10px;
+
+        .scroll-container {
+            width: 300px;
+            height: calc(3 * (1.8em + 10px)); /* Assuming each item height is around 1.8em + padding/margin */
+            overflow-y: auto;
+            border: 1px solid #ddd;
         }
-        .button-container .button-info img {
-            width: 100px; /* Adjust size as needed */
-            height: auto; /* Maintain aspect ratio */
-            display: block;
-            margin: 0 auto;
+
+        .vertical{
+        display:flex;
+
+
         }
-        .button-container .button-info p {
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
             margin: 5px 0;
-            font-size: 14px;
+            padding: 5px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-         #base64Image {
-            margin-top: 5px; /* Adjust the margin as needed */
-          }
+
+        .remove-item {
+            background-color: red;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            color: white;
+        }
+         #totalAmount {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
     </style>
 </head>
+<div class="auth-container" id="authContainer">
+    <p>GC Mall デモアプリ</p>
+    <p>GCのQRか顔を読み込ませてください</p>
+    <button id="authenticate">認証</button>
+    <button id="qrButton">QR</button>
+    <button id="faceButton">顔</button>
+</div>
+<div class="button-container">
+    <img id="base64Image" src="" alt="Base64 Image" height="250" width="250">
+</div>
+<div class="button-container">
+    <label id="labelCCW"></label>
+</div>
+ <div class="button-container">
+    <label id="label_NK_OP"></label>
+</div>
 <body>
-    <h1>使用したい方法を選択してください</h1>
-    
-    <div class="button-container">
-        <button id="qrButton">QR</button>
-        <button id="faceButton">顔</button>
-     </div>
-    <div class="button-container">
-              <img id="base64Image" src="" alt="Base64 Image" height="250" width="250">
-    </div>
-
-     <div class="button-container">
-             <label id="labelCCW"></label>
-     </div>
-     <div class="button-container">
-             <label id="label_NK_OP"></label>
-     </div>
     <script>
-
          var gckid = ""
          var prefix = "93929"
          var sbuser  =prefix + "09000000013"
@@ -109,13 +146,8 @@
               }else
               {
                   abel_NK_OP.innerText = "このユーザーの顔はすでに登録されています。"
-              }
-                  
-        });
-
-
-            
-        
+              }                  
+        });        
     </script>
 </body>
 </html>
