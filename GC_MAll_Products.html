@@ -178,6 +178,7 @@ function setTotal(){
           }else
           {
                ToastInterface.showToast("このユーザーの顔はすでに登録されています。")
+              ToastInterface.showToast(info)
                setMessage("GCユーザー:"+info,"user")
                document.getElementById('authContainer').style.display = 'none';
                document.getElementById('mainContainer').style.display = 'block';
