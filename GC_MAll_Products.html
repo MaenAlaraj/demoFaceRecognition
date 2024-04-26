@@ -210,6 +210,14 @@ document.getElementById('authenticate').addEventListener('click', function() {
     document.getElementById('mainContainer').style.display = 'block';
     setBalance()   
 });
+
+// Function to set the source of the base64Image element
+function setBase64ImageSource(base64String) 
+{
+ // Set the src attribute to the Base64-encoded string
+document.getElementById("base64Image").src = "data:image/jpeg;base64," + base64String;
+}
+    
 function isPositiveInteger(str) {
     return /^[0-9]\d*$/.test(str);
 }
