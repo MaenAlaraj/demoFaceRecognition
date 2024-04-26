@@ -178,7 +178,7 @@ function setTotal(){
           }else
           {
               ToastInterface.showToast("このユーザーの顔はすでに登録されています。")
-              var CCW_FaceResponse_LIST=info.split(":")
+              var CCW_FaceResponse_LIST=info.split("：")
               ToastInterface.showToast(CCW_FaceResponse_LIST[1])
               setMessage("GCユーザー:"+CCW_FaceResponse_LIST[1],"user")
               document.getElementById('authContainer').style.display = 'none';
