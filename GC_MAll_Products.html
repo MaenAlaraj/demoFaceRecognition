@@ -128,8 +128,6 @@ var discount_Balance;
 function setBalance(){
     var Balance_STR=CCWalletInterface.Balance("9392909000000154",payment_terminalID)
     var Balance_LIST=Balance_STR.split(" ")
-    //ToastInterface.showToast(Balance_LIST[0])
-    ToastInterface.showToast(Balance_LIST[1])
     document.getElementById('message').innerText="円残高:"+Balance_LIST[0].split(":")[1]+"円(残高の下限:"+Balance_LIST[1].split(":")[1]+"円)"
    /* Balance=parseInt(Balance_LIST[0].split(":")[1])-parseInt(Balance_LIST[1].split(":")[1])
     var discountBalance_STR=CCWalletInterface.Balance(user,Discount_terminalID)
@@ -159,6 +157,29 @@ function setTotal(){
            document.getElementById('totalAmount').innerText = 'トータル: ' + total + '円';
         }
 }
+
+  document.getElementById("faceButton").addEventListener("click", function() {
+        //Set the Camera
+        var base64String =  FaceCaptureInterface.getFace("FaceCaptureInterface");              
+      
+        //Set the source of the base64Image element
+        setBase64ImageSource(base64String);
+                
+         //Set the S (Search Operation)
+          var info=CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);           
+          if (info.includes(errorsSubstring))
+          {
+              var qrstring = QRInterface.get_QRInfo("QR");
+              const match = qrstring.match(/,(.*?),/);
+              extractedUserID = match ? match[1] : null;
+              extractedUserID = prefix + extractedUserID
+              var info = CCWalletInterface.AddFaces(sbuser,extractedUserID,"A",base64String);  
+              setMessage("GCユーザー:"+extractedUserID,"user")
+          }else
+          {
+               ToastInterface.showToast("このユーザーの顔はすでに登録されています。")
+          }             
+    });
 document.getElementById('authenticate').addEventListener('click', function() {
     // ここでユーザー認証のロジックを実行
     var qrstring = QRInterface.get_QRInfo("QR");
