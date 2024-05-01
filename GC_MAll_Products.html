@@ -131,7 +131,7 @@ function setBalance(){
     var Balance_LIST=Balance_STR.split(" ")
     document.getElementById('message').innerText="円残高:"+Balance_LIST[0].split(":")[1]+"円(残高の下限:"+Balance_LIST[1].split(":")[1]+"円)"
     Balance=parseInt(Balance_LIST[0].split(":")[1])-parseInt(Balance_LIST[1].split(":")[1])
-    ToastInterface.showToast("Balance" + Balance)
+    //ToastInterface.showToast("Balance" + Balance)
     
    /* Balance=parseInt(Balance_LIST[0].split(":")[1])-parseInt(Balance_LIST[1].split(":")[1])
     var discountBalance_STR=CCWalletInterface.Balance(user,Discount_terminalID)
@@ -269,7 +269,8 @@ function setMessage(str,id="message") {
             };
             
             let listItem = document.createElement('li');
-            ToastInterface.showToast(Balance)
+            //ToastInterface.showToast(Balance)
+            ToastInterface.showToast(total+price)
             if(total+price<Balance){
                 ToastInterface.showToast(total+price)
                 item.listItem=listItem
