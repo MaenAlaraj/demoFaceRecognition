@@ -345,6 +345,7 @@ function setMessage(str,id="message") {
         // Skip the first iteration
         if (isFirstIteration) {
             isFirstIteration = false;
+            ToastInterface.showToast(isFirstIteration)
             return;
         }        
         const spans = listItem.querySelectorAll('span');
