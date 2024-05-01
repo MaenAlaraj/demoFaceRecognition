@@ -137,7 +137,7 @@ function setBalance(){
     document.getElementById('message').innerText="円残高:"+Balance+"円(割引残高:"+discount_Balance+"円)"*/
 }
 
-function setTotal(){
+/*function setTotal(){
         total=0
         discount_total=0
         for (const item of items) {
@@ -157,7 +157,14 @@ function setTotal(){
         else{
            document.getElementById('totalAmount').innerText = 'トータル: ' + total + '円';
         }
-}
+}*/
+    function setTotal(){
+        total=0
+        for (const item of items) {
+            total+=item.price
+        }
+        document.getElementById('totalAmount').innerText = 'トータル: ' + total + "円)";
+        }
 
   document.getElementById("faceButton").addEventListener("click", function() {
         //Set the Camera
@@ -242,12 +249,10 @@ function setMessage(str,id="message") {
         var qrstring = QRInterface.get_QRInfo("QR");
         console.log(qrstring)
         var qrstr_list=qrstring.split(",")
-        //ToastInterface.showToast(qrstr_list.length)
-        ToastInterface.showToast(qrstr_list[2])
+       
         if(qrstr_list.length==6){
        // if(!isPositiveInteger(qrstr_list[2]) || !isPositiveInteger(qrstr_list[3])){
             if(!isPositiveInteger(qrstr_list[2])){
-             ToastInterface.showToast(qrstr_list[2])
             setMessage("商品QRではないものが読み込まれました。?????????????","error_message")
             }
             else{
@@ -260,16 +265,10 @@ function setMessage(str,id="message") {
             };
             let listItem = document.createElement('li');
             if(total+price<Balance){
+                ToastInterface.showToast(Balance)
                 item.listItem=listItem
                 items.push(item);
                 total+=price
-                discount_total+=discount_price
-                if(discount_total>0){
-                    document.getElementById('totalAmount').innerText = 'トータル: ' + total + '円 (割引：'+discount_total+"円)";
-                }
-                else{
-                    document.getElementById('totalAmount').innerText = 'トータル: ' + total + '円';
-                }
                 let list = document.getElementById('productList');
 
                     //コード
