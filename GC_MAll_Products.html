@@ -244,6 +244,7 @@ function setMessage(str,id="message") {
         if(qrstr_list.length==5){
        // if(!isPositiveInteger(qrstr_list[2]) || !isPositiveInteger(qrstr_list[3])){
         if(!isPositiveInteger(qrstr_list[2])){
+         ToastInterface.showToast((qrstr_list[2])
         setMessage("商品QRではないものが読み込まれました。","error_message")
         }
         else{
@@ -268,18 +269,19 @@ function setMessage(str,id="message") {
         }
         let list = document.getElementById('productList');
 
+            //コード
         let itemSeller = document.createElement('span');
         itemSeller.textContent = item.seller;
-
+　　　　　　　//商品名
         let itemProduct = document.createElement('span');
         itemProduct.textContent = item.product;
-
+　　　　　　　//値段
         let itemPrice = document.createElement('span');
         itemPrice.textContent = item.price+" 円";
-
+　　　　　　　//カテゴリー
         let itemCat = document.createElement('span');
         itemCat.textContent = item.category;
-
+　　　　　　　//削除
        let removeBtn = document.createElement('div');
         removeBtn.innerHTML = "❌";
         removeBtn.className = 'remove-item';
