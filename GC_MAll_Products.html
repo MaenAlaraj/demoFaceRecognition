@@ -380,12 +380,13 @@ function setMessage(str,id="message") {
         message1 =　(header_prefix + sellerCode + product_name+ catValue +  category +  date + seller_name);
         ToastInterface.showToast(message1)
         message2 = "MALL用";
-        //var r = CCWalletInterface.doPointPayment(user1,amount,user2,message1,message2,"");
-        //document.getElementById('authContainer').style.display = 'block';
-        //document.getElementById('mainContainer').style.display = 'none';
-        //ToastInterface.showToast("ご購入ありがとうございます！")
-        //setBalance()
-        //setTotal()
+        var r = CCWalletInterface.doPointPayment(user1,amount,user2,message1,message2,"");
+        ToastInterface.showToast(r)
+        document.getElementById('authContainer').style.display = 'block';
+        document.getElementById('mainContainer').style.display = 'none';
+        ToastInterface.showToast("ご購入ありがとうございます！")
+        setBalance()
+        setTotal()
 
 });
 
