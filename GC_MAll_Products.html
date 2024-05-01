@@ -159,17 +159,17 @@ function setBalance(){
 
 
 //QR コードのキーに基づいて Cat_List から値を取得する関数
-function getValueFromCatList(qrCodeData) {
+function getValueFromCatList(category) {
     // Parse the QR code data to get the key
-    const key = qrCodeData.trim();
+    const key = category.trim();
 
-    // Check if the key exists in the Cat_List
+    // キーがCat_Listに存在するかどうかを確認する
     if (Cat_List.hasOwnProperty(key)) {
-        // Return the corresponding value from Cat_List
+        //Cat_Listから対応する値を返す
         return Cat_List[key];
     } else {
-        // If the key doesn't exist, return an error message or handle it as needed
-        return "Key not found in Cat_List";
+        // キーが存在しない場合は、エラーメッセージを返すか、必要に応じて処理する
+        return "商品のカテゴリーが見つかりません。";
     }
 }
 
@@ -369,7 +369,7 @@ function setMessage(str,id="message") {
         
 
         
-    var info=CCWalletInterface.C1toC2MovenPoint(user,discount_total,recipient,"ユーザー割引",recipient+"に"+discount_total+"円の割引",Discount_terminalID)
+    /*var info=CCWalletInterface.C1toC2MovenPoint(user,discount_total,recipient,"ユーザー割引",recipient+"に"+discount_total+"円の割引",Discount_terminalID)
     if(info.includes("エラー")){
     ToastInterface.showToast(info)
     }
@@ -389,7 +389,7 @@ function setMessage(str,id="message") {
     user_freeArea="";
     discount_rate=0;
     setBalance()
-    setTotal()
+    setTotal()*/
 }
 
 
