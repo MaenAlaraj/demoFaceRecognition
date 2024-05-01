@@ -242,7 +242,8 @@ function setMessage(str,id="message") {
         var qrstring = QRInterface.get_QRInfo("QR");
         console.log(qrstring)
         var qrstr_list=qrstring.split(",")
-        ToastInterface.showToast(qrstr_list.length)
+        //ToastInterface.showToast(qrstr_list.length)
+        ToastInterface.showToast(qrstr_list[2])
         if(qrstr_list.length==6){
        // if(!isPositiveInteger(qrstr_list[2]) || !isPositiveInteger(qrstr_list[3])){
             if(!isPositiveInteger(qrstr_list[2])){
