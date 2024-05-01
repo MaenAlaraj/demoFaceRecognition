@@ -158,13 +158,13 @@ function setBalance(){
            document.getElementById('totalAmount').innerText = 'トータル: ' + total + '円';
         }
 }*/
-    function setTotal(){
-        total=0
+
+    function setTotal() {
+        total = 0;
         for (const item of items) {
-            var price=item.price
-            total+=price
-        }
-        document.getElementById('totalAmount').innerText = 'トータル: ' + total + "円)";
+                total += item.price;
+            }
+        document.getElementById('totalAmount').innerText = 'トータル: ' + total + "円";
         }
 
   document.getElementById("faceButton").addEventListener("click", function() {
@@ -254,7 +254,7 @@ function setMessage(str,id="message") {
         if(qrstr_list.length==6){
        // if(!isPositiveInteger(qrstr_list[2]) || !isPositiveInteger(qrstr_list[3])){
             if(!isPositiveInteger(qrstr_list[2])){
-            setMessage("商品QRではないものが読み込まれました。?????????????","error_message")
+            setMessage("商品QRではないものが読み込まれました。","error_message")
             }
             else{
                 let item = {
@@ -264,11 +264,12 @@ function setMessage(str,id="message") {
                 price: parseInt(qrstr_list[2]),
                 category: qrstr_list[3]
             };
-            ToastInterface.showToast(item)
+            
             let listItem = document.createElement('li');
             if(total+price<Balance){
-                
+                ToastInterface.showToast(total+price)
                 item.listItem=listItem
+                ToastInterface.showToast(item)
                 items.push(item);
                 total+=price
                 let list = document.getElementById('productList');
