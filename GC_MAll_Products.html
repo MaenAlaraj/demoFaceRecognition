@@ -271,10 +271,10 @@ function setMessage(str,id="message") {
             let listItem = document.createElement('li');
             ToastInterface.showToast(Balance)
             ToastInterface.showToast(total)
-            ToastInterface.showToast(price)
+            //ToastInterface.showToast(price)
                 
             ToastInterface.showToast(total+price)
-            if(total+price<Balance){
+            if(total+ parseInt(qrstr_list[2])<Balance){
                 ToastInterface.showToast(total+price)
                 item.listItem=listItem
                
