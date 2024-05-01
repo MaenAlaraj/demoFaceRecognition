@@ -101,7 +101,6 @@
 <div id="totalAmount">トータル: 0円</div>
     <div class=".vertical">
 <button id="payment">支払い</button>
-        <button id="charge">割引券</button>
     </div>
 </div>
 <script>
@@ -411,45 +410,6 @@ function setMessage(str,id="message") {
     setTotal()
 }
 
-
-    });
-
-    document.getElementById('charge').addEventListener('click', function() {
-    try{
-    var qrstring = QRInterface.get_QRInfo("QR");
-    console.log(qrstring)
-    var qrstr_list=qrstring.split(".")
-    if(!qrstr_list.length==4){
-    throw new Error('Parameter is not a number!');
-    }
-    if(!isPositiveInteger(qrstr_list[3])){
-    throw new Error('Parameter is not a number!');
-    }
-    var terminalID;
-    var target;
-    if(qrstr_list[1]=="Do"){
-    terminalID=payment_terminalID;
-    target="円残高"
-    }
-    else if(qrstr_list[1]=="BNDI"){
-    terminalID=Discount_terminalID;
-    target="割引残高"
-    }
-    else{
-    throw new Error('Parameter is not a number!');
-    }
-    var info=CCWalletInterface.getGiftPointFromQR(user,qrstr_list[1]+qrstr_list[3]+"チャージ:"+qrstr_list[2],qrstring,terminalID)
-    if(info.includes("エラー")){
-    ToastInterface.showToast(info)
-    }
-    else{
-    ToastInterface.showToast(target+"が"+qrstr_list[3]+"円分増加しました。")
-    setBalance()
-    setTotal()
-    }
-    }catch (e) {
-    setMessage("チャージ用のQRではありません","error_message")
-    }
 
     });
 </script>
