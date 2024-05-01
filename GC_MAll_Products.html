@@ -243,7 +243,7 @@ function setMessage(str,id="message") {
         console.log(qrstring)
         var qrstr_list=qrstring.split(",")
         ToastInterface.showToast(qrstr_list.length)
-        if(qrstr_list.length==5){
+        if(qrstr_list.length==6){
        // if(!isPositiveInteger(qrstr_list[2]) || !isPositiveInteger(qrstr_list[3])){
             if(!isPositiveInteger(qrstr_list[2])){
              ToastInterface.showToast(qrstr_list[2])
