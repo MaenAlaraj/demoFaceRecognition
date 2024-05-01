@@ -162,7 +162,7 @@ function setBalance(){
 function getValueFromCatList(category) {
     // Parse the QR code data to get the key
     const key = category.trim();
-
+    ToastInterface.showToast(key)
     // キーがCat_Listに存在するかどうかを確認する
     if (Cat_List.hasOwnProperty(key)) {
         //Cat_Listから対応する値を返す
