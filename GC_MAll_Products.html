@@ -125,41 +125,28 @@ var Balance;
 var discount_rate=0.0;
 var discount_Balance;
 
+
+const Cat_List = {
+    A: 6000,
+    B: 10000,
+    C: 5,
+    D: 10000,
+    E: 6000,
+    F: 8000,
+    G: 70000,
+    H: 5000
+};
+
+
+    
 function setBalance(){
     var Balance_STR=CCWalletInterface.Balance("9392909000000154",payment_terminalID)
     var Balance_LIST=Balance_STR.split(" ")
     document.getElementById('message').innerText="円残高:"+Balance_LIST[0].split(":")[1]+"円(残高の下限:"+Balance_LIST[1].split(":")[1]+"円)"
     Balance=parseInt(Balance_LIST[0].split(":")[1])-parseInt(Balance_LIST[1].split(":")[1])
-    //ToastInterface.showToast("Balance" + Balance)
-    
-   /* Balance=parseInt(Balance_LIST[0].split(":")[1])-parseInt(Balance_LIST[1].split(":")[1])
-    var discountBalance_STR=CCWalletInterface.Balance(user,Discount_terminalID)
-    var discountBalance_LIST=discountBalance_STR.split(" ")
-    discount_Balance=parseInt(discountBalance_LIST[0].split(":")[1])-parseInt(discountBalance_LIST[1].split(":")[1])
-    document.getElementById('message').innerText="円残高:"+Balance+"円(割引残高:"+discount_Balance+"円)"*/
 }
 
-/*function setTotal(){
-        total=0
-        discount_total=0
-        for (const item of items) {
-        var discount_price=parseInt(item.price*item.discount/100)
-        if(discount_total+discount_price>discount_Balance){
-        discount_price=discount_Balance-discount_total
-        }
-        var price=item.price-discount_price
-        total+=price
-        discount_total+=discount_price
 
-        }
-
-        if(total!=0){
-           document.getElementById('totalAmount').innerText = 'トータル: ' + total + '円 (割引：'+discount_total+"円)";
-        }
-        else{
-           document.getElementById('totalAmount').innerText = 'トータル: ' + total + '円';
-        }
-}*/
 
     function setTotal() {
         total = 0;
@@ -170,6 +157,29 @@ function setBalance(){
         document.getElementById('totalAmount').innerText = 'トータル: ' + total + "円";
         }
 
+
+//QR コードのキーに基づいて Cat_List から値を取得する関数
+function getValueFromCatList(qrCodeData) {
+    // Parse the QR code data to get the key
+    const key = qrCodeData.trim();
+
+    // Check if the key exists in the Cat_List
+    if (Cat_List.hasOwnProperty(key)) {
+        // Return the corresponding value from Cat_List
+        return Cat_List[key];
+    } else {
+        // If the key doesn't exist, return an error message or handle it as needed
+        return "Key not found in Cat_List";
+    }
+}
+
+
+
+
+
+
+
+    
   document.getElementById("faceButton").addEventListener("click", function() {
         //Set the Camera
        ToastInterface.showToast("Face Buttin in clicked")
@@ -318,75 +328,47 @@ function setMessage(str,id="message") {
     }
     );
             
-        /*let item = {
-            index:items.length,
-            name: qrstr_list[4],
-            price: parseInt(qrstr_list[2]),
-            discount: parseInt(qrstr_list[3])*discount_rate,
-            seller:qrstr_list[1]
-        };
-        var discount_price=parseInt(item.price*item.discount/100)
-        if(discount_total+discount_price>discount_Balance){
-            discount_price=discount_Balance-discount_total
-        }
-        var price=item.price-discount_price
-        let listItem = document.createElement('li');
-        if(total+price<Balance){
-        item.listItem=listItem
-        items.push(item);
-        total+=price
-        discount_total+=discount_price
-        if(discount_total>0){
-        document.getElementById('totalAmount').innerText = 'トータル: ' + total + '円 (割引：'+discount_total+"円)";
-        }
-        else{
-        document.getElementById('totalAmount').innerText = 'トータル: ' + total + '円';
-        }
-        let list = document.getElementById('productList');
-
-        let itemName = document.createElement('span');
-        itemName.textContent = item.name;
-
-        let itemPrice = document.createElement('span');
-        itemPrice.textContent = item.price+" 円";
-
-        let itemDiscount = document.createElement('span');
-        itemDiscount.textContent = item.discount+"%";
-
-        let removeBtn = document.createElement('div');
-        removeBtn.innerHTML = "❌";
-        removeBtn.className = 'remove-item';
-        removeBtn.onclick = function() {
-            list.removeChild(listItem);
-            const index = items.indexOf(item);
-            if (index > -1) {
-                items.splice(index, 1);
-            }
-            setTotal()
-
-        };
-
-        listItem.appendChild(itemName);
-        listItem.appendChild(itemPrice);
-        listItem.appendChild(itemDiscount);
-        listItem.appendChild(removeBtn);
-
-        list.appendChild(listItem);
-
-        }else{
-        setMessage("残高が足りません。","error_message")
-        }
-        }}else{
-        setMessage("商品QRではないものが読み込まれました","error_message")
-        }
-    }
-    );*/
 
     document.getElementById('payment').addEventListener('click', function() {
     if(total==0 && discount_total==0){
     ToastInterface.showToast("商品がありません。商品を読み込ませた後に支払いをするか、終了ボタンを押してください。")
     }
     else{
+    const qrCodeData = "A"; // Replace this with the actual QR code data
+    const catValue = getValueFromCatList(qrCodeData);
+
+    // Accessing values from the productList
+    const productList = document.getElementById('productList');
+    const listItems = productList.querySelectorAll('li');
+    
+    // Iterate over each list item
+    listItems.forEach(listItem => {
+        // Extracting values from each list item
+        const spans = listItem.querySelectorAll('span');
+        const category = spans[3].textContent.trim();
+        const catValue = getValueFromCatList(category);
+        console.log("Category:", catValue);
+        ToastInterface.showToast(catValue)
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+        
     var info=CCWalletInterface.C1toC2MovenPoint(user,discount_total,recipient,"ユーザー割引",recipient+"に"+discount_total+"円の割引",Discount_terminalID)
     if(info.includes("エラー")){
     ToastInterface.showToast(info)
