@@ -266,6 +266,7 @@ function setMessage(str,id="message") {
             };
             
             let listItem = document.createElement('li');
+            ToastInterface.showToast(Balance)
             if(total+price<Balance){
                 ToastInterface.showToast(total+price)
                 item.listItem=listItem
