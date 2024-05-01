@@ -88,8 +88,9 @@
     <ul id="productList">
         <li>
             <span>コード      </span>
+            <span>商品名</span>
             <span>値段</span>
-            <span>割引率</span>
+            <span>CAT.</span>
             <span>削除</span>
 
         <!-- ここに読み込んだ商品をリストとして表示します -->
@@ -241,11 +242,75 @@ function setMessage(str,id="message") {
         console.log(qrstring)
         var qrstr_list=qrstring.split(",")
         if(qrstr_list.length==5){
-        if(!isPositiveInteger(qrstr_list[2]) || !isPositiveInteger(qrstr_list[3])){
+       // if(!isPositiveInteger(qrstr_list[2]) || !isPositiveInteger(qrstr_list[3])){
+        if(!isPositiveInteger(qrstr_list[2])){
         setMessage("商品QRではないものが読み込まれました。","error_message")
         }
         else{
-        let item = {
+            let item = {
+            index:items.length,
+            seller:qrstr_list[0],
+            product:qrstr_list[1],
+            price: parseInt(qrstr_list[2]),
+            category: qrstr_list[3]
+        };
+        let listItem = document.createElement('li');
+        if(total+price<Balance){
+        item.listItem=listItem
+        items.push(item);
+        total+=price
+        discount_total+=discount_price
+        if(discount_total>0){
+        document.getElementById('totalAmount').innerText = 'トータル: ' + total + '円 (割引：'+discount_total+"円)";
+        }
+        else{
+        document.getElementById('totalAmount').innerText = 'トータル: ' + total + '円';
+        }
+        let list = document.getElementById('productList');
+
+        let itemSeller = document.createElement('span');
+        itemSeller.textContent = item.seller;
+
+        let itemProduct = document.createElement('span');
+        itemProduct.textContent = item.product;
+
+        let itemPrice = document.createElement('span');
+        itemPrice.textContent = item.price+" 円";
+
+        let itemCat = document.createElement('span');
+        itemCat.textContent = item.category;
+
+       let removeBtn = document.createElement('div');
+        removeBtn.innerHTML = "❌";
+        removeBtn.className = 'remove-item';
+        removeBtn.onclick = function() {
+            list.removeChild(listItem);
+            const index = items.indexOf(item);
+            if (index > -1) {
+                items.splice(index, 1);
+            }
+            setTotal()
+
+        };
+            
+        listItem.appendChild(itemSeller);
+        listItem.appendChild(itemProduct);
+        listItem.appendChild(itemPrice);
+        listItem.appendChild(itemCat);
+        listItem.appendChild(removeBtn);
+
+        list.appendChild(listItem);
+
+        }else{
+        setMessage("残高が足りません。","error_message")
+        }
+        }}else{
+        setMessage("商品QRではないものが読み込まれました","error_message")
+        }
+    }
+    );
+            
+        /*let item = {
             index:items.length,
             name: qrstr_list[4],
             price: parseInt(qrstr_list[2]),
@@ -307,7 +372,7 @@ function setMessage(str,id="message") {
         setMessage("商品QRではないものが読み込まれました","error_message")
         }
     }
-    );
+    );*/
 
     document.getElementById('payment').addEventListener('click', function() {
     if(total==0 && discount_total==0){
