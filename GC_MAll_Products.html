@@ -91,6 +91,7 @@
             <span>商品名</span>
             <span>値段</span>
             <span>CAT.</span>
+            <span>日付</span>
             <span>削除</span>
 
         <!-- ここに読み込んだ商品をリストとして表示します -->
@@ -112,6 +113,8 @@
 
     
 const items = [];
+const gcMall_code= "09000000015"
+const header_prefix = "＆％MALL／"
 var total=0;
 var discount_total=0
 var AccountNo="";
@@ -162,7 +165,7 @@ function setBalance(){
 function getValueFromCatList(category) {
     // Parse the QR code data to get the key
     const key = category.trim();
-    ToastInterface.showToast(key)
+
     // キーがCat_Listに存在するかどうかを確認する
     if (Cat_List.hasOwnProperty(key)) {
         //Cat_Listから対応する値を返す
@@ -275,7 +278,8 @@ function setMessage(str,id="message") {
                 seller:qrstr_list[0],
                 product:qrstr_list[1],
                 price: parseInt(qrstr_list[2]),
-                category: qrstr_list[3]
+                category: qrstr_list[3],
+                date: qrstr_list[4]            
             };
             var price=item.price
             let listItem = document.createElement('li');
@@ -300,7 +304,12 @@ function setMessage(str,id="message") {
         　　　　　　　//カテゴリー
                 let itemCat = document.createElement('span');
                 itemCat.textContent = item.category;
-        　　　　　　　//削除
+
+              　　　//日付
+                let itemDate = document.createElement('span');
+                itemDate.textContent = item.category;
+                
+        　　　　　//削除
                let removeBtn = document.createElement('div');
                 removeBtn.innerHTML = "❌";
                 removeBtn.className = 'remove-item';
@@ -316,6 +325,7 @@ function setMessage(str,id="message") {
                 listItem.appendChild(itemProduct);
                 listItem.appendChild(itemPrice);
                 listItem.appendChild(itemCat);
+                listItem.appendChild(itemDate);
                 listItem.appendChild(removeBtn);
         
                 list.appendChild(listItem);
@@ -344,15 +354,29 @@ function setMessage(str,id="message") {
     listItems.forEach(listItem => {
         // Skip the first iteration
         if (isFirstIteration) {
-            isFirstIteration = false;
-            ToastInterface.showToast(isFirstIteration)
+            isFirstIteration = false;     
             return;
         }        
         const spans = listItem.querySelectorAll('span');
+        const sellerCode =spans[0].textContent.trim()
+        const product_name =spans[1].textContent.trim()
+        const product_price = spans[2].textContent.trim();
         const category = spans[3].textContent.trim();
+        const date = spans[4].textContent.trim();
         const catValue = getValueFromCatList(category);
         console.log("Category:", catValue);
-        ToastInterface.showToast(catValue)
+        
+        var userid1 = prefix + sellerCode
+        var terminalid = ""
+        var SellerName = CCWalletInterface.Name(userid1,terminalid);
+        var amount = parseInt(product_price)
+        var user2 = prefix + gcMall_code
+        message1 =　(header_prefix + sellerCode + product_name+ catValue +  category +  date + SellerName);
+        ToastInterface.showToast(message1)
+        message2 = "MALL用";
+        var r = CCWalletInterface.doPointPayment(user1,amount,user2,message1,message2,"");
+        
+
 });
 
     
