@@ -335,12 +335,18 @@ function setMessage(str,id="message") {
     }
     else{
    
-
+    let isFirstIteration = true;
+        
     // Accessing values from the productList
     const productList = document.getElementById('productList');
     const listItems = productList.querySelectorAll('li');
 
     listItems.forEach(listItem => {
+        // Skip the first iteration
+        if (isFirstIteration) {
+            isFirstIteration = false;
+            return;
+        }        
         const spans = listItem.querySelectorAll('span');
         const category = spans[3].textContent.trim();
         const catValue = getValueFromCatList(category);
