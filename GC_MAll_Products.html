@@ -161,6 +161,7 @@ function setTotal(){
 
   document.getElementById("faceButton").addEventListener("click", function() {
         //Set the Camera
+       ToastInterface.showToast("Face Buttin in clicked")
         var base64String =  FaceCaptureInterface.getFace("FaceCaptureInterface");              
       
         //Set the source of the base64Image element
@@ -244,7 +245,7 @@ function setMessage(str,id="message") {
         if(qrstr_list.length==5){
        // if(!isPositiveInteger(qrstr_list[2]) || !isPositiveInteger(qrstr_list[3])){
         if(!isPositiveInteger(qrstr_list[2])){
-         ToastInterface.showToast((qrstr_list[2])
+         ToastInterface.showToast(qrstr_list[2])
         setMessage("商品QRではないものが読み込まれました。","error_message")
         }
         else{
