@@ -161,7 +161,8 @@ function setBalance(){
     function setTotal(){
         total=0
         for (const item of items) {
-            total+=item.price
+            var price=item.price
+            total+=price
         }
         document.getElementById('totalAmount').innerText = 'トータル: ' + total + "円)";
         }
