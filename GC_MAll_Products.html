@@ -269,9 +269,9 @@ function setMessage(str,id="message") {
             };
             
             let listItem = document.createElement('li');
-            ToastInterface.showToast("Balance:" +  Balance)
-            ToastInterface.showToast("Total:" + total)
-            ToastInterface.showToast("Balance:" + price)
+            ToastInterface.showToast(Balance)
+            ToastInterface.showToast(total)
+            ToastInterface.showToast(price)
                 
             ToastInterface.showToast(total+price)
             if(total+price<Balance){
