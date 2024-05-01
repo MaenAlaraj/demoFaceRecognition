@@ -257,7 +257,6 @@ function setMessage(str,id="message") {
             setMessage("商品QRではないものが読み込まれました。?????????????","error_message")
             }
             else{
-                 ToastInterface.showToast("+++++++++++++++++++++++++++++++++++")
                 let item = {
                 index:items.length,
                 seller:qrstr_list[0],
@@ -265,7 +264,7 @@ function setMessage(str,id="message") {
                 price: parseInt(qrstr_list[2]),
                 category: qrstr_list[3]
             };
-           
+            ToastInterface.showToast(item)
             let listItem = document.createElement('li');
             if(total+price<Balance){
                 
