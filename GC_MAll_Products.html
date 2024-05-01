@@ -263,9 +263,10 @@ function setMessage(str,id="message") {
                 price: parseInt(qrstr_list[2]),
                 category: qrstr_list[3]
             };
+            ToastInterface.showToast(total+price)
             let listItem = document.createElement('li');
             if(total+price<Balance){
-                ToastInterface.showToast(Balance)
+                
                 item.listItem=listItem
                 items.push(item);
                 total+=price
