@@ -203,7 +203,7 @@ function getValueFromCatList(category) {
   document.getElementById("faceButton").addEventListener("click", function() {
         var base64String =  FaceCaptureInterface.getFace("FaceCaptureInterface");              
         setBase64ImageSource(base64String);
-        //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000154","D");
+        var info = CCWalletInterface.DelFaces(sbuser,"9392909000000154","D");
         //var info = CCWalletInterface.AddFaces(sbuser,"9392909000000154","A",base64String);
          //ToastInterface.showToast(info)
       
