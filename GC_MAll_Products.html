@@ -110,6 +110,7 @@
  var sbuser  =prefix + "09000000013"
  const errorsSubstring = "生体認証検証エラー";
  var extractedUserID =""
+ var userBeforePrefix = ""
 
     
 const items = [];
@@ -198,13 +199,15 @@ function getValueFromCatList(category) {
               const match = qrstring.match(/,(.*?),/);
               extractedUserID = match ? match[1] : null;
               extractedUserID = prefix + extractedUserID
-              var info = CCWalletInterface.AddFaces(sbuser,extractedUserID,"A",base64String);  
+              var info = CCWalletInterface.AddFaces(sbuser,extractedUserID,"A",base64String);
+               userBeforePrefix =  info
               setMessage("GCユーザー:"+info,"user")
           }else
           {
               ToastInterface.showToast("このユーザーの顔はすでに登録されています。")
               var CCW_FaceResponse_LIST=info.split("：")
               ToastInterface.showToast(CCW_FaceResponse_LIST[1])
+              userBeforePrefix = CCW_FaceResponse_LIST[1]
               setMessage("GCユーザー:"+CCW_FaceResponse_LIST[1],"user")
               document.getElementById('authContainer').style.display = 'none';
               document.getElementById('mainContainer').style.display = 'block';
@@ -364,9 +367,7 @@ function setMessage(str,id="message") {
         const date = spans[4].textContent.trim();
         const catValue = getValueFromCatList(category);
 
-
-        let message = document.getElementById(id);      
-        var user1 = prefix + message.innerText
+        var user1 = prefix + userBeforePrefix
         ToastInterface.showToast(user1)
 
 
@@ -406,6 +407,7 @@ function setMessage(str,id="message") {
        ToastInterface.showToast("ご購入ありがとうございます！")
         setBalance()
         setTotal()
+        userBeforePrefix = ""
     
 
 
