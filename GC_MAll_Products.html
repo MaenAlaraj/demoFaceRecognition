@@ -376,8 +376,16 @@ function setMessage(str,id="message") {
 
         
         var amount = parseInt(product_price)
+        
+        // Replace "/" with "."
+        var formattedDate = date.replace(/\//g, ".");
+
+
+
+
+        
         var user2 = prefix + gcMall_code
-        message1 =　(header_prefix + sellerCode + product_name+ catValue +  category +  date + seller_name);
+        message1 =　(header_prefix + sellerCode + product_name+ catValue +  category +  formattedDate + seller_name);
         ToastInterface.showToast(message1)
         message2 = "MALL用";
         var r = CCWalletInterface.doPointPayment(user1,amount,user2,message1,message2,"");
