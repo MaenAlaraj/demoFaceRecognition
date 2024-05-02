@@ -143,7 +143,8 @@ const Cat_List = {
 
     
 function setBalance(userStr){
-    ToastInterface.showToast(userStr)
+    var user1 = prefix + userStr
+    ToastInterface.showToast(user1)
     var Balance_STR=CCWalletInterface.Balance(userStr,payment_terminalID)
     var Balance_LIST=Balance_STR.split(" ")
     document.getElementById('message').innerText="円残高:"+Balance_LIST[0].split(":")[1]+"円(残高の下限:"+Balance_LIST[1].split(":")[1]+"円)"
