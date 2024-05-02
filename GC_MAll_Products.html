@@ -203,8 +203,8 @@ function getValueFromCatList(category) {
   document.getElementById("faceButton").addEventListener("click", function() {
         var base64String =  FaceCaptureInterface.getFace("FaceCaptureInterface");              
         setBase64ImageSource(base64String);
-         var info = CCWalletInterface.DelFaces(sbuser,"9392909000000154","D");
-         ToastInterface.showToast(info)
+         //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000154","D");
+         //ToastInterface.showToast(info)
       
          //Set the S (Search Operation)
           var info=CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);           
@@ -216,6 +216,7 @@ function getValueFromCatList(category) {
               extractedUserID = prefix + extractedUserID
               //var info = CCWalletInterface.DelFaces(sbuser,extractedUserID,"D");
               var info = CCWalletInterface.AddFaces(sbuser,extractedUserID,"A",base64String);
+              ToastInterface.showToast(info)
               var info = CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);  
               ToastInterface.showToast(info)
           }else
