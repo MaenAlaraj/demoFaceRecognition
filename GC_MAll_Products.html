@@ -204,19 +204,19 @@ function getValueFromCatList(category) {
         var base64String =  FaceCaptureInterface.getFace("FaceCaptureInterface");              
         setBase64ImageSource(base64String);
         //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000154","D");
-         ToastInterface.showToast(info)
-        var info = CCWalletInterface.AddFaces(sbuser,"9392909000000154","A",base64String);
-         ToastInterface.showToast(info)
+        //var info = CCWalletInterface.AddFaces(sbuser,"9392909000000154","A",base64String);
+         //ToastInterface.showToast(info)
+      
          //Set the S (Search Operation)
-          /*var info=CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);           
+          var info=CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);           
           if (info.includes(errorsSubstring))
           {
               var qrstring = QRInterface.get_QRInfo("QR");
               const match = qrstring.match(/,(.*?),/);
               extractedUserID = match ? match[1] : null;
               extractedUserID = prefix + extractedUserID
-               var info = CCWalletInterface.DelFaces(sbuser,extractedUserID,"D");
-               var info = CCWalletInterface.AddFaces(sbuser,extractedUserID,"A",base64String);
+              var info = CCWalletInterface.DelFaces(sbuser,extractedUserID,"D");
+              //var info = CCWalletInterface.AddFaces(sbuser,extractedUserID,"A",base64String);
               ToastInterface.showToast(info)
               //userBeforePrefix =  info
              // setMessage("GCユーザー:"+info,"user")
@@ -229,7 +229,7 @@ function getValueFromCatList(category) {
               setMessage("GCユーザー:"+CCW_FaceResponse_LIST[1],"user")
               document.getElementById('authContainer').style.display = 'none';
               document.getElementById('mainContainer').style.display = 'block';
-              setBalance(userID)*/   
+              setBalance(userID)
     }
     );
 
