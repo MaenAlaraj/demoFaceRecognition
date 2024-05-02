@@ -200,14 +200,14 @@ function getValueFromCatList(category) {
               extractedUserID = match ? match[1] : null;
               extractedUserID = prefix + extractedUserID
               var info = CCWalletInterface.AddFaces(sbuser,extractedUserID,"A",base64String);
-               userBeforePrefix =  info
+               //userBeforePrefix =  info
               setMessage("GCユーザー:"+info,"user")
           }else
           {
               ToastInterface.showToast("このユーザーの顔はすでに登録されています。")
               var CCW_FaceResponse_LIST=info.split("：")
               ToastInterface.showToast(CCW_FaceResponse_LIST[1])
-              userBeforePrefix = CCW_FaceResponse_LIST[1]
+              //userBeforePrefix = CCW_FaceResponse_LIST[1]
               setMessage("GCユーザー:"+CCW_FaceResponse_LIST[1],"user")
               document.getElementById('authContainer').style.display = 'none';
               document.getElementById('mainContainer').style.display = 'block';
