@@ -185,7 +185,6 @@ function getValueFromCatList(category) {
     
   document.getElementById("faceButton").addEventListener("click", function() {
         //Set the Camera
-       ToastInterface.showToast("Face Buttin in clicked")
         var base64String =  FaceCaptureInterface.getFace("FaceCaptureInterface");              
       
         //Set the source of the base64Image element
@@ -364,8 +363,17 @@ function setMessage(str,id="message") {
         const category = spans[3].textContent.trim();
         const date = spans[4].textContent.trim();
         const catValue = getValueFromCatList(category);
+
+
+        let message = document.getElementById(id);      
+        var user1 = prefix + message.innerText
+
+
+
+
+
+
         
-        var user1 = prefix + sellerCode
         var terminalid = ""
         var sellerNameRet = CCWalletInterface.Name(user1,terminalid);
         var sellerNameToken_list=sellerNameRet.split(":")
