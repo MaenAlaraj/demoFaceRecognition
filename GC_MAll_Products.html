@@ -143,6 +143,7 @@ const Cat_List = {
 
     
 function setBalance(userID){
+    userBeforePrefix = userID
     var user1 = prefix + userID
     ToastInterface.showToast(user1)
     var Balance_STR=CCWalletInterface.Balance(user1,payment_terminalID)
@@ -209,8 +210,6 @@ function getValueFromCatList(category) {
               ToastInterface.showToast("このユーザーの顔はすでに登録されています。")
               var CCW_FaceResponse_LIST=info.split("：")
                var userID =  CCW_FaceResponse_LIST[1].replace(/\s/g, "");
-               userBeforePrefix = user
-              //userBeforePrefix = CCW_FaceResponse_LIST[1]
               setMessage("GCユーザー:"+CCW_FaceResponse_LIST[1],"user")
               document.getElementById('authContainer').style.display = 'none';
               document.getElementById('mainContainer').style.display = 'block';
