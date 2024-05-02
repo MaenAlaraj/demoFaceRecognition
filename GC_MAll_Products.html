@@ -186,6 +186,7 @@ function getValueFromCatList(category) {
     
   document.getElementById("faceButton").addEventListener("click", function() {
         //Set the Camera
+        ToastInterface.showToast("Camera has been operated")
         var base64String =  FaceCaptureInterface.getFace("FaceCaptureInterface");              
       
         //Set the source of the base64Image element
