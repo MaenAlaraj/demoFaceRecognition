@@ -364,15 +364,12 @@ function setMessage(str,id="message") {
         const category = spans[3].textContent.trim();
         const date = spans[4].textContent.trim();
         const catValue = getValueFromCatList(category);
-        console.log("Category:", catValue);
         
-        var userid1 = prefix + sellerCode
-        ToastInterface.showToast(userid1)
+        var user1 = prefix + sellerCode
         var terminalid = ""
-        var sellerNameRet = CCWalletInterface.Name(userid1,terminalid);
+        var sellerNameRet = CCWalletInterface.Name(user1,terminalid);
         var sellerNameToken_list=sellerNameRet.split(":")
         var seller_name = sellerNameToken_list[1]
-        ToastInterface.showToast(seller_name)
 
         
         var amount = parseInt(product_price)
@@ -385,20 +382,22 @@ function setMessage(str,id="message") {
 
         
         var user2 = prefix + gcMall_code
-        message1 =　(header_prefix + sellerCode + product_name+ catValue +  category +  formattedDate + seller_name);
+        message1 =　(header_prefix + sellerCode + product_name + catValue +  category +  formattedDate + seller_name);
         ToastInterface.showToast(message1)
         message2 = "MALL用";
+
+        
         var r = CCWalletInterface.doPointPayment(user1,amount,user2,message1,message2,"");
         ToastInterface.showToast(r)
         document.getElementById('authContainer').style.display = 'block';
         document.getElementById('mainContainer').style.display = 'none';
-        ToastInterface.showToast("ご購入ありがとうございます！")
-        setBalance()
-        setTotal()
+     
 
 });
 
-    
+       ToastInterface.showToast("ご購入ありがとうございます！")
+        setBalance()
+        setTotal()
     
 
 
