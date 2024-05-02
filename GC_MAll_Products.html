@@ -360,54 +360,47 @@ function setMessage(str,id="message") {
             return;
         }        
         const spans = listItem.querySelectorAll('span');
-        const sellerCode =spans[0].textContent.trim()
-        const product_name =spans[1].textContent.trim()
+        const sellerCode =spans[0].textContent.trim();
+        const product_name =spans[1].textContent.trim();
         const product_price = spans[2].textContent.trim();
         const category = spans[3].textContent.trim();
         const date = spans[4].textContent.trim();
         const catValue = getValueFromCatList(category);
 
-        var user1 = prefix + userBeforePrefix
-        ToastInterface.showToast(user1)
+       
+        var user1 = prefix + userBeforePrefix;
+        ToastInterface.showToast(user1);
 
-
-
-
-
+       var sellerCode = prefix + sellerCode;
+        var terminalid = "";
+        var sellerNameRet = CCWalletInterface.Name(sellerCode,terminalid);
+        var sellerNameToken_list=sellerNameRet.split(":");
+        var seller_name = sellerNameToken_list[1];
         
-        var terminalid = ""
-        var sellerNameRet = CCWalletInterface.Name(user1,terminalid);
-        var sellerNameToken_list=sellerNameRet.split(":")
-        var seller_name = sellerNameToken_list[1]
-
-        
-        var amount = parseInt(product_price)
+        var amount = parseInt(product_price);
         
         // Replace "/" with "."
         var formattedDate = date.replace(/\//g, ".");
 
-
-
-
         
-        var user2 = prefix + gcMall_code
+        var user2 = prefix + gcMall_code;
         message1 =　(header_prefix + sellerCode + " " + product_name + " " + catValue + " " + category + " " + formattedDate + " " + seller_name);
-        ToastInterface.showToast(message1)
+        ToastInterface.showToast(message1);
         message2 = "MALL用";
 
         
         var r = CCWalletInterface.doPointPayment(user1,amount,user2,message1,message2,"");
-        ToastInterface.showToast(r)
+        ToastInterface.showToast(r);
         document.getElementById('authContainer').style.display = 'block';
         document.getElementById('mainContainer').style.display = 'none';
      
 
 });
 
-       ToastInterface.showToast("ご購入ありがとうございます！")
-        setBalance()
-        setTotal()
-        userBeforePrefix = ""
+       ToastInterface.showToast("ご購入ありがとうございます！");
+        setBalance();
+        setTotal();
+        userBeforePrefix = "";
     
 
 
