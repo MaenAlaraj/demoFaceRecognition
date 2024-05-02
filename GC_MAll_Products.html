@@ -212,7 +212,8 @@ function getValueFromCatList(category) {
               const match = qrstring.match(/,(.*?),/);
               extractedUserID = match ? match[1] : null;
               extractedUserID = prefix + extractedUserID
-              var info = CCWalletInterface.AddFaces(sbuser,extractedUserID,"A",base64String);
+              var info = CCWalletInterface.DelFaces(sbuser,extractedUserID,"D",base64String);
+             // var info = CCWalletInterface.AddFaces(sbuser,extractedUserID,"A",base64String);
               ToastInterface.showToast(info)
               //userBeforePrefix =  info
              // setMessage("GCユーザー:"+info,"user")
