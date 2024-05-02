@@ -203,7 +203,7 @@ function getValueFromCatList(category) {
   document.getElementById("faceButton").addEventListener("click", function() {
         var base64String =  FaceCaptureInterface.getFace("FaceCaptureInterface");              
         setBase64ImageSource(base64String);
-        //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000154","D");
+         var info = CCWalletInterface.DelFaces(sbuser,"9392909000000154","D");
         //var info = CCWalletInterface.AddFaces(sbuser,"9392909000000154","A",base64String);
          //ToastInterface.showToast(info)
       
@@ -217,9 +217,8 @@ function getValueFromCatList(category) {
               extractedUserID = prefix + extractedUserID
               //var info = CCWalletInterface.DelFaces(sbuser,extractedUserID,"D");
               var info = CCWalletInterface.AddFaces(sbuser,extractedUserID,"A",base64String);
+              var info = CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);  
               ToastInterface.showToast(info)
-              //userBeforePrefix =  info
-             // setMessage("GCユーザー:"+info,"user")
           }else
           {
               ToastInterface.showToast("このユーザーの顔はすでに登録されています。")             
