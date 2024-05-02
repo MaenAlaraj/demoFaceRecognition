@@ -202,8 +202,8 @@ function getValueFromCatList(category) {
   document.getElementById("faceButton").addEventListener("click", function() {
         var base64String =  FaceCaptureInterface.getFace("FaceCaptureInterface");              
         setBase64ImageSource(base64String);
-         //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000154","D");
-         //ToastInterface.showToast(info)
+         var info = CCWalletInterface.DelFaces(sbuser,"9392909000000154","D");
+         ToastInterface.showToast(info)
       
          //Set the S (Search Operation)
           var info=CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);           
@@ -215,9 +215,8 @@ function getValueFromCatList(category) {
               extractedUserID = prefix + extractedUserID
               //var info = CCWalletInterface.DelFaces(sbuser,extractedUserID,"D");
               var info = CCWalletInterface.AddFaces(sbuser,extractedUserID,"A",base64String);
-              ToastInterface.showToast(info)
+              ToastInterface.showToast("顔が登録されました。")
               var info = CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);  
-              ToastInterface.showToast(info)
           }else
           {
               ToastInterface.showToast("このユーザーの顔はすでに登録されています。")             
@@ -236,8 +235,6 @@ function getValueFromCatList(category) {
       var qrstring = QRInterface.get_QRInfo("QR");
       const match = qrstring.match(/,(.*?),/);
       extractedUserID = match ? match[1] : null;
-      //extractedUserID = prefix + extractedUserID
-      ToastInterface.showToast(extractedUserID)     
       setMessage("GCユーザー:"+extractedUserID,"user")
       document.getElementById('authContainer').style.display = 'none';
       document.getElementById('mainContainer').style.display = 'block';
@@ -293,7 +290,6 @@ function setMessage(str,id="message") {
             var price=item.price
             let listItem = document.createElement('li');
             if(total+price <Balance){
-                //ToastInterface.showToast(total+price)
                 item.listItem=listItem
                
                 items.push(item);
