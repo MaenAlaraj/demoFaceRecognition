@@ -212,8 +212,8 @@ function getValueFromCatList(category) {
               const match = qrstring.match(/,(.*?),/);
               extractedUserID = match ? match[1] : null;
               extractedUserID = prefix + extractedUserID
-              var info = CCWalletInterface.DelFaces(sbuser,extractedUserID,"D");
-             // var info = CCWalletInterface.AddFaces(sbuser,extractedUserID,"A",base64String);
+              //var info = CCWalletInterface.DelFaces(sbuser,extractedUserID,"D");
+               var info = CCWalletInterface.AddFaces(sbuser,extractedUserID,"A",base64String);
               ToastInterface.showToast(info)
               //userBeforePrefix =  info
              // setMessage("GCユーザー:"+info,"user")
@@ -367,11 +367,8 @@ function setMessage(str,id="message") {
         
         // Replace "/" with "."
         var formattedDate = date.replace(/\//g, ".");
-
-        
-        
-        message1 =　(header_prefix + sellerCode + " " + product_name + " " + catValue + " " + category + " " + formattedDate + " " + seller_name)
-               
+      
+        message1 =　(header_prefix + sellerCode + " " + product_name + " " + catValue + " " + category + " " + formattedDate + " " + seller_name)               
         var r = CCWalletInterface.doPointPayment(user1,amount,user2,message1,message2,"");   
 });
         document.getElementById('authContainer').style.display = 'block';
