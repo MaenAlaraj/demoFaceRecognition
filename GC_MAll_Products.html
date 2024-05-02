@@ -7,10 +7,21 @@
     <title>GC Mall 商品読み込みページ</title>
     <style>
         .auth-container {
+             text-align: center;
+        }
+
+        .button-container {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-       }
+            justify-content: center;
+            margin-bottom: 10px; /* Adjust as needed */
+        }
+
+        #base64Image {
+            display: block;
+            margin: 0 auto;
+        }
+
+        
         body {
             font-family: 'Arial', sans-serif;
             height: 100vh;
@@ -79,12 +90,13 @@
 <div class="auth-container" id="authContainer">
     <p>GC Mall デモアプリ</p>
     <p>GCのQRか顔を読み込ませてください</p>
-    <button id="qrButton">QR</button>
-    <button id="faceButton">顔</button>
-    <div id="imageContainer"> 
-        <img id="base64Image" src="" alt="Base64 Image" height="140" width="140">
+    <div class="button-container">
+        <button id="qrButton">QR</button>
+        <button id="faceButton">顔</button>
     </div>
+    <img id="base64Image" src="" alt="Base64 Image" height="140" width="140">
 </div>
+    
 <body>
 <div id="mainContainer" style="display: none;">
     <p id="user"></p>
