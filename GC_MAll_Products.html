@@ -219,14 +219,14 @@ function getValueFromCatList(category) {
              // setMessage("GCユーザー:"+info,"user")
           }else
           {
-              ToastInterface.showToast("このユーザーの顔はすでに登録されています。")
+              ToastInterface.showToast("このユーザーの顔はすでに登録されています。")             
+          }
               var CCW_FaceResponse_LIST=info.split("：")
-               var userID =  CCW_FaceResponse_LIST[1].replace(/\s/g, "");
+              var userID =  CCW_FaceResponse_LIST[1].replace(/\s/g, "");
               setMessage("GCユーザー:"+CCW_FaceResponse_LIST[1],"user")
               document.getElementById('authContainer').style.display = 'none';
               document.getElementById('mainContainer').style.display = 'block';
               setBalance(userID)   
-          }             
     });
 
 
