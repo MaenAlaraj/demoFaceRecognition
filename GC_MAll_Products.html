@@ -142,8 +142,8 @@ const Cat_List = {
 
 
     
-function setBalance(userStr){
-    var user1 = prefix + userStr
+function setBalance(userID){
+    var user1 = prefix + userID
     ToastInterface.showToast(user1)
     var Balance_STR=CCWalletInterface.Balance(user1,payment_terminalID)
     var Balance_LIST=Balance_STR.split(" ")
@@ -208,12 +208,13 @@ function getValueFromCatList(category) {
           {
               ToastInterface.showToast("このユーザーの顔はすでに登録されています。")
               var CCW_FaceResponse_LIST=info.split("：")
-              ToastInterface.showToast(CCW_FaceResponse_LIST[1])
-              userBeforePrefix = CCW_FaceResponse_LIST[1]
+               var userID =  CCW_FaceResponse_LIST[1].replace(/\s/g, "");
+               userBeforePrefix = user
+              //userBeforePrefix = CCW_FaceResponse_LIST[1]
               setMessage("GCユーザー:"+CCW_FaceResponse_LIST[1],"user")
               document.getElementById('authContainer').style.display = 'none';
               document.getElementById('mainContainer').style.display = 'block';
-              setBalance(CCW_FaceResponse_LIST[1])   
+              setBalance(userID)   
           }             
     });
 
@@ -339,8 +340,9 @@ function setMessage(str,id="message") {
         const date = spans[4].textContent.trim();
         const catValue = getValueFromCatList(category);
        
-        var userWithSpace = prefix + userBeforePrefix;
-        var user1 = userWithSpace.replace(/\s/g, "");
+        //var userWithSpace = prefix + userBeforePrefix;
+        //var user1 = userWithSpace.replace(/\s/g, "");
+        var user1 = prefix + userBeforePrefix
         
         var sellerCodeE = prefix + sellerCode;
         var terminalid = "";
