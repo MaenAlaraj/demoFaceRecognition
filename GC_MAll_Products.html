@@ -368,8 +368,9 @@ function setMessage(str,id="message") {
         const catValue = getValueFromCatList(category);
 
        
-        var user1 = prefix + userBeforePrefix;
-        ToastInterface.showToast(user1)
+        var userWithSpace = prefix + userBeforePrefix;
+        var user1 = userWithSpace.replace(/\s/g, "");
+        
 
         var sellerCodeE = prefix + sellerCode;
         var terminalid = "";
