@@ -74,7 +74,6 @@
 <div class="auth-container" id="authContainer">
     <p>GC Mall デモアプリ</p>
     <p>GCのQRか顔を読み込ませてください</p>
-    <button id="authenticate">認証</button>
     <button id="qrButton">QR</button>
     <button id="faceButton">顔</button>
     <img id="base64Image" src="" alt="Base64 Image" height="250" width="250">
@@ -143,8 +142,8 @@ const Cat_List = {
 
 
     
-function setBalance(){
-    var Balance_STR=CCWalletInterface.Balance("9392909000000154",payment_terminalID)
+function setBalance(userStr){
+    var Balance_STR=CCWalletInterface.Balance(userStr,payment_terminalID)
     var Balance_LIST=Balance_STR.split(" ")
     document.getElementById('message').innerText="円残高:"+Balance_LIST[0].split(":")[1]+"円(残高の下限:"+Balance_LIST[1].split(":")[1]+"円)"
     Balance=parseInt(Balance_LIST[0].split(":")[1])-parseInt(Balance_LIST[1].split(":")[1])
@@ -213,7 +212,7 @@ function getValueFromCatList(category) {
               setMessage("GCユーザー:"+CCW_FaceResponse_LIST[1],"user")
               document.getElementById('authContainer').style.display = 'none';
               document.getElementById('mainContainer').style.display = 'block';
-              setBalance()   
+              setBalance(CCW_FaceResponse_LIST[1])   
           }             
     });
 
