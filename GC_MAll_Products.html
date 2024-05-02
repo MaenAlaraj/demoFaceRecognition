@@ -201,10 +201,7 @@ function getValueFromCatList(category) {
 
     
   document.getElementById("faceButton").addEventListener("click", function() {
-        //Set the Camera
         var base64String =  FaceCaptureInterface.getFace("FaceCaptureInterface");              
-      
-        //Set the source of the base64Image element
         setBase64ImageSource(base64String);
                 
          //Set the S (Search Operation)
@@ -216,8 +213,9 @@ function getValueFromCatList(category) {
               extractedUserID = match ? match[1] : null;
               extractedUserID = prefix + extractedUserID
               var info = CCWalletInterface.AddFaces(sbuser,extractedUserID,"A",base64String);
-              userBeforePrefix =  info
-              setMessage("GCユーザー:"+info,"user")
+              ToastInterface.showToast(info)
+              //userBeforePrefix =  info
+             // setMessage("GCユーザー:"+info,"user")
           }else
           {
               ToastInterface.showToast("このユーザーの顔はすでに登録されています。")
