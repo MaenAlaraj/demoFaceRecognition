@@ -162,9 +162,10 @@ function setBalance(){
         }
 
 
+
+    
 //QR コードのキーに基づいて Cat_List から値を取得する関数
 function getValueFromCatList(category) {
-    // Parse the QR code data to get the key
     const key = category.trim();
 
     // キーがCat_Listに存在するかどうかを確認する
@@ -215,36 +216,7 @@ function getValueFromCatList(category) {
               setBalance()   
           }             
     });
-document.getElementById('authenticate').addEventListener('click', function() {
-    // ここでユーザー認証のロジックを実行
-    var qrstring = QRInterface.get_QRInfo("QR");
-    var qrstr_list=qrstring.split(",")
-    if(qrstr_list[0]=="BNDI"){
-    user=CCWalletInterface.CodeTblMnt(qrstr_list[0]+","+qrstr_list[1],"","S")
-    user_freeArea=CCWalletInterface.FreeAreaMnt(user,"","S")
-    if(user_freeArea.includes("BNDIPlus_Townspeople")){
-    discount_rate=1.0
-    setMessage("町民ユーザー:"+qrstr_list[1],"user")
-    }
-    else if(user_freeArea.includes("BNDIPlus_Virtualpeople")){
-    discount_rate=0.5
-    setMessage("仮想町民ユーザー:"+qrstr_list[1],"user")
-    }
-    else{
-    discount_rate=0
-    setMessage("町外ユーザー:"+qrstr_list[1],"user")
-    }
-    }
 
-    /*const match = qrstring.match(/,(.*?),/);
-    extractedUserID = match ? match[1] : null;
-    extractedUserID = prefix + extractedUserID
-    ToastInterface.showToast(extractedUserID)*/ 
-    
-    document.getElementById('authContainer').style.display = 'none';
-    document.getElementById('mainContainer').style.display = 'block';
-    setBalance()   
-});
 
 // Function to set the source of the base64Image element
 function setBase64ImageSource(base64String) 
@@ -366,12 +338,10 @@ function setMessage(str,id="message") {
         const category = spans[3].textContent.trim();
         const date = spans[4].textContent.trim();
         const catValue = getValueFromCatList(category);
-
        
         var userWithSpace = prefix + userBeforePrefix;
         var user1 = userWithSpace.replace(/\s/g, "");
         
-
         var sellerCodeE = prefix + sellerCode;
         var terminalid = "";
         var sellerNameRet = CCWalletInterface.Name(sellerCodeE,terminalid);
@@ -394,61 +364,15 @@ function setMessage(str,id="message") {
         ToastInterface.showToast(r)
         document.getElementById('authContainer').style.display = 'block';
         document.getElementById('mainContainer').style.display = 'none';
-
+});
+        
         ToastInterface.showToast("ご購入ありがとうございます！")
         setBalance()
         setTotal()
-        //userBeforePrefix = ""
-     
-
-});
-
-     
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        userBeforePrefix = ""
 
         
-
-        
-    /*var info=CCWalletInterface.C1toC2MovenPoint(user,discount_total,recipient,"ユーザー割引",recipient+"に"+discount_total+"円の割引",Discount_terminalID)
-    if(info.includes("エラー")){
-    ToastInterface.showToast(info)
-    }
-    info=CCWalletInterface.C1toC2MovenPoint(user,total,recipient,"ユーザー支払い",recipient+"に"+total+"円の支払い",payment_terminalID)
-    if(info.includes("エラー")){
-    ToastInterface.showToast(info)
-    }
-    let list = document.getElementById('productList');
-    for (const item of items) {
-    list.removeChild(item.listItem);
-    }
-    document.getElementById('authContainer').style.display = 'block';
-    document.getElementById('mainContainer').style.display = 'none';
-    ToastInterface.showToast("ご購入ありがとうございます！")
-
-    user="";
-    user_freeArea="";
-    discount_rate=0;
-    setBalance()
-    setTotal()*/
 }
-
-
     });
 </script>
 
