@@ -191,16 +191,20 @@ function getValueFromCatList(category) {
 
 
 
-function clearItemList() {
-    // Remove all items from the list
+function removeItemsFromList() {
+    // Remove items from the list
     const productList = document.getElementById('productList');
-    productList.innerHTML = '';
+    const listItems = productList.querySelectorAll('li');
+
+    listItems.forEach(listItem => {
+        productList.removeChild(listItem);
+    });
 
     // Clear the items array
     items.length = 0;
 
     // Reset the total amount displayed
-    document.getElementById('totalAmount').innerText = 'トータル: 0円';
+    setTotal();
 }
 
 
