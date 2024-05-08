@@ -204,7 +204,7 @@ function getValueFromCatList(category) {
         setBase64ImageSource(base64String);
          //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000154","D"); //アララジ
          //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000114","D");　//山口さん
-      　　var info = CCWalletInterface.DelFaces(sbuser,"9392909000000176","D");　//大橋さん
+      　　//var info = CCWalletInterface.DelFaces(sbuser,"9392909000000176","D");　//大橋さん
          ToastInterface.showToast(info)
       
          //Set the S (Search Operation)
@@ -215,10 +215,9 @@ function getValueFromCatList(category) {
               const match = qrstring.match(/,(.*?),/);
               extractedUserID = match ? match[1] : null;
               extractedUserID = prefix + extractedUserID
-              //var info = CCWalletInterface.DelFaces(sbuser,extractedUserID,"D");
-              //var info = CCWalletInterface.AddFaces(sbuser,extractedUserID,"A",base64String);
-              //ToastInterface.showToast("顔が登録されました。")
-              //var info = CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);  
+              var info = CCWalletInterface.AddFaces(sbuser,extractedUserID,"A",base64String);
+              ToastInterface.showToast("顔が登録されました。")
+              var info = CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);  
           }else
           {
               ToastInterface.showToast("このユーザーの顔はすでに登録されています。")             
