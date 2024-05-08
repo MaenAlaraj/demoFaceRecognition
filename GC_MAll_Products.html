@@ -196,8 +196,6 @@ function getValueFromCatList(category) {
 
     
   document.getElementById("faceButton").addEventListener("click", function() {
-        var base64String =  FaceCaptureInterface.getFace("FaceCaptureInterface");              
-        setBase64ImageSource(base64String);
          //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000154","D"); //アララジ
          //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000114","D");　//山口さん
       　　//var info = CCWalletInterface.DelFaces(sbuser,"9392909000000176","D");　//大橋さん
@@ -239,19 +237,6 @@ function getValueFromCatList(category) {
     }
     );
 
-
-
-
-
-
-
-    
-// Function to set the source of the base64Image element
-function setBase64ImageSource(base64String) 
-{
- // Set the src attribute to the Base64-encoded string
-document.getElementById("base64Image").src = "data:image/jpeg;base64," + base64String;
-}
     
 function isPositiveInteger(str) {
     return /^[0-9]\d*$/.test(str);
