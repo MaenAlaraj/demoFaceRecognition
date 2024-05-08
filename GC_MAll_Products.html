@@ -359,8 +359,12 @@ function setMessage(str,id="message") {
     var terminalid = "";    
 
         
-   for (let index = 1; index < listItems.length; index++) {
-        const listItem = listItems[index];
+ listItems.forEach(listItem => {
+        // Skip the first iteration
+        if (isFirstIteration) {
+            isFirstIteration = false;     
+            return;
+        }        
         const spans = listItem.querySelectorAll('span');
         const sellerCode =spans[0].textContent.trim();
         const product_name =spans[1].textContent.trim();
@@ -386,7 +390,7 @@ function setMessage(str,id="message") {
       
         message1 =　(header_prefix + sellerCode + " " + product_name + " " + catValue + " " + category + " " + formattedDate + " " + seller_name)
         ToastInterface.showToast("購入中")
-        await delay(2000);
+        //await delay(2000);
         var r = CCWalletInterface.doPointPayment(user1,amount,user2,message1,message2,"");   
 });
         document.getElementById('authContainer').style.display = 'block';
@@ -399,9 +403,9 @@ function setMessage(str,id="message") {
     });
 
 
-function delay(ms) {
+/*function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
-}
+}*/
 
 
 
