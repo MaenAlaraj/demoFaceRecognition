@@ -390,7 +390,7 @@ function setMessage(str,id="message") {
       
         message1 =　(header_prefix + sellerCode + " " + product_name + " " + catValue + " " + category + " " + formattedDate + " " + seller_name)
         ToastInterface.showToast("購入中")
-        await delay(3500);
+        //await delay(3500);
         var r = CCWalletInterface.doPointPayment(user1,amount,user2,message1,message2,"");   
 });
         document.getElementById('authContainer').style.display = 'block';
@@ -403,9 +403,9 @@ function setMessage(str,id="message") {
     });
 
 
-function delay(ms) {
+/*function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
-}
+}*/
 
 
 
