@@ -345,7 +345,7 @@ function setMessage(str,id="message") {
     }
     );
             
-    /*document.getElementById('payment').addEventListener('click', function() {
+    document.getElementById('payment').addEventListener('click', function() {
     if(total==0 && discount_total==0){
     ToastInterface.showToast("商品がありません。商品を読み込ませた後に支払いをするか、終了ボタンを押してください。")
     }
@@ -389,7 +389,8 @@ function setMessage(str,id="message") {
         var formattedDate = date.replace(/\//g, ".");
       
         message1 =　(header_prefix + sellerCode + " " + product_name + " " + catValue + " " + category + " " + formattedDate + " " + seller_name)
-        ToastInterface.showToast(amount)
+        ToastInterface.showToast(product_name + ": 購入中")
+        await delay(2000);
         var r = CCWalletInterface.doPointPayment(user1,amount,user2,message1,message2,"");   
 });
         document.getElementById('authContainer').style.display = 'block';
@@ -399,72 +400,15 @@ function setMessage(str,id="message") {
         setTotal()
         userBeforePrefix = ""        
 }
-    });*/
+    });
+
+
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 
 
-
-
-document.getElementById('payment').addEventListener('click', function() {
-    if (total == 0 && discount_total == 0) {
-        ToastInterface.showToast("商品がありません。商品を読み込ませた後に支払いをするか、終了ボタンを押してください。")
-    } else {
-        const productList = document.getElementById('productList');
-        const listItems = productList.querySelectorAll('li');
-        const user1 = prefix + userBeforePrefix;
-        const user2 = prefix + gcMall_code;
-        const message2 = "MALL用";
-        const terminalid = "";
-
-        let index = 0;
-        const periodOfShowToast = 2000; 
-        function processNextItem() {
-            const listItem = listItems[index];
-            const spans = listItem.querySelectorAll('span');
-            const sellerCode = spans[0].textContent.trim();
-            const product_name = spans[1].textContent.trim();
-            const product_price = spans[2].textContent.trim();
-            const category = spans[3].textContent.trim();
-            const date = spans[4].textContent.trim();
-            const catValue = getValueFromCatList(category);
-
-            const sellerCodeE = prefix + sellerCode;
-
-            const sellerNameRet = CCWalletInterface.Name(sellerCodeE, terminalid);
-            const sellerNameToken_list = sellerNameRet.split(":");
-            const seller_name = sellerNameToken_list[1];
-
-            const amount = parseInt(product_price);
-
-            const formattedDate = date.replace(/\//g, ".");
-
-            const message1 = (header_prefix + sellerCode + " " + product_name + " " + catValue + " " + category + " " + formattedDate + " " + seller_name);
-
-            ToastInterface.showToast(amount);
-
-            const r = CCWalletInterface.doPointPayment(user1, amount, user2, message1, message2, "");
-
-            index++;
-
-            // Check if there are more items to process
-            if (index < listItems.length) {
-                // Schedule processing of next item after the period of showToast
-                setTimeout(processNextItem, periodOfShowToast);
-            } else {
-                // All items processed, perform final actions
-                document.getElementById('authContainer').style.display = 'block';
-                document.getElementById('mainContainer').style.display = 'none';
-                ToastInterface.showToast("ご購入ありがとうございます！");
-                setBalance(userBeforePrefix);
-                setTotal();
-                userBeforePrefix = "";
-            }
-        }
-
-        // Start processing the first item
-        processNextItem();
-    }
-});
 
     
 </script>
