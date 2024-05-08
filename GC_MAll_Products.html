@@ -389,7 +389,7 @@ function setMessage(str,id="message") {
         ToastInterface.showToast("ご購入ありがとうございます！")
         setBalance("userBeforePrefix")
         setTotal()
-        clearItemList();
+        removeItemsFromList();
         userBeforePrefix = ""        
 }
     });
