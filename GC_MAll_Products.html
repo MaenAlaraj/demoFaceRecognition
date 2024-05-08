@@ -195,8 +195,14 @@ function removeItemsFromList() {
     // Remove items from the list
     const productList = document.getElementById('productList');
     const listItems = productList.querySelectorAll('li');
-
+    let isFirstIteration = true;
+    
     listItems.forEach(listItem => {
+        // Skip the first iteration
+         if (isFirstIteration) {
+            isFirstIteration = false;     
+            return;
+        }                
         productList.removeChild(listItem);
     });
 
@@ -236,7 +242,7 @@ function removeItemsFromList() {
               setMessage("GCユーザー:"+CCW_FaceResponse_LIST[1],"user")
               document.getElementById('authContainer').style.display = 'none';
               document.getElementById('mainContainer').style.display = 'block';
-             // removeItemsFromList();
+              removeItemsFromList();
               setBalance(userID)
     }
     );
