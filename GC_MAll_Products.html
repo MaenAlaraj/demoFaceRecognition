@@ -389,7 +389,7 @@ function setMessage(str,id="message") {
         var formattedDate = date.replace(/\//g, ".");
       
         message1 =　(header_prefix + sellerCode + " " + product_name + " " + catValue + " " + category + " " + formattedDate + " " + seller_name)
-        ToastInterface.showToast(product_name + ": 購入中")
+        ToastInterface.showToast("購入中")
         await delay(2000);
         var r = CCWalletInterface.doPointPayment(user1,amount,user2,message1,message2,"");   
 });
