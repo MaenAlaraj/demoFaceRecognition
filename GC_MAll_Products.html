@@ -191,7 +191,17 @@ function getValueFromCatList(category) {
 
 
 
+function clearItemList() {
+    // Remove all items from the list
+    const productList = document.getElementById('productList');
+    productList.innerHTML = '';
 
+    // Clear the items array
+    items.length = 0;
+
+    // Reset the total amount displayed
+    document.getElementById('totalAmount').innerText = 'トータル: 0円';
+}
 
 
     
@@ -375,6 +385,7 @@ function setMessage(str,id="message") {
         ToastInterface.showToast("ご購入ありがとうございます！")
         setBalance("userBeforePrefix")
         setTotal()
+        clearItemList();
         userBeforePrefix = ""        
 }
     });
