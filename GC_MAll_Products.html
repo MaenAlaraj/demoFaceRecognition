@@ -359,12 +359,8 @@ function setMessage(str,id="message") {
     var terminalid = "";    
 
         
-    listItems.forEach(listItem => {
-        // Skip the first iteration
-        if (isFirstIteration) {
-            isFirstIteration = false;     
-            return;
-        }        
+   for (let index = 1; index < listItems.length; index++) {
+        const listItem = listItems[index];
         const spans = listItem.querySelectorAll('span');
         const sellerCode =spans[0].textContent.trim();
         const product_name =spans[1].textContent.trim();
