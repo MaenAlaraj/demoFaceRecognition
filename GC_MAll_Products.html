@@ -388,7 +388,8 @@ function setMessage(str,id="message") {
         // Replace "/" with "."
         var formattedDate = date.replace(/\//g, ".");
       
-        message1 =　(header_prefix + sellerCode + " " + product_name + " " + catValue + " " + category + " " + formattedDate + " " + seller_name)               
+        message1 =　(header_prefix + sellerCode + " " + product_name + " " + catValue + " " + category + " " + formattedDate + " " + seller_name)
+        ToastInterface.showToast(amount)
         var r = CCWalletInterface.doPointPayment(user1,amount,user2,message1,message2,"");   
 });
         document.getElementById('authContainer').style.display = 'block';
