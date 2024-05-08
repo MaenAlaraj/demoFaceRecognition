@@ -202,7 +202,8 @@ function getValueFromCatList(category) {
   document.getElementById("faceButton").addEventListener("click", function() {
         var base64String =  FaceCaptureInterface.getFace("FaceCaptureInterface");              
         setBase64ImageSource(base64String);
-         var info = CCWalletInterface.DelFaces(sbuser,"9392909000000154","D");
+         //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000154","D"); アララジ
+         var info = CCWalletInterface.DelFaces(sbuser,"9392909000000114","D");　//山口さん
          ToastInterface.showToast(info)
       
          //Set the S (Search Operation)
