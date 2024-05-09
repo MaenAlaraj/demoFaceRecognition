@@ -272,7 +272,8 @@ function setMessage(str,id="message") {
     document.getElementById('loadProduct').addEventListener('click', function() {
         var qrstring = QRInterface.get_QRInfo("QR");
         var qrstr_list=qrstring.split(",")
-         if(qrstr_list.length==6){
+       
+        if(qrstr_list.length==6){
             if(!isPositiveInteger(qrstr_list[2])){
             setMessage("商品QRではないものが読み込まれました。","error_message")
             }
@@ -338,8 +339,6 @@ function setMessage(str,id="message") {
         }}else{
         setMessage("商品QRではないものが読み込まれました。","error_message")
         }
-       
-
     }
     );
             
