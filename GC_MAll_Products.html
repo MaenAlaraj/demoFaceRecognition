@@ -262,9 +262,9 @@ function removeItemsFromList() {
               var CCW_FaceResponse_LIST=info.split("：")
               var userID =  CCW_FaceResponse_LIST[1].replace(/\s/g, "");
               setMessage("GCユーザー:"+CCW_FaceResponse_LIST[1],"user")
-              document.getElementById('loading-text').style.display = 'none';
               document.getElementById('authContainer').style.display = 'none';
               document.getElementById('mainContainer').style.display = 'block';
+              document.getElementById('loading-text').style.display = 'none';
               removeItemsFromList();
               setBalance(userID)
     }
