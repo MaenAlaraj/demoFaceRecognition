@@ -233,12 +233,12 @@ function removeItemsFromList() {
               var info = CCWalletInterface.AddFaces(sbuser,extractedUserID,"A",base64String);
               ToastInterface.showToast("顔が登録されました。")
               var info = CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);  
-          }else
+          }/*else
           {
               ToastInterface.showToast("このユーザーの顔はすでに登録されています。")             
-          }
+          }*/
               var CCW_FaceResponse_LIST=info.split("：")
-              var userID =  CCW_FaceResponse_LIST[1].replace(/\s/g, "");
+              //var userID =  CCW_FaceResponse_LIST[1].replace(/\s/g, "");
               setMessage("GCユーザー:"+CCW_FaceResponse_LIST[1],"user")
               document.getElementById('authContainer').style.display = 'none';
               document.getElementById('mainContainer').style.display = 'block';
