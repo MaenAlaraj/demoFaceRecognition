@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GC Mall 商品読み込みページ</title>
     <style>
+      #loading-text {
+      font-size: 24px;
+      font-weight: bold;
+      text-align: center;
+     }
         .auth-container {
              text-align: center;
         }
@@ -91,6 +96,7 @@
         <button id="qrButton">QR</button>
         <button id="faceButton">顔</button>
     </div>
+    <div id="loading-text">Loading...</div>
 </div>
     
 <body>
@@ -149,7 +155,21 @@ const Cat_List = {
     H: 5000
 };
 
+// Function to animate the loading text
+    function animateLoadingText() {
+      const loadingText = document.getElementById('loading-text');
+      let dots = '';
 
+      setInterval(() => {
+        if (dots.length < 3) {
+          dots += '.';
+        } else {
+          dots = '';
+        }
+        loadingText.innerHTML = 'Loading' + dots;
+      }, 500); // Change the interval as needed (in milliseconds)
+    }
+    
     
 function setBalance(userID){
     userBeforePrefix = userID
@@ -220,9 +240,11 @@ function removeItemsFromList() {
          //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000154","D"); //アララジ
          //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000114","D");　//山口さん
       　　//var info = CCWalletInterface.DelFaces(sbuser,"9392909000000176","D");　//大橋さん
+        　//var info = CCWalletInterface.DelFaces(sbuser,"9392909000000176","D");　//会長
          //ToastInterface.showToast(info)
       
          //Set the S (Search Operation)
+          animateLoadingText();
           var info=CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);           
           if (info.includes(errorsSubstring))
           {
