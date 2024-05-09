@@ -100,8 +100,9 @@
 </div>
     
 <body>
-  <div id="loading-text">Loading...</div>
 <div id="mainContainer" style="display: none;">
+<div id="loading-text" style="display: none;">Loading...</div>
+
     <p id="user"></p>
 <p id="message"></p>
     <button id="loadProduct">商品の読み込み</button>
@@ -245,6 +246,7 @@ function removeItemsFromList() {
          //ToastInterface.showToast(info)
       
          //Set the S (Search Operation)
+          document.getElementById('loading-text').style.display = 'block';
           animateLoadingText();
           var info=CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);           
           if (info.includes(errorsSubstring))
@@ -260,6 +262,7 @@ function removeItemsFromList() {
               var CCW_FaceResponse_LIST=info.split("：")
               var userID =  CCW_FaceResponse_LIST[1].replace(/\s/g, "");
               setMessage("GCユーザー:"+CCW_FaceResponse_LIST[1],"user")
+              document.getElementById('loading-text').style.display = 'none';
               document.getElementById('authContainer').style.display = 'none';
               document.getElementById('mainContainer').style.display = 'block';
               removeItemsFromList();
