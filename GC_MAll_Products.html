@@ -252,6 +252,7 @@ function removeItemsFromList() {
       setMessage("GCユーザー:"+extractedUserID,"user")
       document.getElementById('authContainer').style.display = 'none';
       document.getElementById('mainContainer').style.display = 'block';
+       removeItemsFromList();
       setBalance(extractedUserID)
     }
     );
