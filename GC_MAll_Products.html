@@ -356,21 +356,12 @@ function setMessage(str,id="message") {
     var terminalid = "";    
 
     // Check if there are items to remove
-    if (listItems.length <= 1) { // Considering the first item as the header
+    /*if (listItems.length <= 1) { // Considering the first item as the header
         setMessage("No items to remove", "error_message");
         return;
-    }
+    }*/
 
-      listItems.forEach(listItem => {
-       // Check if the current item is the header
-        if (listItem.classList.contains('header-item')) {
-            setMessage("No items to remove", "error_message");
-            return; // Skip the header
-        }
-
-
-
-
+     
         
  listItems.forEach(listItem => {
         // Skip the first iteration
