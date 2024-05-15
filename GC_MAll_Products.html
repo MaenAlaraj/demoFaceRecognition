@@ -348,7 +348,6 @@ function setMessage(str,id="message") {
     ToastInterface.showToast("商品がありません。商品を読み込ませた後に支払いをするか、終了ボタンを押してください。")
     }
     else{  
-    let isFirstIteration = true;
     const productList = document.getElementById('productList');
     const listItems = productList.querySelectorAll('li');
     var user1 = prefix + userBeforePrefix
@@ -365,12 +364,6 @@ function setMessage(str,id="message") {
      
         
  listItems.forEach(listItem => {
-        // Skip the first iteration
-       /* if (isFirstIteration) {
-            isFirstIteration = false;     
-            return;
-        }*/
-
       if (listItem.classList.contains('header-item')) {
             setMessage("購入中なので、少々お待ちください。", "error_message");
             return; // Skip the header
