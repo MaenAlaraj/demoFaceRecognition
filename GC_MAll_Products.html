@@ -362,8 +362,8 @@ function setMessage(str,id="message") {
     }*/
 
      
-        
- listItems.forEach(listItem => {
+
+listItems.forEach((listItem, index) => {
       /*if (listItem.classList.contains('header-item')) {
             setMessage("購入中なので、少々お待ちください。", "error_message");
             return; // Skip the header
@@ -392,6 +392,11 @@ function setMessage(str,id="message") {
         var formattedDate = date.replace(/\//g, ".");
       
         message1 =　(header_prefix + sellerCode + " " + product_name + " " + catValue + " " + category + " " + formattedDate + " " + seller_name)
+         
+         // Display the index of the current listItem with custom text
+         ToastInterface.showToast(`Processing item ${index + 1}: ${product_name} (${product_price}円)`);
+
+    
         var r = CCWalletInterface.doPointPayment(user1,amount,user2,message1,message2,"");   
 });
         document.getElementById('authContainer').style.display = 'block';
