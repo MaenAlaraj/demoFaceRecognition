@@ -364,6 +364,7 @@ function setMessage(str,id="message") {
      
 
 listItems.forEach((listItem, index) => {
+      if (index > 0) {
       /*if (listItem.classList.contains('header-item')) {
             setMessage("購入中なので、少々お待ちください。", "error_message");
             return; // Skip the header
@@ -393,11 +394,12 @@ listItems.forEach((listItem, index) => {
         message1 =　(header_prefix + sellerCode + " " + product_name + " " + catValue + " " + category + " " + formattedDate + " " + seller_name)
 
 
-       if (index > 0) {
+     
          // Display the index of the current listItem with custom text
          ToastInterface.showToast(`購入中の商品 ${index + 1}: ${product_name} (${product_price}円)`);
-       } 
-        var r = CCWalletInterface.doPointPayment(user1,amount,user2,message1,message2,"");   
+        
+        var r = CCWalletInterface.doPointPayment(user1,amount,user2,message1,message2,"");
+           }
 });
         document.getElementById('authContainer').style.display = 'block';
         document.getElementById('mainContainer').style.display = 'none';
