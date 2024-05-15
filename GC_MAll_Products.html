@@ -199,7 +199,7 @@ function removeItemsFromList() {
     listItems.forEach(listItem => {
        // Check if the current item is the header
         if (listItem.classList.contains('header-item')) {
-            setMessage("No items to remove", "error_message");
+            //setMessage("No items to remove", "error_message");
             return; // Skip the header
         }
         productList.removeChild(listItem);
@@ -372,7 +372,7 @@ function setMessage(str,id="message") {
         }*/
 
       if (listItem.classList.contains('header-item')) {
-            setMessage("No items to remove", "error_message");
+            setMessage("購入中なので、少々お待ちください。", "error_message");
             return; // Skip the header
         }
         const spans = listItem.querySelectorAll('span');
