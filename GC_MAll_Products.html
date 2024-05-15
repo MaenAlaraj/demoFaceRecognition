@@ -389,14 +389,14 @@ listItems.forEach((listItem, index) => {
         var amount = parseInt(product_price);
         
         // Replace "/" with "."
-        var formattedDate = date.replace(/\//g, ".");
-      
+        var formattedDate = date.replace(/\//g, ".");   
         message1 =　(header_prefix + sellerCode + " " + product_name + " " + catValue + " " + category + " " + formattedDate + " " + seller_name)
-         
+
+
+       if (index > 0) {
          // Display the index of the current listItem with custom text
          ToastInterface.showToast(`購入中の商品 ${index + 1}: ${product_name} (${product_price}円)`);
-
-    
+       } 
         var r = CCWalletInterface.doPointPayment(user1,amount,user2,message1,message2,"");   
 });
         document.getElementById('authContainer').style.display = 'block';
