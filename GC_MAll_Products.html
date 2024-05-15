@@ -399,7 +399,7 @@ listItems.forEach((listItem, index) => {
          ToastInterface.showToast(`購入中の商品 ${index}: ${product_name} (${product_price})`);
         
         var r = CCWalletInterface.doPointPayment(user1,amount,user2,message1,message2,"");
-          ToastInterface.showToast(`残り残高: ${r}`);
+         ToastInterface.showToast(`残り残高: ${r}`);
            }*/
 });
         document.getElementById('authContainer').style.display = 'block';
