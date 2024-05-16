@@ -394,12 +394,14 @@ listItems.forEach((listItem, index) => {
         message1 =　(header_prefix + sellerCode + " " + product_name + " " + catValue + " " + category + " " + formattedDate + " " + seller_name)
 
 
-     
-         // Display the index of the current listItem with custom text
+     if (index > 0) {
+        // Display the index of the current listItem with custom text
          ToastInterface.showToast(`購入中の商品 ${index}: ${product_name} (${product_price})`);
         
         var r = CCWalletInterface.doPointPayment(user1,amount,user2,message1,message2,"");
         ToastInterface.showToast(`残り残高: ${r}`);
+    }
+        
 });
         document.getElementById('authContainer').style.display = 'block';
         document.getElementById('mainContainer').style.display = 'none';
