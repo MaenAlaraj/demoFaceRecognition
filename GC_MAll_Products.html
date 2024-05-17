@@ -359,7 +359,7 @@ function sleep(ms) {
 }
 
 async function processItems() {
-    ToastInterface.showToast("Excution of processItems funstion has been started.")
+    ToastInterface.showToast("購入中・・・少々お待ちくださいませ")
     const productList = document.getElementById('productList');
     const listItems = productList.querySelectorAll('li');
     var user1 = prefix + userBeforePrefix;
@@ -390,7 +390,7 @@ async function processItems() {
             var r = CCWalletInterface.doPointPayment(user1, amount, user2, message1, message2, "");
             //ToastInterface.showToast(`残り残高: ${r}`);
         }
-         ToastInterface.showToast(`Sleep:${index}second`)
+         //ToastInterface.showToast(`Sleep:${index}second`)
         // Pause for 1 second
         await sleep(1000);
         
