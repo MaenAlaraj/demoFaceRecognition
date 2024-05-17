@@ -347,76 +347,55 @@ function setMessage(str,id="message") {
     if(total==0){
     ToastInterface.showToast("商品がありません。商品を読み込ませた後に支払いをするか、終了ボタンを押してください。")
     }
-    else{  
-    const productList = document.getElementById('productList');
-    const listItems = productList.querySelectorAll('li');
-    var user1 = prefix + userBeforePrefix
-    var user2 = prefix + gcMall_code;
-    message2 = "MALL用";
-    var terminalid = "";    
-
-    // Check if there are items to remove
-    /*if (listItems.length <= 1) { // Considering the first item as the header
-        setMessage("No items to remove", "error_message");
-        return;
-    }*/
-
-     
-
-listItems.forEach((listItem, index) => {
-      /*if (index > 0) {
-      /*if (listItem.classList.contains('header-item')) {
-            setMessage("購入中なので、少々お待ちください。", "error_message");
-            return; // Skip the header
-        }*/
-        const spans = listItem.querySelectorAll('span');
-        const sellerCode =spans[0].textContent.trim();
-        const product_name =spans[1].textContent.trim();
-        const product_price = spans[2].textContent.trim();
-        const category = spans[3].textContent.trim();
-        const date = spans[4].textContent.trim();
-        const catValue = getValueFromCatList(category);
-       
-        //var userWithSpace = prefix + userBeforePrefix;
-        //var user1 = userWithSpace.replace(/\s/g, "");
-        //var user1 = prefix + userBeforePrefix
-        
-        var sellerCodeE = prefix + sellerCode;
-      
-        var sellerNameRet = CCWalletInterface.Name(sellerCodeE,terminalid);
-        var sellerNameToken_list=sellerNameRet.split(":");
-        var seller_name = sellerNameToken_list[1];
-        
-        var amount = parseInt(product_price);
-        
-        // Replace "/" with "."
-        var formattedDate = date.replace(/\//g, ".");   
-        message1 =　(header_prefix + sellerCode + " " + product_name + " " + catValue + " " + category + " " + formattedDate + " " + seller_name)
-
-
-     if (index > 0) {
-        // Display the index of the current listItem with custom text
-         ToastInterface.showToast(`購入中の商品 ${index}: ${product_name} (${product_price})`);
-        
-        var r = CCWalletInterface.doPointPayment(user1,amount,user2,message1,message2,"");
-        ToastInterface.showToast(`残り残高: ${r}`);
-    }
-        
-});
-        document.getElementById('authContainer').style.display = 'block';
-        document.getElementById('mainContainer').style.display = 'none';
-        ToastInterface.showToast("ご購入ありがとうございます！")
-        setBalance("userBeforePrefix")
-        setTotal()
-        userBeforePrefix = ""        
+    else{
+        // Call the async function to process the items
+        processItems(); 
 }
     });
 
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
+async function processItems() {
+    ToastInterface.showToast("Excution of processItems funstion has been started.")
+    const productList = document.getElementById('productList');
+    const listItems = productList.querySelectorAll('li');
+    var user1 = prefix + userBeforePrefix;
+    var user2 = prefix + gcMall_code;
+    var message2 = "MALL用";
+    var terminalid = "";         
 
+    for (const [index, listItem] of listItems.entries()) {
+        const spans = listItem.querySelectorAll('span');
+        const sellerCode = spans[0].textContent.trim();
+        const product_name = spans[1].textContent.trim();
+        const product_price = spans[2].textContent.trim();
+        const category = spans[3].textContent.trim();
+        const date = spans[4].textContent.trim();
+        const catValue = getValueFromCatList(category);
+        var sellerCodeE = prefix + sellerCode;
+        var sellerNameRet = CCWalletInterface.Name(sellerCodeE, terminalid);
+        var sellerNameToken_list = sellerNameRet.split(":");
+        var seller_name = sellerNameToken_list[1];
+        var amount = parseInt(product_price);
+        var formattedDate = date.replace(/\//g, ".");
+        var message1 = (header_prefix + sellerCode + " " + product_name + " " + catValue + " " + category + " " + formattedDate + " " + seller_name);
 
+        if (index > 0) {
+            // Display the index of the current listItem with custom text
+            ToastInterface.showToast(`購入中の商品 ${index}: ${product_name} (${product_price})`);
 
+            var r = CCWalletInterface.doPointPayment(user1, amount, user2, message1, message2, "");
+            ToastInterface.showToast(`残り残高: ${r}`);
+        }
+         ToastInterface.showToast(`Sleep:${index}second`)
+        // Pause for 1 second
+        await sleep(1000);
+        
+    }
+}
     
 </script>
 
