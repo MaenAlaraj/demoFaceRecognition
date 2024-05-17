@@ -388,13 +388,19 @@ async function processItems() {
             ToastInterface.showToast(`購入中の商品 ${index}: ${product_name} (${product_price})`);
 
             var r = CCWalletInterface.doPointPayment(user1, amount, user2, message1, message2, "");
-            ToastInterface.showToast(`残り残高: ${r}`);
+            //ToastInterface.showToast(`残り残高: ${r}`);
         }
          ToastInterface.showToast(`Sleep:${index}second`)
         // Pause for 1 second
         await sleep(1000);
         
     }
+        document.getElementById('authContainer').style.display = 'block';
+        document.getElementById('mainContainer').style.display = 'none';
+        ToastInterface.showToast("ご購入ありがとうございます！")
+        setBalance("userBeforePrefix")
+        setTotal()
+        userBeforePrefix = ""    
 }
     
 </script>
