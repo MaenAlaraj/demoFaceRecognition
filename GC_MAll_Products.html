@@ -16,10 +16,7 @@
             margin-bottom: 10px; /* Adjust as needed */
         }
 
-        #base64Image {
-            display: block;
-            margin: 0 auto;
-        }
+    
 
         
         body {
@@ -94,7 +91,6 @@
         <button id="qrButton">QR</button>
         <button id="faceButton">顔</button>
     </div>
-    <img id="base64Image" src="" alt="Base64 Image" height="140" width="140">
 </div>
     
 <body>
@@ -194,18 +190,37 @@ function getValueFromCatList(category) {
 
 
 
+function removeItemsFromList() {
+    // Remove items from the list
+    const productList = document.getElementById('productList');
+    const listItems = productList.querySelectorAll('li');
+    
+    listItems.forEach(listItem => {
+       // Check if the current item is the header
+        if (listItem.classList.contains('header-item')) {
+            //setMessage("No items to remove", "error_message");
+            return; // Skip the header
+        }
+        productList.removeChild(listItem);
+    });
 
+    // Clear the items array
+    items.length = 0;
+
+    // Reset the total amount displayed
+     setTotal() 
+}
 
 
 
     
   document.getElementById("faceButton").addEventListener("click", function() {
         var base64String =  FaceCaptureInterface.getFace("FaceCaptureInterface");              
-        setBase64ImageSource(base64String);
          //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000154","D"); //アララジ
          //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000114","D");　//山口さん
       　　//var info = CCWalletInterface.DelFaces(sbuser,"9392909000000176","D");　//大橋さん
-         ToastInterface.showToast(info)
+        　//var info = CCWalletInterface.DelFaces(sbuser,"9392909000000176","D");　//会長
+         //ToastInterface.showToast(info)
       
          //Set the S (Search Operation)
           var info=CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);           
@@ -227,6 +242,7 @@ function getValueFromCatList(category) {
               setMessage("GCユーザー:"+CCW_FaceResponse_LIST[1],"user")
               document.getElementById('authContainer').style.display = 'none';
               document.getElementById('mainContainer').style.display = 'block';
+              removeItemsFromList();
               setBalance(userID)
     }
     );
@@ -239,23 +255,12 @@ function getValueFromCatList(category) {
       setMessage("GCユーザー:"+extractedUserID,"user")
       document.getElementById('authContainer').style.display = 'none';
       document.getElementById('mainContainer').style.display = 'block';
+       removeItemsFromList();
       setBalance(extractedUserID)
     }
     );
 
 
-
-
-
-
-
-    
-// Function to set the source of the base64Image element
-function setBase64ImageSource(base64String) 
-{
- // Set the src attribute to the Base64-encoded string
-document.getElementById("base64Image").src = "data:image/jpeg;base64," + base64String;
-}
     
 function isPositiveInteger(str) {
     return /^[0-9]\d*$/.test(str);
@@ -346,7 +351,8 @@ function setMessage(str,id="message") {
     if(total==0 && discount_total==0){
     ToastInterface.showToast("商品がありません。商品を読み込ませた後に支払いをするか、終了ボタンを押してください。")
     }
-    else{  
+    else{
+    ToastInterface.showToast("購入中・・・少々お待ちくださいませ")
     let isFirstIteration = true;
     const productList = document.getElementById('productList');
     const listItems = productList.querySelectorAll('li');
