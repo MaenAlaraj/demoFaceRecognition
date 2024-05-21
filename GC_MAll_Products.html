@@ -392,7 +392,11 @@ function setMessage(str,id="message") {
         var formattedDate = date.replace(/\//g, ".");
       
         message1 =　(header_prefix + sellerCode + " " + product_name + " " + catValue + " " + category + " " + formattedDate + " " + seller_name)               
-        var r = CCWalletInterface.doPointPayment(user1,amount,user2,message1,message2,"");   
+       
+        setTimeout(() => {
+		 var r = CCWalletInterface.doPointPayment(user1,amount,user2,message1,message2,"");
+	}, 1000);
+        
 });
         document.getElementById('authContainer').style.display = 'block';
         document.getElementById('mainContainer').style.display = 'none';
