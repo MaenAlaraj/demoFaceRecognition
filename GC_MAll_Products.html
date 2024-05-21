@@ -16,6 +16,11 @@
             margin-bottom: 10px; /* Adjust as needed */
         }
 
+        #base64Image {
+            display: block;
+            margin: 0 auto;
+        }
+
         
         body {
             font-family: 'Arial', sans-serif;
@@ -28,8 +33,6 @@
         }
 
         button {
-            width: 150px; /* Adjust width as needed */
-            height: 60px; /* Adjust height as needed */
             margin: 10px;
             padding: 10px 20px;
             border: none;
@@ -91,18 +94,17 @@
         <button id="qrButton">QR</button>
         <button id="faceButton">顔</button>
     </div>
-  
+    <img id="base64Image" src="" alt="Base64 Image" height="140" width="140">
 </div>
     
 <body>
 <div id="mainContainer" style="display: none;">
-
     <p id="user"></p>
 <p id="message"></p>
     <button id="loadProduct">商品の読み込み</button>
 <div class="scroll-container">
     <ul id="productList">
-        <li class="header-item">
+        <li>
             <span>コード      </span>
             <span>商品名</span>
             <span>値段</span>
@@ -149,7 +151,9 @@ const Cat_List = {
     F: 8000,
     G: 70000,
     H: 5000
-};  
+};
+
+
     
 function setBalance(userID){
     userBeforePrefix = userID
@@ -191,39 +195,20 @@ function getValueFromCatList(category) {
 
 
 
-function removeItemsFromList() {
-    // Remove items from the list
-    const productList = document.getElementById('productList');
-    const listItems = productList.querySelectorAll('li');
-    
-    listItems.forEach(listItem => {
-       // Check if the current item is the header
-        if (listItem.classList.contains('header-item')) {
-            //setMessage("No items to remove", "error_message");
-            return; // Skip the header
-        }
-        productList.removeChild(listItem);
-    });
 
-    // Clear the items array
-    items.length = 0;
-
-    // Reset the total amount displayed
-     setTotal() 
-}
 
 
     
   document.getElementById("faceButton").addEventListener("click", function() {
-          var base64String =  FaceCaptureInterface.getFace("FaceCaptureInterface");
+        var base64String =  FaceCaptureInterface.getFace("FaceCaptureInterface");              
+        setBase64ImageSource(base64String);
          //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000154","D"); //アララジ
          //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000114","D");　//山口さん
       　　//var info = CCWalletInterface.DelFaces(sbuser,"9392909000000176","D");　//大橋さん
-        　//var info = CCWalletInterface.DelFaces(sbuser,"9392909000000176","D");　//会長
-         //ToastInterface.showToast(info)
+         ToastInterface.showToast(info)
       
          //Set the S (Search Operation)
-          var info=CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);        
+          var info=CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);           
           if (info.includes(errorsSubstring))
           {
               var qrstring = QRInterface.get_QRInfo("QR");
@@ -233,13 +218,15 @@ function removeItemsFromList() {
               var info = CCWalletInterface.AddFaces(sbuser,extractedUserID,"A",base64String);
               ToastInterface.showToast("顔が登録されました。")
               var info = CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);  
+          }else
+          {
+              ToastInterface.showToast("このユーザーの顔はすでに登録されています。")             
           }
               var CCW_FaceResponse_LIST=info.split("：")
               var userID =  CCW_FaceResponse_LIST[1].replace(/\s/g, "");
               setMessage("GCユーザー:"+CCW_FaceResponse_LIST[1],"user")
-               document.getElementById('authContainer').style.display = 'none';
-               document.getElementById('mainContainer').style.display = 'block';
-              removeItemsFromList();
+              document.getElementById('authContainer').style.display = 'none';
+              document.getElementById('mainContainer').style.display = 'block';
               setBalance(userID)
     }
     );
@@ -252,11 +239,23 @@ function removeItemsFromList() {
       setMessage("GCユーザー:"+extractedUserID,"user")
       document.getElementById('authContainer').style.display = 'none';
       document.getElementById('mainContainer').style.display = 'block';
-       removeItemsFromList();
       setBalance(extractedUserID)
     }
     );
 
+
+
+
+
+
+
+    
+// Function to set the source of the base64Image element
+function setBase64ImageSource(base64String) 
+{
+ // Set the src attribute to the Base64-encoded string
+document.getElementById("base64Image").src = "data:image/jpeg;base64," + base64String;
+}
     
 function isPositiveInteger(str) {
     return /^[0-9]\d*$/.test(str);
@@ -344,59 +343,59 @@ function setMessage(str,id="message") {
     );
             
     document.getElementById('payment').addEventListener('click', function() {
-    if(total==0){
+    if(total==0 && discount_total==0){
     ToastInterface.showToast("商品がありません。商品を読み込ませた後に支払いをするか、終了ボタンを押してください。")
     }
-    else{
-        // Call the async function to process the items
-        processItems(); 
-}
-    });
-
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-async function processItems() {
-    ToastInterface.showToast("Excution of processItems funstion has been started.")
+    else{  
+    let isFirstIteration = true;
     const productList = document.getElementById('productList');
     const listItems = productList.querySelectorAll('li');
-    var user1 = prefix + userBeforePrefix;
+    var user1 = prefix + userBeforePrefix
     var user2 = prefix + gcMall_code;
-    var message2 = "MALL用";
-    var terminalid = "";         
+    message2 = "MALL用";
+    var terminalid = "";    
 
-    for (const [index, listItem] of listItems.entries()) {
+        
+    listItems.forEach(listItem => {
+        // Skip the first iteration
+        if (isFirstIteration) {
+            isFirstIteration = false;     
+            return;
+        }        
         const spans = listItem.querySelectorAll('span');
-        const sellerCode = spans[0].textContent.trim();
-        const product_name = spans[1].textContent.trim();
+        const sellerCode =spans[0].textContent.trim();
+        const product_name =spans[1].textContent.trim();
         const product_price = spans[2].textContent.trim();
         const category = spans[3].textContent.trim();
         const date = spans[4].textContent.trim();
         const catValue = getValueFromCatList(category);
-        var sellerCodeE = prefix + sellerCode;
-        var sellerNameRet = CCWalletInterface.Name(sellerCodeE, terminalid);
-        var sellerNameToken_list = sellerNameRet.split(":");
-        var seller_name = sellerNameToken_list[1];
-        var amount = parseInt(product_price);
-        var formattedDate = date.replace(/\//g, ".");
-        var message1 = (header_prefix + sellerCode + " " + product_name + " " + catValue + " " + category + " " + formattedDate + " " + seller_name);
-
-        if (index > 0) {
-            // Display the index of the current listItem with custom text
-            ToastInterface.showToast(`購入中の商品 ${index}: ${product_name} (${product_price})`);
-
-            var r = CCWalletInterface.doPointPayment(user1, amount, user2, message1, message2, "");
-            ToastInterface.showToast(`残り残高: ${r}`);
-        }
-         ToastInterface.showToast(`Sleep:${index}second`)
-        // Pause for 1 second
-        await sleep(1000);
+       
+        //var userWithSpace = prefix + userBeforePrefix;
+        //var user1 = userWithSpace.replace(/\s/g, "");
+        //var user1 = prefix + userBeforePrefix
         
-    }
+        var sellerCodeE = prefix + sellerCode;
+      
+        var sellerNameRet = CCWalletInterface.Name(sellerCodeE,terminalid);
+        var sellerNameToken_list=sellerNameRet.split(":");
+        var seller_name = sellerNameToken_list[1];
+        
+        var amount = parseInt(product_price);
+        
+        // Replace "/" with "."
+        var formattedDate = date.replace(/\//g, ".");
+      
+        message1 =　(header_prefix + sellerCode + " " + product_name + " " + catValue + " " + category + " " + formattedDate + " " + seller_name)               
+        var r = CCWalletInterface.doPointPayment(user1,amount,user2,message1,message2,"");   
+});
+        document.getElementById('authContainer').style.display = 'block';
+        document.getElementById('mainContainer').style.display = 'none';
+        ToastInterface.showToast("ご購入ありがとうございます！")
+        setBalance("userBeforePrefix")
+        setTotal()
+        userBeforePrefix = ""        
 }
-    
+    });
 </script>
 
 </body>
