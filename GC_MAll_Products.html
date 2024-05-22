@@ -393,7 +393,7 @@ function setMessage(str,id="message") {
       
         message1 =　(header_prefix + sellerCode + " " + product_name + " " + catValue + " " + category + " " + formattedDate + " " + seller_name)               
         var r = CCWalletInterface.doPointPayment(user1,amount,user2,message1,message2,"");
-      
+        ToastInterface.showToast(r)
         
 });
         document.getElementById('authContainer').style.display = 'block';
