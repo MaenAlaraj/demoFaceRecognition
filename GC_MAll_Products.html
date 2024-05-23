@@ -232,13 +232,11 @@ function removeItemsFromList() {
               extractedUserID = prefix + extractedUserID
               var info = CCWalletInterface.AddFaces(sbuser,extractedUserID,"A",base64String);
               ToastInterface.showToast("顔が登録されました。")
-              var info = CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);
-            ToastInterface.showToast(info)
-              
-              
+              var info = CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);     
           }else
           {
-              ToastInterface.showToast("このユーザーの顔はすでに登録されています。")             
+             // ToastInterface.showToast("このユーザーの顔はすでに登録されています。")
+               ToastInterface.showToast(info)
           }
               var CCW_FaceResponse_LIST=info.split("：")
               var userID =  CCW_FaceResponse_LIST[1].replace(/\s/g, "");
