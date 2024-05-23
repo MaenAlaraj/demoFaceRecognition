@@ -232,7 +232,10 @@ function removeItemsFromList() {
               extractedUserID = prefix + extractedUserID
               var info = CCWalletInterface.AddFaces(sbuser,extractedUserID,"A",base64String);
               ToastInterface.showToast("顔が登録されました。")
-              var info = CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);  
+              var info = CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);
+            ToastInterface.showToast(info)
+              
+              
           }else
           {
               ToastInterface.showToast("このユーザーの顔はすでに登録されています。")             
