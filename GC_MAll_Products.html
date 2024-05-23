@@ -376,11 +376,7 @@ function setMessage(str,id="message") {
         const category = spans[3].textContent.trim();
         const date = spans[4].textContent.trim();
         const catValue = getValueFromCatList(category);
-       
-        //var userWithSpace = prefix + userBeforePrefix;
-        //var user1 = userWithSpace.replace(/\s/g, "");
-        //var user1 = prefix + userBeforePrefix
-        
+               
         var sellerCodeE = prefix + sellerCode;
       
         var sellerNameRet = CCWalletInterface.Name(sellerCodeE,terminalid);
@@ -400,7 +396,7 @@ function setMessage(str,id="message") {
         document.getElementById('authContainer').style.display = 'block';
         document.getElementById('mainContainer').style.display = 'none';
         ToastInterface.showToast("ご購入ありがとうございます！")
-        setBalance("userBeforePrefix")
+        setBalance(userBeforePrefix)
         setTotal()
         userBeforePrefix = ""        
 }
