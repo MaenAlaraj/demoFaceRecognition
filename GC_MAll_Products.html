@@ -214,7 +214,7 @@ function removeItemsFromList() {
 
             
   document.getElementById("faceButton").addEventListener("click", function() {
-       
+    var base64String =  FaceCaptureInterface.getFace("FaceCaptureInterface");     
     // Check the value of base64String using if-else statements
     let message;
     if (base64String === "0") {
@@ -227,7 +227,7 @@ function removeItemsFromList() {
         message = "無効な顔の数が検出されましたので、再撮影してください。";
         ToastInterface.showToast(message)
     }else{
-         var base64String =  FaceCaptureInterface.getFace("FaceCaptureInterface");              
+                  
          //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000154","D"); //アララジ
          //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000114","D");　//山口さん
          //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000176","D");　//大橋さん
