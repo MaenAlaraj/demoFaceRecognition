@@ -216,7 +216,7 @@ function removeItemsFromList() {
   document.getElementById("faceButton").addEventListener("click", function() {
     var base64String =  FaceCaptureInterface.getFace("FaceCaptureInterface");     
     // Check the value of base64String using if-else statements
-    let message;
+    /*let message;
     if (base64String === "0") {
         message = "顔が検出されませんでしたので、再撮影してください。";
         ToastInterface.showToast(message)
@@ -226,7 +226,7 @@ function removeItemsFromList() {
     }else if (base64String === "Invalid number") {
         message = "無効な顔の数が検出されましたので、再撮影してください。";
         ToastInterface.showToast(message)
-    }else{
+    }else{*/
                   
          //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000154","D"); //アララジ
          //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000114","D");　//山口さん
@@ -258,7 +258,7 @@ function removeItemsFromList() {
               document.getElementById('mainContainer').style.display = 'block';
               removeItemsFromList();
               setBalance(userID)
-          }
+         // }
     }
   );
     
