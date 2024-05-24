@@ -358,6 +358,9 @@ function setMessage(str,id="message") {
     message2 = "MALL用";
     var terminalid = "";    
 
+   var sellerNameRet = CCWalletInterface.Name(sellerCodeE,terminalid);
+    var sellerNameToken_list=sellerNameRet.split(":");
+    var seller_name = sellerNameToken_list[1];    
         
     listItems.forEach(listItem => {
         // Skip the first iteration
@@ -375,9 +378,7 @@ function setMessage(str,id="message") {
                
         var sellerCodeE = prefix + sellerCode;
       
-        var sellerNameRet = CCWalletInterface.Name(sellerCodeE,terminalid);
-        var sellerNameToken_list=sellerNameRet.split(":");
-        var seller_name = sellerNameToken_list[1];
+     
         
         var amount = parseInt(product_price);
         
