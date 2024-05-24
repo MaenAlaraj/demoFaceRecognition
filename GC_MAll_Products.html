@@ -221,21 +221,8 @@ function removeItemsFromList() {
       　　//var info = CCWalletInterface.DelFaces(sbuser,"9392909000000176","D");　//大橋さん
         　//var info = CCWalletInterface.DelFaces(sbuser,"9392909000000176","D");　//会長
          //ToastInterface.showToast(info)
-      
-        // Check the value of base64String using if-else statements
-        let message;
-        if (base64String === "0") {
-            message = "顔が検出されませんでしたので、再撮影してください。";
-            ToastInterface.showToast(message)
-        }else if (base64String === "2") {
-            message = "複数のの顔が検出されましたので、再撮影してください。";
-            ToastInterface.showToast(message)
-    　　 }else if (base64String === "Invalid number") {
-            message = "無効な顔の数が検出されましたので、再撮影してください。";
-            ToastInterface.showToast(message)
-        }
-        } else {
-               //Set the S (Search Operation)
+
+      //Set the S (Search Operation)
               var info=CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);           
               if (info.includes(errorsSubstring))
               {
@@ -258,7 +245,8 @@ function removeItemsFromList() {
                   document.getElementById('mainContainer').style.display = 'block';
                   removeItemsFromList();
                   setBalance(userID)
-        }
+
+
 
 
 
