@@ -253,6 +253,9 @@ function removeItemsFromList() {
               ToastInterface.showToast(message)
           } else if (numberOfFaces === 1) {
               console.log("One face detected.");
+              const base64String = facesArray[0].image64;
+              console.log("Base64 string of the first face:", base64String);
+              
               //Set the S (Search Operation)
               
               var info=CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);
