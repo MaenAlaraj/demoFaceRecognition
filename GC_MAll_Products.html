@@ -251,16 +251,23 @@ function removeItemsFromList() {
                       if (qrstring !== "Scanner stopped") {
                           const match = qrstring.match(/,(.*?),/);
                           extractedUserID = match ? match[1] : null;
-                          extractedUserID = prefix + extractedUserID;
-                          var info = CCWalletInterface.AddFaces(sbuser,extractedUserID,"A",base64String);
-                          if (info.includes(errorsSubstring)){
-                              setMessage("GC MAllのユーザーQR【識別番号・利用券番・利用者名】をご利用ください。","error_message")
+                           if (extractedUserID !== null) {
+                               extractedUserID = prefix + extractedUserID;
+                               var info = CCWalletInterface.AddFaces(sbuser,extractedUserID,"A",base64String);
+                               if (info.includes(errorsSubstring)){
+                                    message = "QRコードから抽出された情報は登録されませんでした。;
+                                   setMessage(message,"error_message");
+                                   showSecondSecreenFlg = false
+                               }else{
+                                   message = "顔が登録されました。";
+                                   setMessage(message,"error_message");
+                                   var info = CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);
+                               }
+                           }else{
+                               message = "GC MAllのユーザーQR【識別番号・利用券番・利用者名】をご利用ください。";
+                               setMessage(message,"error_message")
                                showSecondSecreenFlg = false
-                          }else{
-                              message = "顔が登録されました。";
-                              setMessage(message,"error_message");
-                              var info = CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);
-                          }
+                           }
                       }else{
                           setMessage("スキャナが停止されました。","error_message")
                           showSecondSecreenFlg = false
