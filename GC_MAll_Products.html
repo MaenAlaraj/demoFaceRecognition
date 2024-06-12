@@ -242,6 +242,7 @@ function removeItemsFromList() {
               console.log("One face detected.");
               const base64String = facesArray[0].image64;
               console.log("Base64 string of the first face:", base64String);
+               setMessage("there is one face in the camera","error_message")
               // Set the S (Search Operation)
               
               var info = CCWalletInterface.SearchFaces(sbuser, gckid, "S", base64String);
@@ -254,7 +255,7 @@ function removeItemsFromList() {
                           extractedUserID = prefix + extractedUserID;
                           var addFaceInfo = CCWalletInterface.AddFaces(sbuser, extractedUserID, "A", base64String);
                           if (addFaceInfo.includes(errorsSubstring)) {
-                              message = "QRコードから抽出された情報は登録されませんでした。";
+                              message = "QRコードから抽出された情報で顔が登録されませんでした。";
                               setMessage(message, "error_message");
                               showSecondScreenFlg = false;
                           } else {
@@ -290,7 +291,7 @@ function removeItemsFromList() {
               setMessage(message,"error_message")
           }
       } catch (error) {
-          message = "JSON の解析中にエラーが発生しました:";
+          message = "JSON の解析中にエラーが発生しました:"  + error.message;;
           console.error(message, error);
           setMessage(message,"error_message")
       }
