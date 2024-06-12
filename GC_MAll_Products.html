@@ -298,7 +298,11 @@ function removeItemsFromList() {
               document.getElementById('mainContainer').style.display = 'block';
               removeItemsFromList();
               setBalance(extractedUserID);
+          }else{
+              setMessage("GC MAllのQR【識別番号・利用券番・利用者名】をご利用ください。","error_message")
           }
+      }else{
+            setMessage("スキャナが停止されました。","error_message")
       }
   }
   );
