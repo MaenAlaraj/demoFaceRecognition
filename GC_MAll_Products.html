@@ -288,16 +288,17 @@ function removeItemsFromList() {
 
 
   document.getElementById("qrButton").addEventListener("click", function() {
-      var qrstring = QRInterface.get_QRInfo("QR");
-      const match = qrstring.match(/,(.*?),/);
-      extractedUserID = match ? match[1] : null;
-      setMessage("GCユーザー:"+extractedUserID,"user")
-      document.getElementById('authContainer').style.display = 'none';
-      document.getElementById('mainContainer').style.display = 'block';
-       removeItemsFromList();
-      setBalance(extractedUserID)
-    }
-    );
+      if (qrstring !== "Scanner stopped") {
+          const match = qrstring.match(/,(.*?),/);
+          const extractedUserID = match ? match[1] : null;
+          setMessage("GCユーザー:" + extractedUserID, "user");
+          document.getElementById('authContainer').style.display = 'none';
+          document.getElementById('mainContainer').style.display = 'block';
+          removeItemsFromList();
+          setBalance(extractedUserID);
+      }
+  }
+  );
 
 
     
