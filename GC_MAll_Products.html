@@ -292,11 +292,13 @@ function removeItemsFromList() {
       if (qrstring !== "Scanner stopped") {
           const match = qrstring.match(/,(.*?),/);
           const extractedUserID = match ? match[1] : null;
-          setMessage("GCユーザー:" + extractedUserID, "user");
-          document.getElementById('authContainer').style.display = 'none';
-          document.getElementById('mainContainer').style.display = 'block';
-          removeItemsFromList();
-          setBalance(extractedUserID);
+          if (extractedUserID !== null) {
+              setMessage("GCユーザー:" + extractedUserID, "user");
+              document.getElementById('authContainer').style.display = 'none';
+              document.getElementById('mainContainer').style.display = 'block';
+              removeItemsFromList();
+              setBalance(extractedUserID);
+          }
       }
   }
   );
