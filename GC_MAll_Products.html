@@ -247,21 +247,25 @@ function removeItemsFromList() {
                   if (info.includes(errorsSubstring))
                   {
                       var qrstring = QRInterface.get_QRInfo("QR");
-                      const match = qrstring.match(/,(.*?),/);
-                      extractedUserID = match ? match[1] : null;
-                      extractedUserID = prefix + extractedUserID
-                      var info = CCWalletInterface.AddFaces(sbuser,extractedUserID,"A",base64String);
-                      message = "顔が登録されました。";
-                      setMessage(message,"error_message")
-                      var info = CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);     
+                      if (qrstring !== "Scanner stopped") {
+                          const match = qrstring.match(/,(.*?),/);
+                          extractedUserID = match ? match[1] : null;
+                          extractedUserID = prefix + extractedUserID;
+                          var info = CCWalletInterface.AddFaces(sbuser,extractedUserID,"A",base64String);
+                          message = "顔が登録されました。";
+                          setMessage(message,"error_message");
+                          var info = CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);
+                          var CCW_FaceResponse_LIST=info.split("：");
+                          var userID =  CCW_FaceResponse_LIST[1].replace(/\s/g, "");
+                          setMessage("GCユーザー:"+CCW_FaceResponse_LIST[1],"user");
+                          document.getElementById('authContainer').style.display = 'none';
+                          document.getElementById('mainContainer').style.display = 'block';
+                          removeItemsFromList();
+                          setBalance(userID)
+                      }else{
+                          setMessage("スキャナが停止されました。","error_message")
+                      }     
                   }
-              var CCW_FaceResponse_LIST=info.split("：")
-              var userID =  CCW_FaceResponse_LIST[1].replace(/\s/g, "");
-              setMessage("GCユーザー:"+CCW_FaceResponse_LIST[1],"user")
-              document.getElementById('authContainer').style.display = 'none';
-              document.getElementById('mainContainer').style.display = 'block';
-              removeItemsFromList();
-              setBalance(userID)
           } else if (numberOfFaces > 1) {
                message = "複数のの顔が検出されましたので、再撮影してください。";
               console.log(`More than one face detected. Number of faces: ${numberOfFaces}`);
