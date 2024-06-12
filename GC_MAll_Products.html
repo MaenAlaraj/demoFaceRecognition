@@ -254,6 +254,7 @@ function removeItemsFromList() {
                           extractedUserID = match ? match[1] : null;
                           extractedUserID = prefix + extractedUserID;
                           var info = CCWalletInterface.AddFaces(sbuser,extractedUserID,"A",base64String);
+                          setMessage(info,"error_message");
                           message = "顔が登録されました。";
                           setMessage(message,"error_message");
                           var info = CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);
