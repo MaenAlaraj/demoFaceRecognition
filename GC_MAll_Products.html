@@ -255,7 +255,7 @@ function removeItemsFromList() {
                           extractedUserID = prefix + extractedUserID;
                           var addFaceInfo = CCWalletInterface.AddFaces(sbuser, extractedUserID, "A", base64String);
                           if (addFaceInfo.includes(errorsSubstring)) {
-                              message = "QRコードから抽出された情報で顔が登録されませんでした。";
+                              message = "QRコードから抽出された情報が既に登録されたので顔が登録されませんでした。";
                               setMessage(message, "error_message");
                               showSecondSecreenFlg  = false;
                           } else {
@@ -286,7 +286,7 @@ function removeItemsFromList() {
               }
           }
           else if (numberOfFaces > 1) {
-               message = "複数のの顔が検出されましたので、再撮影してください。";
+               message = "複数の顔が検出されましたので、再撮影してください。";
               console.log(`More than one face detected. Number of faces: ${numberOfFaces}`);
               setMessage(message,"error_message")
           }
