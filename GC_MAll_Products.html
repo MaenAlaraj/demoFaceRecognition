@@ -238,52 +238,53 @@ function removeItemsFromList() {
               message = "顔が検出されませんでしたので、再撮影してください。";
               console.log(message);
               setMessage(message,"error_message")
-          } else if (numberOfFaces === 1) {
+          }else if (numberOfFaces === 1) {
               console.log("One face detected.");
               const base64String = facesArray[0].image64;
               console.log("Base64 string of the first face:", base64String);
+              // Set the S (Search Operation)
               
-              //Set the S (Search Operation)             
-              var info=CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);
-                  if (info.includes(errorsSubstring))
-                  {
-                      var qrstring = QRInterface.get_QRInfo("QR");
-                      if (qrstring !== "Scanner stopped") {
-                          const match = qrstring.match(/,(.*?),/);
-                          extractedUserID = match ? match[1] : null;
-                           if (extractedUserID !== null) {
-                               extractedUserID = prefix + extractedUserID;
-                               var info = CCWalletInterface.AddFaces(sbuser,extractedUserID,"A",base64String);
-                               if (info.includes(errorsSubstring)){
-                                    message = "QRコードから抽出された情報は登録されませんでした。;
-                                   setMessage(message,"error_message");
-                                   showSecondSecreenFlg = false
-                               }else{
-                                   message = "顔が登録されました。";
-                                   setMessage(message,"error_message");
-                                   var info = CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);
-                               }
-                           }else{
-                               message = "GC MAllのユーザーQR【識別番号・利用券番・利用者名】をご利用ください。";
-                               setMessage(message,"error_message")
-                               showSecondSecreenFlg = false
-                      }else{
-                          setMessage("スキャナが停止されました。","error_message")
-                          showSecondSecreenFlg = false
-                      }     
+              var info = CCWalletInterface.SearchFaces(sbuser, gckid, "S", base64String);
+              if (info.includes(errorsSubstring)) {
+                  var qrstring = QRInterface.get_QRInfo("QR");
+                  if (qrstring !== "Scanner stopped") {
+                      const match = qrstring.match(/,(.*?),/);
+                      extractedUserID = match ? match[1] : null;
+                      if (extractedUserID !== null) {
+                          extractedUserID = prefix + extractedUserID;
+                          var addFaceInfo = CCWalletInterface.AddFaces(sbuser, extractedUserID, "A", base64String);
+                          if (addFaceInfo.includes(errorsSubstring)) {
+                              message = "QRコードから抽出された情報は登録されませんでした。";
+                              setMessage(message, "error_message");
+                              showSecondScreenFlg = false;
+                          } else {
+                              message = "顔が登録されました。";
+                              setMessage(message, "error_message");
+                              info = CCWalletInterface.SearchFaces(sbuser, gckid, "S", base64String);
+                          }
+                      } else {
+                          message = "GC MAllのユーザーQR【識別番号・利用券番・利用者名】をご利用ください。";
+                          setMessage(message, "error_message");
+                          showSecondScreenFlg = false;
+                      }
+                  } else {
+                      setMessage("スキャナが停止されました。", "error_message");
+                      showSecondScreenFlg = false;
                   }
-              if (showSecondSecreenFlg !== flase) {
-                  var CCW_FaceResponse_LIST=info.split("：");
-                  var userID =  CCW_FaceResponse_LIST[1].replace(/\s/g, "");
-                  setMessage("GCユーザー:"+CCW_FaceResponse_LIST[1],"user");
+              }
+              if (showSecondScreenFlg !== false) {
+                  var CCW_FaceResponse_LIST = info.split("：");
+                  var userID = CCW_FaceResponse_LIST[1].replace(/\s/g, "");
+                  setMessage("GCユーザー:" + CCW_FaceResponse_LIST[1], "user");
                   document.getElementById('authContainer').style.display = 'none';
                   document.getElementById('mainContainer').style.display = 'block';
                   removeItemsFromList();
-                  setBalance(userID)
-              }else{
-                  showSecondSecreenFlg = true
+                  setBalance(userID);
+              } else {
+                  showSecondScreenFlg = true;
               }
-          } else if (numberOfFaces > 1) {
+          }
+          else if (numberOfFaces > 1) {
                message = "複数のの顔が検出されましたので、再撮影してください。";
               console.log(`More than one face detected. Number of faces: ${numberOfFaces}`);
               setMessage(message,"error_message")
