@@ -234,18 +234,16 @@ function removeItemsFromList() {
           
           // Conditional statements based on the number of faces
           if (numberOfFaces === 0) {
-              console.log("No faces detected.");
               message = "顔が検出されませんでしたので、再撮影してください。";
-              ToastInterface.showToast(message)
+              console.log(message);
+              setMessage(message,"error_message")
           } else if (numberOfFaces === 1) {
               console.log("One face detected.");
               const base64String = facesArray[0].image64;
               console.log("Base64 string of the first face:", base64String);
               
-              //Set the S (Search Operation)
-              
+              //Set the S (Search Operation)             
               var info=CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);
-              ToastInterface.showToast(info)
                   if (info.includes(errorsSubstring))
                   {
                       var qrstring = QRInterface.get_QRInfo("QR");
@@ -253,12 +251,9 @@ function removeItemsFromList() {
                       extractedUserID = match ? match[1] : null;
                       extractedUserID = prefix + extractedUserID
                       var info = CCWalletInterface.AddFaces(sbuser,extractedUserID,"A",base64String);
-                      ToastInterface.showToast("顔が登録されました。")
+                      message = "顔が登録されました。";
+                      setMessage(message,"error_message")
                       var info = CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);     
-                  }else
-                  {
-                      // ToastInterface.showToast("このユーザーの顔はすでに登録されています。")
-                      ToastInterface.showToast(info)
                   }
               var CCW_FaceResponse_LIST=info.split("：")
               var userID =  CCW_FaceResponse_LIST[1].replace(/\s/g, "");
@@ -268,12 +263,14 @@ function removeItemsFromList() {
               removeItemsFromList();
               setBalance(userID)
           } else if (numberOfFaces > 1) {
+               message = "複数のの顔が検出されましたので、再撮影してください。";
               console.log(`More than one face detected. Number of faces: ${numberOfFaces}`);
-              message = "複数のの顔が検出されましたので、再撮影してください。";
-              ToastInterface.showToast(message)
+              setMessage(message,"error_message")
           }
       } catch (error) {
-          console.error("Error parsing JSON:", error);
+          message = "JSON の解析中にエラーが発生しました:";
+          console.error(message, error);
+          setMessage(message,"error_message")
       }
       
     
