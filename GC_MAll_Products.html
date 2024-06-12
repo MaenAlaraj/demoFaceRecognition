@@ -243,7 +243,6 @@ function removeItemsFromList() {
               console.log("One face detected.");
               const base64String = facesArray[0].image64;
               console.log("Base64 string of the first face:", base64String);
-               setMessage("there is one face in the camera","error_message")
               // Set the S (Search Operation)
               
               var info = CCWalletInterface.SearchFaces(sbuser, gckid, "S", base64String);
@@ -258,7 +257,7 @@ function removeItemsFromList() {
                           if (addFaceInfo.includes(errorsSubstring)) {
                               message = "QRコードから抽出された情報で顔が登録されませんでした。";
                               setMessage(message, "error_message");
-                              showSecondScreenFlg = false;
+                              showSecondSecreenFlg  = false;
                           } else {
                               message = "顔が登録されました。";
                               setMessage(message, "error_message");
@@ -267,14 +266,14 @@ function removeItemsFromList() {
                       } else {
                           message = "GC MAllのユーザーQR【識別番号・利用券番・利用者名】をご利用ください。";
                           setMessage(message, "error_message");
-                          showSecondScreenFlg = false;
+                          showSecondSecreenFlg  = false;
                       }
                   } else {
                       setMessage("スキャナが停止されました。", "error_message");
-                      showSecondScreenFlg = false;
+                      showSecondSecreenFlg  = false;
                   }
               }
-              if (showSecondScreenFlg !== false) {
+              if (showSecondSecreenFlg  !== false) {
                   var CCW_FaceResponse_LIST = info.split("：");
                   var userID = CCW_FaceResponse_LIST[1].replace(/\s/g, "");
                   setMessage("GCユーザー:" + CCW_FaceResponse_LIST[1], "user");
@@ -283,7 +282,7 @@ function removeItemsFromList() {
                   removeItemsFromList();
                   setBalance(userID);
               } else {
-                  showSecondScreenFlg = true;
+                  showSecondSecreenFlg  = true;
               }
           }
           else if (numberOfFaces > 1) {
