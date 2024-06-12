@@ -123,7 +123,7 @@
  var gckid = ""
  var prefix = "93929"
  var sbuser  = prefix + "09000000013"
- const errorsSubstring = "生体認証検証エラー";
+ const errorsSubstring = "エラー";
  var extractedUserID =""
  var userBeforePrefix = ""
 
@@ -254,7 +254,6 @@ function removeItemsFromList() {
                       if (extractedUserID !== null) {
                           extractedUserID = prefix + extractedUserID;
                           var addFaceInfo = CCWalletInterface.AddFaces(sbuser, extractedUserID, "A", base64String);
-                            setMessage(addFaceInfo, "error_message");
                           if (addFaceInfo.includes(errorsSubstring)) {
                               message = "QRコードから抽出された情報で顔が登録されませんでした。";
                               setMessage(message, "error_message");
