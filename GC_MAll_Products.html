@@ -119,6 +119,7 @@
     </div>
 </div>
 <script>
+ var qrCameraFlg = false
  var gckid = ""
  var prefix = "93929"
  var sbuser  = prefix + "09000000013"
@@ -214,6 +215,7 @@ function removeItemsFromList() {
 
             
   document.getElementById("faceButton").addEventListener("click", function() {
+      var qrCameraFlg = false
           //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000154","D"); //アララジ        
          //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000154","D"); //アララジ
          //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000114","D");　//山口さん
@@ -255,17 +257,22 @@ function removeItemsFromList() {
                           message = "顔が登録されました。";
                           setMessage(message,"error_message");
                           var info = CCWalletInterface.SearchFaces(sbuser,gckid,"S",base64String);
-                          var CCW_FaceResponse_LIST=info.split("：");
-                          var userID =  CCW_FaceResponse_LIST[1].replace(/\s/g, "");
-                          setMessage("GCユーザー:"+CCW_FaceResponse_LIST[1],"user");
-                          document.getElementById('authContainer').style.display = 'none';
-                          document.getElementById('mainContainer').style.display = 'block';
-                          removeItemsFromList();
-                          setBalance(userID)
                       }else{
                           setMessage("スキャナが停止されました。","error_message")
+                          qrCameraFlg = true
                       }     
                   }
+              if (qrCameraFlg !== true) {
+                  var CCW_FaceResponse_LIST=info.split("：");
+                  var userID =  CCW_FaceResponse_LIST[1].replace(/\s/g, "");
+                  setMessage("GCユーザー:"+CCW_FaceResponse_LIST[1],"user");
+                  document.getElementById('authContainer').style.display = 'none';
+                  document.getElementById('mainContainer').style.display = 'block';
+                  removeItemsFromList();
+                  setBalance(userID)
+              }else{
+                  qrCameraFlg = false
+              }
           } else if (numberOfFaces > 1) {
                message = "複数のの顔が検出されましたので、再撮影してください。";
               console.log(`More than one face detected. Number of faces: ${numberOfFaces}`);
