@@ -288,6 +288,7 @@ function removeItemsFromList() {
 
 
   document.getElementById("qrButton").addEventListener("click", function() {
+      var qrstring = QRInterface.get_QRInfo("QR");
       if (qrstring !== "Scanner stopped") {
           const match = qrstring.match(/,(.*?),/);
           const extractedUserID = match ? match[1] : null;
