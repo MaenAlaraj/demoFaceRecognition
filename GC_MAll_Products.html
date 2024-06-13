@@ -410,7 +410,6 @@ function setMessage(str,id="message") {
             setMessage("商品がありません。商品を読み込ませた後に支払いをするか、終了ボタンを押してください。","show_message")
         }
         else{
-            setMessage("購入中なので、少々お待ちくださいませ。","show_message");
             let isFirstIteration = true;
             const productList = document.getElementById('productList');
             const listItems = productList.querySelectorAll('li');
@@ -439,6 +438,13 @@ function setMessage(str,id="message") {
                 var formattedDate = date.replace(/\//g, ".");
                 message1 =　(header_prefix + sellerCode + " " + product_name + " " + catValue + " " + category + " " + formattedDate + " " + seller_name);
                 var r = CCWalletInterface.doPointPayment(user1,amount,user2,message1,message2,"");
+                if (r.includes(errorsSubstring)) {
+                    message = "支払いエラー：" + r;
+                    setMessage(message, "show_message");
+                }else {
+                    message = "購入中なので、少々お待ちくださいませ。";
+                    setMessage(message, "show_message");
+                }
             });
             document.getElementById('authContainer').style.display = 'block';
             document.getElementById('mainContainer').style.display = 'none';
