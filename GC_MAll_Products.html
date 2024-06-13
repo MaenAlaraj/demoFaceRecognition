@@ -119,36 +119,31 @@
     </div>
 </div>
 <script>
- var showSecondSecreenFlg = true
- var gckid = ""
- var prefix = "93929"
- var sbuser  = prefix + "09000000013"
- const errorsSubstring = "エラー";
- var extractedUserID =""
- var userBeforePrefix = ""
-
-    
-const items = [];
-const gcMall_code= "09000000015"
-const header_prefix = "＆％MALL／"
-var total=0;
-var AccountNo="";
-var user="";
-const payment_terminalID=""
-var Balance;
-
-
-
-const Cat_List = {
-    A: 6000,
-    B: 10000,
-    C: 5,
-    D: 10000,
-    E: 6000,
-    F: 8000,
-    G: 70000,
-    H: 5000
-};
+    var showSecondSecreenFlg = true;
+    var gckid = "";
+    var prefix = "93929";
+    var sbuser  = prefix + "09000000013";
+    const errorsSubstring = "エラー";
+    var extractedUserID ="";
+    var userBeforePrefix = "";    
+    const items = [];
+    const gcMall_code= "09000000015";
+    const header_prefix = "＆％MALL／";
+    var total=0;
+    var AccountNo="";
+    var user="";
+    const payment_terminalID="";
+    var Balance;
+    const Cat_List = {
+        A: 6000,
+        B: 10000,
+        C: 5,
+        D: 10000,
+        E: 6000,
+        F: 8000,
+        G: 70000,
+        H: 5000
+    };
 
 
     
@@ -199,7 +194,7 @@ function removeItemsFromList() {
     listItems.forEach(listItem => {
        // Check if the current item is the header
         if (listItem.classList.contains('header-item')) {
-            //setMessage("No items to remove", "error_message");
+            //setMessage("No items to remove", "show_message");
             return; // Skip the header
         }
         productList.removeChild(listItem);
@@ -238,7 +233,7 @@ function removeItemsFromList() {
           if (numberOfFaces === 0) {
               message = "顔が検出されませんでしたので、再撮影してください。";
               console.log(message);
-              setMessage(message,"error_message")
+              setMessage(message,"show_message")
           }else if (numberOfFaces === 1) {
               console.log("One face detected.");
               const base64String = facesArray[0].image64;
@@ -256,20 +251,20 @@ function removeItemsFromList() {
                           var addFaceInfo = CCWalletInterface.AddFaces(sbuser, extractedUserID, "A", base64String);
                           if (addFaceInfo.includes(errorsSubstring)) {
                               message = "QRコードから抽出された情報が既に登録されたので顔が登録されませんでした。";
-                              setMessage(message, "error_message");
+                              setMessage(message, "show_message");
                               showSecondSecreenFlg  = false;
                           } else {
                               message = "顔が登録されました。";
-                              setMessage(message, "error_message");
+                              setMessage(message, "show_message");
                               info = CCWalletInterface.SearchFaces(sbuser, gckid, "S", base64String);
                           }
                       } else {
                           message = "GC MAllのユーザーQR【識別番号・利用券番・利用者名】をご利用ください。";
-                          setMessage(message, "error_message");
+                          setMessage(message, "show_message");
                           showSecondSecreenFlg  = false;
                       }
                   } else {
-                      setMessage("スキャナが停止されました。", "error_message");
+                      setMessage("スキャナが停止されました。", "show_message");
                       showSecondSecreenFlg  = false;
                   }
               }
@@ -288,19 +283,13 @@ function removeItemsFromList() {
           else if (numberOfFaces > 1) {
                message = "複数の顔が検出されましたので、再撮影してください。";
               console.log(`More than one face detected. Number of faces: ${numberOfFaces}`);
-              setMessage(message,"error_message")
+              setMessage(message,"show_message")
           }
       } catch (error) {
           message = "JSON の解析中にエラーが発生しました:"  + error.message;;
           console.error(message, error);
-          setMessage(message,"error_message")
+          setMessage(message,"show_message")
       }
-      
-    
-
-
-      
-
     }
   );
     
@@ -320,11 +309,11 @@ function removeItemsFromList() {
               setBalance(extractedUserID);
           }else{
               message = "GC MAllのユーザーQR【識別番号・利用券番・利用者名】をご利用ください。";
-              setMessage(message,"error_message")
+              setMessage(message,"show_message")
           }
       }else{
            message = "スキャナが停止されました。";
-          setMessage(message,"error_message")
+          setMessage(message,"show_message")
       }
   }
   );
@@ -334,22 +323,25 @@ function removeItemsFromList() {
 function isPositiveInteger(str) {
     return /^[0-9]\d*$/.test(str);
 }
+    
 function setMessage(str,id="message") {
-    if(id=="error_message"){
-    ToastInterface.showToast(str)
+    if(id=="show_message"){
+        ToastInterface.showToast(str)
     }
     else{
-    let message = document.getElementById(id);
-    message.innerText=str
+        let message = document.getElementById(id);
+        message.innerText=str
     }
 }
+
+
+    
     document.getElementById('loadProduct').addEventListener('click', function() {
         var qrstring = QRInterface.get_QRInfo("QR");
-        var qrstr_list=qrstring.split(",")
-       
+        var qrstr_list=qrstring.split(",");
         if(qrstr_list.length==6){
             if(!isPositiveInteger(qrstr_list[2])){
-            setMessage("商品QRではないものが読み込まれました。","error_message")
+                setMessage("商品QRではないものが読み込まれました。","show_message")
             }
             else{
                 let item = {
@@ -363,10 +355,9 @@ function setMessage(str,id="message") {
             var price=item.price
             let listItem = document.createElement('li');
             if(total+price <Balance){
-                item.listItem=listItem
-               
+                item.listItem=listItem;
                 items.push(item);
-                total+=price
+                total+=price;
                 document.getElementById('totalAmount').innerText = 'トータル: ' + total + '円';
                 let list = document.getElementById('productList');
 
@@ -404,70 +395,59 @@ function setMessage(str,id="message") {
                 listItem.appendChild(itemPrice);
                 listItem.appendChild(itemCat);
                 listItem.appendChild(itemDate);
-                listItem.appendChild(removeBtn);
-        
+                listItem.appendChild(removeBtn);       
                 list.appendChild(listItem);
         }else{
-            setMessage("残高が足りません。","error_message")
+            setMessage("残高が足りません。","show_message")
         }
         }}else{
-        setMessage("商品QRではないものが読み込まれました。","error_message")
+            setMessage("商品QRではないものが読み込まれました。","show_message")
         }
-    }
-    );
+    });
             
     document.getElementById('payment').addEventListener('click', function() {
-    if(total==0 && discount_total==0){
-    ToastInterface.showToast("商品がありません。商品を読み込ませた後に支払いをするか、終了ボタンを押してください。")
-    }
-    else{
-    ToastInterface.showToast("購入中・・・少々お待ちくださいませ")
-    let isFirstIteration = true;
-    const productList = document.getElementById('productList');
-    const listItems = productList.querySelectorAll('li');
-    var user1 = prefix + userBeforePrefix
-    var user2 = prefix + gcMall_code;
-    message2 = "MALL用";
-    var terminalid = "";    
-        
-    listItems.forEach(listItem => {
-        // Skip the first iteration
-        if (isFirstIteration) {
-            isFirstIteration = false;     
-            return;
-        }     
-        const spans = listItem.querySelectorAll('span');
-        const sellerCode =spans[0].textContent.trim();
-        const product_name =spans[1].textContent.trim();
-        const product_price = spans[2].textContent.trim();
-        const category = spans[3].textContent.trim();
-        const date = spans[4].textContent.trim();
-        const catValue = getValueFromCatList(category);
-               
-        var sellerCodeE = prefix + sellerCode;
-        var sellerNameRet = CCWalletInterface.Name(sellerCodeE,terminalid);
-        var sellerNameToken_list=sellerNameRet.split(":");
-        var seller_name = sellerNameToken_list[1];   
-         
-        var amount = parseInt(product_price);
-        
-        // Replace "/" with "."
-        var formattedDate = date.replace(/\//g, ".");
-      
-        message1 =　(header_prefix + sellerCode + " " + product_name + " " + catValue + " " + category + " " + formattedDate + " " + seller_name)               
-        var r = CCWalletInterface.doPointPayment(user1,amount,user2,message1,message2,"");
-        ToastInterface.showToast(r)
-        
-});
-        document.getElementById('authContainer').style.display = 'block';
-        document.getElementById('mainContainer').style.display = 'none';
-        ToastInterface.showToast("ご購入ありがとうございます！")
-        setBalance(userBeforePrefix)
-        setTotal()
-        userBeforePrefix = ""        
-}
+        if(total==0 && discount_total==0){
+            setMessage("商品がありません。商品を読み込ませた後に支払いをするか、終了ボタンを押してください。","show_message")
+        }
+        else{
+            setMessage("購入中なので、少々お待ちくださいませ。","show_message");
+            let isFirstIteration = true;
+            const productList = document.getElementById('productList');
+            const listItems = productList.querySelectorAll('li');
+            var user1 = prefix + userBeforePrefix;
+            var user2 = prefix + gcMall_code;
+            message2 = "MALL用";
+            var terminalid = "";    
+            listItems.forEach(listItem => {
+                // Skip the first iteration
+                if (isFirstIteration) {
+                    isFirstIteration = false;     
+                    return;
+                }
+                const spans = listItem.querySelectorAll('span');
+                const sellerCode =spans[0].textContent.trim();
+                const product_name =spans[1].textContent.trim();
+                const product_price = spans[2].textContent.trim();
+                const category = spans[3].textContent.trim();
+                const date = spans[4].textContent.trim();
+                const catValue = getValueFromCatList(category);          
+                var sellerCodeE = prefix + sellerCode;
+                var sellerNameRet = CCWalletInterface.Name(sellerCodeE,terminalid);
+                var sellerNameToken_list=sellerNameRet.split(":");
+                var seller_name = sellerNameToken_list[1];
+                var amount = parseInt(product_price);
+                var formattedDate = date.replace(/\//g, ".");
+                message1 =　(header_prefix + sellerCode + " " + product_name + " " + catValue + " " + category + " " + formattedDate + " " + seller_name);
+                var r = CCWalletInterface.doPointPayment(user1,amount,user2,message1,message2,"");
+            });
+            document.getElementById('authContainer').style.display = 'block';
+            document.getElementById('mainContainer').style.display = 'none';
+            setMessage("ご購入ありがとうございます！","show_message");
+            setBalance(userBeforePrefix);
+            setTotal();
+            userBeforePrefix = "";
+        }
     });
 </script>
-
 </body>
 </html>
