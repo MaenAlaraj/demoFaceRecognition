@@ -211,6 +211,7 @@ function removeItemsFromList() {
             
   document.getElementById("faceButton").addEventListener("click", function() {
       var showSecondSecreenFlg = true
+       extractedUserID ="";
           //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000154","D"); //アララジ        
          //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000154","D"); //アララジ
          //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000114","D");　//山口さん
@@ -297,6 +298,7 @@ function removeItemsFromList() {
 
   document.getElementById("qrButton").addEventListener("click", function() {
       var qrstring = QRInterface.get_QRInfo("QR");
+       extractedUserID ="";
       if (qrstring !== "Scanner stopped") {
           const match = qrstring.match(/,(.*?),/);
           const extractedUserID = match ? match[1] : null;
@@ -310,8 +312,6 @@ function removeItemsFromList() {
               message = "GC MAllのユーザーQR【識別番号・利用券番・利用者名】をご利用ください。";
               setMessage(message,"show_message")
           }
-      }else{
-          setMessage(message,"show_message")
       }
   }
   );
