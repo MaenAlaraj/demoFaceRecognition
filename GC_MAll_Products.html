@@ -406,7 +406,7 @@ function setMessage(str,id="message") {
     });
             
     document.getElementById('payment').addEventListener('click', function() {
-        if(total==0 && discount_total==0){
+        if(total==0){
             setMessage("商品がありません。商品を読み込ませた後に支払いをするか、終了ボタンを押してください。","show_message")
         }
         else{
