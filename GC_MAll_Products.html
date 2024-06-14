@@ -301,9 +301,10 @@ function removeItemsFromList() {
        setMessage(qrstring,"show_message")
        extractedUserID ="";
       if (qrstring !== "Scanner stopped") {
+          var qrstr_list = qrstring.split(",");
           const match = qrstring.match(/,(.*?),/);
           const extractedUserID = match ? match[1] : null;
-          if (extractedUserID !== null) {
+          if (extractedUserID !== null && qrstr_list.length==5) {
               setMessage("GCユーザー:" + extractedUserID, "user");
               document.getElementById('authContainer').style.display = 'none';
               document.getElementById('mainContainer').style.display = 'block';
