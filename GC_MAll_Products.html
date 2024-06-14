@@ -240,8 +240,8 @@ function removeItemsFromList() {
               const base64String = facesArray[0].image64;
               console.log("Base64 string of the first face:", base64String);
               // Set the S (Search Operation)
-              var addFaceInfo = CCWalletInterface.AddFaces(sbuser, "09000000154", "A", base64String);
-
+              var addFaceInfo = CCWalletInterface.AddFaces(sbuser, "9392909000000154", "A", base64String);
+              ToastInterface.showToast(info)
               
               /*var info = CCWalletInterface.SearchFaces(sbuser, gckid, "S", base64String);
               if (info.includes(errorsSubstring)) {
