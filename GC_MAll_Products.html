@@ -240,8 +240,10 @@ function removeItemsFromList() {
               const base64String = facesArray[0].image64;
               console.log("Base64 string of the first face:", base64String);
               // Set the S (Search Operation)
+              var addFaceInfo = CCWalletInterface.AddFaces(sbuser, "09000000154", "A", base64String);
+
               
-              var info = CCWalletInterface.SearchFaces(sbuser, gckid, "S", base64String);
+              /*var info = CCWalletInterface.SearchFaces(sbuser, gckid, "S", base64String);
               if (info.includes(errorsSubstring)) {
                   var qrstring = QRInterface.get_QRInfo("QR");
                   if (qrstring !== "Scanner stopped") {
@@ -280,7 +282,7 @@ function removeItemsFromList() {
                   setBalance(userID);
               } else {
                   showSecondSecreenFlg  = true;
-              }
+              }*/
           }
           else if (numberOfFaces > 1) {
                message = "複数の顔が検出されましたので、再撮影してください。";
