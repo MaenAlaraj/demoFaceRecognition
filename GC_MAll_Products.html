@@ -245,9 +245,11 @@ function removeItemsFromList() {
               if (info.includes(errorsSubstring)) {
                   var qrstring = QRInterface.get_QRInfo("QR");
                   if (qrstring !== "Scanner stopped") {
+                      var qrstr_list = qrstring.split(",");
+                      var numFlg = checkValueInQrstrList(qrstr_list[1]);
                       const match = qrstring.match(/,(.*?),/);
                       extractedUserID = match ? match[1] : null;
-                      if (extractedUserID !== null) {
+                      if (extractedUserID !== null && numFlg==true) {
                           extractedUserID = prefix + extractedUserID;
                           var addFaceInfo = CCWalletInterface.AddFaces(sbuser, extractedUserID, "A", base64String);
                           if (addFaceInfo.includes(errorsSubstring)) {
@@ -298,13 +300,13 @@ function removeItemsFromList() {
 
   document.getElementById("qrButton").addEventListener("click", function() {
       var qrstring = QRInterface.get_QRInfo("QR");
-       setMessage(qrstring,"show_message")
        extractedUserID ="";
       if (qrstring !== "Scanner stopped") {
           var qrstr_list = qrstring.split(",");
+          var numFlg = checkValueInQrstrList(qrstr_list[1]);
           const match = qrstring.match(/,(.*?),/);
           const extractedUserID = match ? match[1] : null;
-          if (extractedUserID !== null && qrstr_list.length==5) {
+          if (extractedUserID !== null && numFlg==true) {
               setMessage("GCユーザー:" + extractedUserID, "user");
               document.getElementById('authContainer').style.display = 'none';
               document.getElementById('mainContainer').style.display = 'block';
@@ -334,7 +336,20 @@ function setMessage(str,id="message") {
     }
 }
 
+function isNumeric(value) {
+    return !isNaN(value) && !isNaN(parseFloat(value));
+}
 
+ 
+function checkNumericValueInQRString(valueToCheck) {
+    if (isNumeric(valueToCheck)) {
+        console.log("「ユーザーID」の値は数値です。");
+        return true;
+    } else {
+        console.log("「ユーザーID」の値は数値ではありません。");
+        return false;
+    }
+}
     
     document.getElementById('loadProduct').addEventListener('click', function() {
         var qrstring = QRInterface.get_QRInfo("QR");
