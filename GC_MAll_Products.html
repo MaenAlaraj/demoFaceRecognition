@@ -343,12 +343,15 @@ function isNumeric(value) {
  
 function checkNumericValueInQRString(valueToCheck) {
     if (isNumeric(valueToCheck)) {
-        console.log("「ユーザーID」の値は数値です。");
+        message ="「ユーザーID」の値は数値です。";
+        console.log(message);
         return true;
     } else {
-        console.log("「ユーザーID」の値は数値ではありません。");
+        message ="「ユーザーID」の値は数値ではありません。";
+        console.log(message);
         return false;
     }
+    setMessage(message,"show_message")
 }
     
     document.getElementById('loadProduct').addEventListener('click', function() {
