@@ -209,15 +209,89 @@ function removeItemsFromList() {
 
 
             
- document.getElementById("faceButton").addEventListener("click", function() {
+  document.getElementById("faceButton").addEventListener("click", function() {
       var showSecondSecreenFlg = true
        extractedUserID ="";
-         var info = CCWalletInterface.DelFaces(sbuser,"9392909000000154","D"); //アララジ        
+          var info = CCWalletInterface.DelFaces(sbuser,"9392909000000154","D"); //アララジ        
          //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000114","D");　//山口さん
          //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000176","D");　//大橋さん
         // var info = CCWalletInterface.DelFaces(sbuser,"9392909000000176","D");　//会長
-         ToastInterface.showToast(info)
- }
+         //ToastInterface.showToast(info)
+
+    var resultJsonString  =  FaceCaptureInterface.getFace("FaceCaptureInterface");
+      try {
+          // Parse the JSON string
+          const resultJsonObject = JSON.parse(resultJsonString);
+          
+          // Access the Faces array
+          const facesArray = resultJsonObject.Faces;
+          
+          // Determine the number of faces
+          const numberOfFaces = facesArray.length;
+          
+          // Conditional statements based on the number of faces
+          if (numberOfFaces === 0) {
+              message = "顔が検出されませんでしたので、再撮影してください。";
+              console.log(message);
+              setMessage(message,"show_message")
+          }else if (numberOfFaces === 1) {
+              console.log("One face detected.");
+              const base64String = facesArray[0].image64;
+              console.log("Base64 string of the first face:", base64String);
+              // Set the S (Search Operation)
+              
+              var info = CCWalletInterface.SearchFaces(sbuser, gckid, "S", base64String);
+              if (info.includes(errorsSubstring)) {
+                  var qrstring = QRInterface.get_QRInfo("QR");
+                  if (qrstring !== "Scanner stopped") {
+                      var qrstr_list = qrstring.split(",");
+                      var numFlg = checkValueInQrstrList(qrstr_list[1]);
+                      const match = qrstring.match(/,(.*?),/);
+                      extractedUserID = match ? match[1] : null;
+                      if (extractedUserID !== null && numFlg==true) {
+                          extractedUserID = prefix + extractedUserID;
+                          var addFaceInfo = CCWalletInterface.AddFaces(sbuser, extractedUserID, "A", base64String);
+                          if (addFaceInfo.includes(errorsSubstring)) {
+                              message = "QRコードから抽出された情報が既に登録されたので顔が登録されませんでした。";
+                              setMessage(message, "show_message");
+                              showSecondSecreenFlg  = false;
+                          } else {
+                              message = "顔が登録されました。";
+                              setMessage(message, "show_message");
+                              info = CCWalletInterface.SearchFaces(sbuser, gckid, "S", base64String);
+                          }
+                      } else {
+                          message = "GC MAllのユーザーQR【識別番号・利用券番・利用者名】をご利用ください。";
+                          setMessage(message, "show_message");
+                          showSecondSecreenFlg  = false;
+                      }
+                  } else {
+                      showSecondSecreenFlg  = false;
+                  }
+              }
+              if (showSecondSecreenFlg  !== false) {
+                  var CCW_FaceResponse_LIST = info.split("：");
+                  var userID = CCW_FaceResponse_LIST[1].replace(/\s/g, "");
+                  setMessage("GCユーザー:" + CCW_FaceResponse_LIST[1], "user");
+                  document.getElementById('authContainer').style.display = 'none';
+                  document.getElementById('mainContainer').style.display = 'block';
+                  removeItemsFromList();
+                  setBalance(userID);
+              } else {
+                  showSecondSecreenFlg  = true;
+              }
+          }
+          else if (numberOfFaces > 1) {
+               message = "複数の顔が検出されましたので、再撮影してください。";
+              console.log(`More than one face detected. Number of faces: ${numberOfFaces}`);
+              setMessage(message,"show_message")
+          }
+      } catch (error) {
+          message = "JSON の解析中にエラーが発生しました:"  + error.message;;
+          console.error(message, error);
+          setMessage(message,"show_message")
+      }
+    }
   );
 
 
