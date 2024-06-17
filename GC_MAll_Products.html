@@ -212,13 +212,13 @@ function removeItemsFromList() {
   document.getElementById("faceButton").addEventListener("click", function() {
       var showSecondSecreenFlg = true
        extractedUserID ="";
-          var info = CCWalletInterface.DelFaces(sbuser,"9392909000000154","D"); //アララジ        
+          //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000154","D"); //アララジ        
          //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000114","D");　//山口さん
          //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000176","D");　//大橋さん
         // var info = CCWalletInterface.DelFaces(sbuser,"9392909000000176","D");　//会長
          ToastInterface.showToast(info)
 
-      /*var resultJsonString  =  FaceCaptureInterface.getFace("FaceCaptureInterface");
+    var resultJsonString  =  FaceCaptureInterface.getFace("FaceCaptureInterface");
       try {
           // Parse the JSON string
           const resultJsonObject = JSON.parse(resultJsonString);
@@ -239,10 +239,8 @@ function removeItemsFromList() {
               const base64String = facesArray[0].image64;
               console.log("Base64 string of the first face:", base64String);
               // Set the S (Search Operation)
-              var addFaceInfo = CCWalletInterface.AddFaces(sbuser, "9392909000000154", "A", base64String);
-              ToastInterface.showToast(addFaceInfo)
               
-              /*var info = CCWalletInterface.SearchFaces(sbuser, gckid, "S", base64String);
+              var info = CCWalletInterface.SearchFaces(sbuser, gckid, "S", base64String);
               if (info.includes(errorsSubstring)) {
                   var qrstring = QRInterface.get_QRInfo("QR");
                   if (qrstring !== "Scanner stopped") {
@@ -292,7 +290,7 @@ function removeItemsFromList() {
           message = "JSON の解析中にエラーが発生しました:"  + error.message;;
           console.error(message, error);
           setMessage(message,"show_message")
-      }*/
+      }
     }
   );
 
