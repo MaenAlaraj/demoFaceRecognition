@@ -356,7 +356,8 @@ function checkValueInQrstrList(valueToCheck) {
     
     document.getElementById('loadProduct').addEventListener('click', function() {
         var qrstring = QRInterface.get_QRInfo("QR");
-        var qrstr_list=qrstring.split(",");
+         if (qrstring !== "Scanner stopped") {
+                     var qrstr_list=qrstring.split(",");
         if(qrstr_list.length==6){
             if(!isPositiveInteger(qrstr_list[2])){
                 setMessage("商品QRではないものが読み込まれました。","show_message")
@@ -418,9 +419,11 @@ function checkValueInQrstrList(valueToCheck) {
         }else{
             setMessage("残高が足りません。","show_message")
         }
-        }}else{
+        }
+        }else{
             setMessage("商品QRではないものが読み込まれました。","show_message")
         }
+         }
     });
             
     document.getElementById('payment').addEventListener('click', function() {
