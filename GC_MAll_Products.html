@@ -227,10 +227,6 @@ function removeItemsFromList() {
           const resultJsonObject = JSON.parse(resultJsonString);   // Parse the JSON string
           const facesArray = resultJsonObject.Faces;               // Access the Faces array
           const numberOfFaces = facesArray.length;                 // Determine the number of faces
-
-           message = "After analyzing JsonString";
-          console.log(message);
-          setMessage(message,"show_message")
           
           // Conditional statements based on the number of faces
           if (numberOfFaces === 0) {
