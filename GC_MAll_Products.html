@@ -210,25 +210,21 @@ function removeItemsFromList() {
 
             
   document.getElementById("faceButton").addEventListener("click", function() {
-      var showSecondSecreenFlg = true
-       extractedUserID ="";
-          //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000154","D"); //アララジ        
-         //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000114","D");　//山口さん
-         //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000176","D");　//大橋さん
-        // var info = CCWalletInterface.DelFaces(sbuser,"9392909000000176","D");　//会長
-         //ToastInterface.showToast(info)
-
-    var resultJsonString  =  FaceCaptureInterface.getFace("FaceCaptureInterface");
+      
       try {
-          // Parse the JSON string
-          const resultJsonObject = JSON.parse(resultJsonString);
+          var showSecondSecreenFlg = true;
+          extractedUserID ="";
+          //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000154","D"); //アララジ        
+          //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000114","D");　//山口さん
+          //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000176","D");　//大橋さん
+          // var info = CCWalletInterface.DelFaces(sbuser,"9392909000000176","D");　//会長
+          //ToastInterface.showToast(info)
           
-          // Access the Faces array
-          const facesArray = resultJsonObject.Faces;
-          
-          // Determine the number of faces
-          const numberOfFaces = facesArray.length;
-          
+          var resultJsonString = FaceCaptureInterface.getFace("FaceCaptureInterface");
+          const resultJsonObject = JSON.parse(resultJsonString);   // Parse the JSON string
+          const facesArray = resultJsonObject.Faces;               // Access the Faces array
+          const numberOfFaces = facesArray.length;                 // Determine the number of faces
+                  
           // Conditional statements based on the number of faces
           if (numberOfFaces === 0) {
               message = "顔が検出されませんでしたので、再撮影してください。";
@@ -287,13 +283,16 @@ function removeItemsFromList() {
               setMessage(message,"show_message")
           }
       } catch (error) {
-          message = "JSON の解析中にエラーが発生しました:"  + error.message;;
-          console.error(message, error);
+           message = "Error processing face detection:"  + error.message;
+           console.error(message, error);
           setMessage(message,"show_message")
       }
-    }
-  );
+    });
 
+
+
+
+  
 
   document.getElementById("qrButton").addEventListener("click", function() {
       var qrstring = QRInterface.get_QRInfo("QR");
