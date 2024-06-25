@@ -212,6 +212,9 @@ function removeItemsFromList() {
   document.getElementById("faceButton").addEventListener("click", function() {
       
       try {
+          message = "faceButton has been excuted";
+          console.log(message);
+          setMessage(message,"show_message")
           var showSecondSecreenFlg = true;
           extractedUserID ="";
           //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000154","D"); //アララジ        
@@ -224,7 +227,11 @@ function removeItemsFromList() {
           const resultJsonObject = JSON.parse(resultJsonString);   // Parse the JSON string
           const facesArray = resultJsonObject.Faces;               // Access the Faces array
           const numberOfFaces = facesArray.length;                 // Determine the number of faces
-                  
+
+           message = "After analyzing JsonString";
+          console.log(message);
+          setMessage(message,"show_message")
+          
           // Conditional statements based on the number of faces
           if (numberOfFaces === 0) {
               message = "顔が検出されませんでしたので、再撮影してください。";
