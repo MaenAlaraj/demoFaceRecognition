@@ -251,6 +251,16 @@ function removeItemsFromList() {
           //ToastInterface.showToast(info)
           
           var resultJsonString = FaceCaptureInterface.getFace("FaceCaptureInterface");
+
+
+          // Check if resultJsonString is empty
+        if (resultJsonString === "") {
+            // Handle case where no face was detected
+            message = "カメラの許可が拒否されたか、Kotlin 関連アプリからの戻り値がありません。";
+            console.log(message);
+            setMessage(message, "show_message");
+            return; // Exit the function early since no face was detected
+        }        
           const resultJsonObject = JSON.parse(resultJsonString);   // Parse the JSON string
           const facesArray = resultJsonObject.Faces;               // Access the Faces array
           const numberOfFaces = facesArray.length;                 // Determine the number of faces
