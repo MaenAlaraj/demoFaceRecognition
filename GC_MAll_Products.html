@@ -256,7 +256,7 @@ function removeItemsFromList() {
           // Check if resultJsonString is empty
         if (resultJsonString === "") {
             // Handle case where no face was detected
-            message = "カメラの許可が拒否されたか、Kotlin 関連アプリからの戻り値がありません。";
+            message = "カメラの許可が拒否されたか、顔のキャプチャを待機中にタイムアウトが発生しました。";
             console.log(message);
             setMessage(message, "show_message");
             return; // Exit the function early since no face was detected
