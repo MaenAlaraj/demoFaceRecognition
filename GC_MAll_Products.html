@@ -277,7 +277,7 @@ function removeItemsFromList() {
                
               
               // Show the loading overlay before processing starts
-               loadingOverlay.style.display = 'flex';
+              // loadingOverlay.style.display = 'flex';
               var info = CCWalletInterface.SearchFaces(sbuser, gckid, "S", base64String);
               if (info.includes(errorsSubstring)) {
                   var qrstring = QRInterface.get_QRInfo("QR");
@@ -309,7 +309,7 @@ function removeItemsFromList() {
               }
               if (showSecondSecreenFlg  !== false) {
                      // Hide the loading overlay if conditions are met
-                loadingOverlay.style.display = 'none';
+                //loadingOverlay.style.display = 'none';
 
                   var CCW_FaceResponse_LIST = info.split("：");
                   var userID = CCW_FaceResponse_LIST[1].replace(/\s/g, "");
