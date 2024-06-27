@@ -111,13 +111,20 @@
     </style>
 </head>
 <div class="auth-container" id="authContainer">
-    <p>GC Mall デモアプリ</p>
+    <p>GC Mallアプリ</p>
     <p>GCのQRか顔を読み込ませてください</p>
     <div class="button-container">
         <button id="qrButton">QR</button>
         <button id="faceButton">顔</button>
     </div>
 </div>
+
+
+
+<div id="authTransit" style="display: none;">
+    <p>Processing....</p>
+    <div id="processingLBL">処理中・・・</div>
+</div>   
     
 <body>
 <div class="overlay" id="loadingOverlay">
@@ -273,6 +280,7 @@ function removeItemsFromList() {
               console.log("One face detected.");
               const base64String = facesArray[0].image64;
               console.log("Base64 string of the first face:", base64String);
+              document.getElementById('authTransit').style.display = 'block';
               // Set the S (Search Operation)
                
               
@@ -314,6 +322,7 @@ function removeItemsFromList() {
                   var CCW_FaceResponse_LIST = info.split("：");
                   var userID = CCW_FaceResponse_LIST[1].replace(/\s/g, "");
                   setMessage("GCユーザー:" + CCW_FaceResponse_LIST[1], "user");
+                  document.getElementById('authTransit').style.display = 'none';
                   document.getElementById('authContainer').style.display = 'none';
                   document.getElementById('mainContainer').style.display = 'block';
                   removeItemsFromList();
