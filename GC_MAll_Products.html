@@ -293,7 +293,7 @@ function removeItemsFromList() {
             const textContent = bottomLeftText.querySelector('.text-content');
 
             textContent.textContent = text; // Set the text content
-
+            textContent.style.backgroundColor = "#0000FF";
             // Trigger reflow to reset the animation
             textContent.style.animation = 'none';
             textContent.getBoundingClientRect(); // Trigger reflow
