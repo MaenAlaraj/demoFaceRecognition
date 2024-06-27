@@ -107,6 +107,43 @@
 
 
 
+        #bottomLeftText {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            white-space: nowrap;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .wipe-animation {
+            display: inline-block;
+            animation: wipe 2s linear infinite;
+        }
+
+        @keyframes wipe {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
         
     </style>
 </head>
@@ -117,8 +154,7 @@
         <button id="qrButton">QR</button>
         <button id="faceButton">顔</button>
     </div>
-    <div id="bottomLeftText" style="position: fixed; bottom: 10px; left: 10px;">
-    </div>
+    <div id="bottomLeftText"></div>
 </div>
 
 
@@ -246,13 +282,20 @@ function removeItemsFromList() {
      setTotal() 
 }
 
-        // Function to update the text based on button click
+        // Function to update the text with wipe animation
         function updateBottomLeftText(text) {
             const bottomLeftText = document.getElementById('bottomLeftText');
             if (bottomLeftText) {
-                bottomLeftText.textContent = text;
+                bottomLeftText.innerHTML = ''; // Clear existing content
+
+                const span = document.createElement('span');
+                span.textContent = text;
+                span.classList.add('wipe-animation');
+
+                bottomLeftText.appendChild(span);
             }
         }
+
 
     function sleep(milliseconds) {
         const start = new Date().getTime();
@@ -271,7 +314,8 @@ function removeItemsFromList() {
           //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000176","D");　//大橋さん
           // var info = CCWalletInterface.DelFaces(sbuser,"9392909000000176","D");　//会長
           //ToastInterface.showToast(info)
-          updateBottomLeftText("Face button clicked!!!!!!!!!!!!!!!!!!");
+          updateBottomLeftText("Animated wipe---------------------");
+          //updateBottomLeftText("Face button clicked!!!!!!!!!!!!!!!!!!");
           var resultJsonString = FaceCaptureInterface.getFace("FaceCaptureInterface");
 
 
@@ -288,6 +332,7 @@ function removeItemsFromList() {
           
           // Conditional statements based on the number of faces
           if (numberOfFaces === 0) {
+              updateBottomLeftText("");
               message = "顔が検出されませんでしたので、再撮影してください。";
               console.log(message);
               setMessage(message,"show_message")
@@ -350,11 +395,13 @@ function removeItemsFromList() {
               }*/
           }
           else if (numberOfFaces > 1) {
+               updateBottomLeftText("");
                message = "複数の顔が検出されましたので、再撮影してください。";
               console.log(`More than one face detected. Number of faces: ${numberOfFaces}`);
               setMessage(message,"show_message")
           }
       } catch (error) {
+          updateBottomLeftText("");
            message = "Error processing face detection:"  + error.message;
            console.error(message, error);
           setMessage(message,"show_message")
