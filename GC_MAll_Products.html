@@ -286,9 +286,9 @@ function removeItemsFromList() {
               console.log(message);
               setMessage(message,"show_message")
           }else if (numberOfFaces === 1) {
+              updateBottomLeftText("Face button clicked!");
               
-              
-              console.log("One face detected.");
+             /* console.log("One face detected.");
               const base64String = facesArray[0].image64;
               console.log("Base64 string of the first face:", base64String);
              
@@ -298,7 +298,6 @@ function removeItemsFromList() {
               
               // Show the loading overlay before processing starts
                //loadingOverlay.style.display = 'flex';
-              updateBottomLeftText("Face button clicked!");
               var info = CCWalletInterface.SearchFaces(sbuser, gckid, "S", base64String);
               if (info.includes(errorsSubstring)) {
                   var qrstring = QRInterface.get_QRInfo("QR");
@@ -342,7 +341,7 @@ function removeItemsFromList() {
                   setBalance(userID);
               } else {
                   showSecondSecreenFlg  = true;
-              }
+              }*/
           }
           else if (numberOfFaces > 1) {
                message = "複数の顔が検出されましたので、再撮影してください。";
