@@ -117,6 +117,9 @@
         <button id="qrButton">QR</button>
         <button id="faceButton">顔</button>
     </div>
+    <div id="bottomLeftText" style="position: fixed; bottom: 10px; left: 10px;">
+         Text at bottom left
+    </div>
 </div>
 
 
@@ -244,7 +247,13 @@ function removeItemsFromList() {
      setTotal() 
 }
 
-
+        // Function to update the text based on button click
+        function updateBottomLeftText(text) {
+            const bottomLeftText = document.getElementById('bottomLeftText');
+            if (bottomLeftText) {
+                bottomLeftText.textContent = text;
+            }
+        }
             
   document.getElementById("faceButton").addEventListener("click", function() {
       
@@ -277,6 +286,8 @@ function removeItemsFromList() {
               console.log(message);
               setMessage(message,"show_message")
           }else if (numberOfFaces === 1) {
+              
+              
               console.log("One face detected.");
               const base64String = facesArray[0].image64;
               console.log("Base64 string of the first face:", base64String);
@@ -286,7 +297,8 @@ function removeItemsFromList() {
                
               
               // Show the loading overlay before processing starts
-               loadingOverlay.style.display = 'flex';
+               //loadingOverlay.style.display = 'flex';
+              updateBottomLeftText("Face button clicked!");
               var info = CCWalletInterface.SearchFaces(sbuser, gckid, "S", base64String);
               if (info.includes(errorsSubstring)) {
                   var qrstring = QRInterface.get_QRInfo("QR");
@@ -318,7 +330,7 @@ function removeItemsFromList() {
               }
               if (showSecondSecreenFlg  !== false) {
                      // Hide the loading overlay if conditions are met
-                loadingOverlay.style.display = 'none';
+                //loadingOverlay.style.display = 'none';
 
                   var CCW_FaceResponse_LIST = info.split("：");
                   var userID = CCW_FaceResponse_LIST[1].replace(/\s/g, "");
