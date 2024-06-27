@@ -254,6 +254,13 @@ function removeItemsFromList() {
                 bottomLeftText.textContent = text;
             }
         }
+
+    function sleep(milliseconds) {
+        const start = new Date().getTime();
+        while (new Date().getTime() - start < milliseconds) {
+        // Busy-wait loop
+        }
+    }
             
   document.getElementById("faceButton").addEventListener("click", function() {
       
@@ -286,7 +293,7 @@ function removeItemsFromList() {
               console.log(message);
               setMessage(message,"show_message")
           }else if (numberOfFaces === 1) {
-              updateBottomLeftText("Face button clicked!");
+              updateBottomLeftText("Face button clicked and 2 seconds passed!");
               
             console.log("One face detected.");
               const base64String = facesArray[0].image64;
@@ -295,7 +302,7 @@ function removeItemsFromList() {
              // document.getElementById('authTransit').style.display = 'block';
               // Set the S (Search Operation)
                
-              
+              sleep(2000); // 2-second blocking delay
               // Show the loading overlay before processing starts
                //loadingOverlay.style.display = 'flex';
                var info = CCWalletInterface.SearchFaces(sbuser, gckid, "S", base64String);
