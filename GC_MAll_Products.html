@@ -288,7 +288,7 @@ function removeItemsFromList() {
           }else if (numberOfFaces === 1) {
               updateBottomLeftText("Face button clicked!");
               
-             /* console.log("One face detected.");
+            console.log("One face detected.");
               const base64String = facesArray[0].image64;
               console.log("Base64 string of the first face:", base64String);
              
@@ -298,7 +298,7 @@ function removeItemsFromList() {
               
               // Show the loading overlay before processing starts
                //loadingOverlay.style.display = 'flex';
-              var info = CCWalletInterface.SearchFaces(sbuser, gckid, "S", base64String);
+               /* var info = CCWalletInterface.SearchFaces(sbuser, gckid, "S", base64String);
               if (info.includes(errorsSubstring)) {
                   var qrstring = QRInterface.get_QRInfo("QR");
                   if (qrstring !== "Scanner stopped") {
