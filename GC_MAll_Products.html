@@ -109,17 +109,26 @@
 
 
 
-   #bottomLeftText {
+ #bottomLeftText {
             position: absolute;
             bottom: 10px;
             left: 10px;
             overflow: hidden;
+            white-space: nowrap;
         }
 
         .text-content {
             display: inline-block;
-            white-space: nowrap;
-            transform: translateX(-100%);
+            animation: wipeAnimation 2s linear infinite;
+        }
+
+        @keyframes wipeAnimation {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(0);
+            }
         }
 
 
@@ -281,13 +290,9 @@ function removeItemsFromList() {
             textContent.textContent = text; // Set the text content
 
             // Trigger reflow to reset the animation
-            textContent.style.transform = 'translateX(-100%)';
-            textContent.style.transition = 'none';
+            textContent.style.animation = 'none';
             textContent.getBoundingClientRect(); // Trigger reflow
-
-            // Apply the animation
-            textContent.style.transition = 'transform 2s linear';
-            textContent.style.transform = 'translateX(0)';
+            textContent.style.animation = 'wipeAnimation 2s linear infinite';
         }
 
 
