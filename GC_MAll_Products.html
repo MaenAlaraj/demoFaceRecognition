@@ -281,7 +281,7 @@ function removeItemsFromList() {
               const base64String = facesArray[0].image64;
               console.log("Base64 string of the first face:", base64String);
              
-              document.getElementById('authTransit').style.display = 'block';
+             // document.getElementById('authTransit').style.display = 'block';
               // Set the S (Search Operation)
                
               
@@ -323,7 +323,7 @@ function removeItemsFromList() {
                   var CCW_FaceResponse_LIST = info.split("：");
                   var userID = CCW_FaceResponse_LIST[1].replace(/\s/g, "");
                   setMessage("GCユーザー:" + CCW_FaceResponse_LIST[1], "user");
-                  document.getElementById('authTransit').style.display = 'none';
+                  //document.getElementById('authTransit').style.display = 'none';
                   document.getElementById('authContainer').style.display = 'none';
                   document.getElementById('mainContainer').style.display = 'block';
                   removeItemsFromList();
