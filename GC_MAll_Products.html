@@ -271,7 +271,7 @@ function removeItemsFromList() {
           //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000176","D");　//大橋さん
           // var info = CCWalletInterface.DelFaces(sbuser,"9392909000000176","D");　//会長
           //ToastInterface.showToast(info)
-          
+          updateBottomLeftText("Face button clicked!!!!!!!!!!!!!!!!!!");
           var resultJsonString = FaceCaptureInterface.getFace("FaceCaptureInterface");
 
 
@@ -292,7 +292,7 @@ function removeItemsFromList() {
               console.log(message);
               setMessage(message,"show_message")
           }else if (numberOfFaces === 1) {
-              updateBottomLeftText("Face button clicked and 2 seconds passed!");
+              updateBottomLeftText("Face button clicked!");
               
             console.log("One face detected.");
               const base64String = facesArray[0].image64;
@@ -301,7 +301,7 @@ function removeItemsFromList() {
              // document.getElementById('authTransit').style.display = 'block';
               // Set the S (Search Operation)
                
-              sleep(2000); // 2-second blocking delay
+              //sleep(2000); // 2-second blocking delay
               // Show the loading overlay before processing starts
                //loadingOverlay.style.display = 'flex';
                var info = CCWalletInterface.SearchFaces(sbuser, gckid, "S", base64String);
