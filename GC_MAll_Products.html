@@ -298,8 +298,8 @@ function removeItemsFromList() {
               
               // Show the loading overlay before processing starts
                //loadingOverlay.style.display = 'flex';
-               /* var info = CCWalletInterface.SearchFaces(sbuser, gckid, "S", base64String);
-              if (info.includes(errorsSubstring)) {
+               var info = CCWalletInterface.SearchFaces(sbuser, gckid, "S", base64String);
+               /*if (info.includes(errorsSubstring)) {
                   var qrstring = QRInterface.get_QRInfo("QR");
                   if (qrstring !== "Scanner stopped") {
                       var qrstr_list = qrstring.split(",");
