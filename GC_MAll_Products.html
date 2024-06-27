@@ -107,30 +107,20 @@
 
 
 
-        #bottomLeftText {
+
+
+  #bottomLeftText {
             position: absolute;
             bottom: 10px;
             left: 10px;
             white-space: nowrap;
             overflow: hidden;
+        }
+
+        .text-content {
             display: inline-block;
+            white-space: nowrap;
         }
-
-        .wipe-animation {
-            display: inline-block;
-            animation: wipe 2s linear infinite;
-        }
-
-        @keyframes wipe {
-            from {
-                transform: translateX(-100%);
-            }
-            to {
-                transform: translateX(0);
-            }
-        }
-
-
 
 
 
@@ -154,7 +144,9 @@
         <button id="qrButton">QR</button>
         <button id="faceButton">顔</button>
     </div>
-    <div id="bottomLeftText"></div>
+   <div id="bottomLeftText">
+        <span class="text-content"></span>
+    </div>
 </div>
 
 
@@ -281,20 +273,28 @@ function removeItemsFromList() {
     // Reset the total amount displayed
      setTotal() 
 }
-
-        // Function to update the text with wipe animation
-        function updateBottomLeftText(text) {
-            const bottomLeftText = document.getElementById('bottomLeftText');
-            if (bottomLeftText) {
-                bottomLeftText.innerHTML = ''; // Clear existing content
-
-                const span = document.createElement('span');
-                span.textContent = text;
-                span.classList.add('wipe-animation');
-
-                bottomLeftText.appendChild(span);
-            }
-        }
+    
+    function updateBottomLeftText(text) {
+        const bottomLeftText = document.getElementById('bottomLeftText');
+        const textContent = bottomLeftText.querySelector('.text-content');
+        
+        textContent.textContent = text; // Set the text content
+        
+        // Get the width of the textContent
+        const textWidth = textContent.offsetWidth;
+        
+        
+        // Apply the initial clip-path
+        textContent.style.clipPath = 'inset(0 100% 0 0)';
+        
+        // Trigger a reflow to ensure the initial clip-path is applied
+        textContent.getBoundingClientRect();
+        
+        
+        // Apply the animation
+        textContent.style.transition = 'clip-path 2s linear';
+        textContent.style.clipPath = 'inset(0 0 0 0)';
+    }
 
 
     function sleep(milliseconds) {
@@ -314,7 +314,7 @@ function removeItemsFromList() {
           //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000176","D");　//大橋さん
           // var info = CCWalletInterface.DelFaces(sbuser,"9392909000000176","D");　//会長
           //ToastInterface.showToast(info)
-          updateBottomLeftText("Animated wipe---------------------");
+          updateBottomLeftText("処理中・・・");
           //updateBottomLeftText("Face button clicked!!!!!!!!!!!!!!!!!!");
           var resultJsonString = FaceCaptureInterface.getFace("FaceCaptureInterface");
 
