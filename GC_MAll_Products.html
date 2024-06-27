@@ -119,9 +119,8 @@
 
          .text-content {
             display: inline-block;
-            animation: wipeAnimation 2s linear infinite;
+            animation: wipeAnimation 3s linear infinite;
             color: #FFFFFF; /* White text */
-            font-weight: bold;
             padding: 5px 10px;
             border-radius: 5px;
             font-size: 13px; 
@@ -293,10 +292,11 @@ function removeItemsFromList() {
 
             textContent.textContent = text; // Set the text content
             textContent.style.backgroundColor = "#0000FF";
+             textContent.style.fontWeight = 'bold'; // Set the font weight to bold
             // Trigger reflow to reset the animation
             textContent.style.animation = 'none';
             textContent.getBoundingClientRect(); // Trigger reflow
-            textContent.style.animation = 'wipeAnimation 2s linear infinite';
+            textContent.style.animation = 'wipeAnimation 3s linear infinite';
         }
 
 
