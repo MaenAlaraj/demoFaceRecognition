@@ -109,17 +109,17 @@
 
 
 
-  #bottomLeftText {
+   #bottomLeftText {
             position: absolute;
             bottom: 10px;
             left: 10px;
-            white-space: nowrap;
             overflow: hidden;
         }
 
         .text-content {
             display: inline-block;
             white-space: nowrap;
+            transform: translateX(-100%);
         }
 
 
@@ -274,27 +274,21 @@ function removeItemsFromList() {
      setTotal() 
 }
     
-    function updateBottomLeftText(text) {
-        const bottomLeftText = document.getElementById('bottomLeftText');
-        const textContent = bottomLeftText.querySelector('.text-content');
-        
-        textContent.textContent = text; // Set the text content
-        
-        // Get the width of the textContent
-        const textWidth = textContent.offsetWidth;
-        
-        
-        // Apply the initial clip-path
-        textContent.style.clipPath = 'inset(0 100% 0 0)';
-        
-        // Trigger a reflow to ensure the initial clip-path is applied
-        textContent.getBoundingClientRect();
-        
-        
-        // Apply the animation
-        textContent.style.transition = 'clip-path 2s linear';
-        textContent.style.clipPath = 'inset(0 0 0 0)';
-    }
+  function updateBottomLeftText(text) {
+            const bottomLeftText = document.getElementById('bottomLeftText');
+            const textContent = bottomLeftText.querySelector('.text-content');
+
+            textContent.textContent = text; // Set the text content
+
+            // Trigger reflow to reset the animation
+            textContent.style.transform = 'translateX(-100%)';
+            textContent.style.transition = 'none';
+            textContent.getBoundingClientRect(); // Trigger reflow
+
+            // Apply the animation
+            textContent.style.transition = 'transform 2s linear';
+            textContent.style.transform = 'translateX(0)';
+        }
 
 
     function sleep(milliseconds) {
