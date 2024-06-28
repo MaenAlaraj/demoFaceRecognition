@@ -319,6 +319,8 @@ function removeItemsFromList() {
           // var info = CCWalletInterface.DelFaces(sbuser,"9392909000000176","D");　//会長
           //ToastInterface.showToast(info)           
           updateBottomLeftText("処理中・・・　　　　　　　　",'#0000FF');
+
+         sleep(2000); // 2-second blocking delay
           var resultJsonString = FaceCaptureInterface.getFace("FaceCaptureInterface");
 
 
@@ -350,7 +352,7 @@ function removeItemsFromList() {
              // document.getElementById('authTransit').style.display = 'block';
               // Set the S (Search Operation)
                
-              sleep(2000); // 2-second blocking delay
+            
               // Show the loading overlay before processing starts
                //loadingOverlay.style.display = 'flex';
                var info = CCWalletInterface.SearchFaces(sbuser, gckid, "S", base64String);
