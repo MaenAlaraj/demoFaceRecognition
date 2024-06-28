@@ -290,11 +290,12 @@ function removeItemsFromList() {
           //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000176","D");　//大橋さん
           // var info = CCWalletInterface.DelFaces(sbuser,"9392909000000176","D");　//会長
           //ToastInterface.showToast(info)           
-          updateBottomLeftText("処理中・・・　　　　　　　　",'#0000FF');
-
+          //updateBottomLeftText("処理中・・・　　　　　　　　",'#0000FF');
+         
+          window.location.href = "https://maenalaraj.github.io/demoFaceRecognition/demoSite.html";
          //sleep(2000); // 2-second blocking delay
           var resultJsonString = FaceCaptureInterface.getFace("FaceCaptureInterface");
-
+        
 
           // Check if resultJsonString is empty
         if (resultJsonString === "") {
@@ -317,13 +318,13 @@ function removeItemsFromList() {
           }else if (numberOfFaces === 1) {
               //updateBottomLeftText("Face button clicked!");
               
-            console.log("One face detected.");
+              console.log("One face detected.");
               const base64String = facesArray[0].image64;
               console.log("Base64 string of the first face:", base64String);
              
               // Set the S (Search Operation)               
                var info = CCWalletInterface.SearchFaces(sbuser, gckid, "S", base64String);
-               /*if (info.includes(errorsSubstring)) {
+               if (info.includes(errorsSubstring)) {
                   var qrstring = QRInterface.get_QRInfo("QR");
                   if (qrstring !== "Scanner stopped") {
                       var qrstr_list = qrstring.split(",");
@@ -355,6 +356,7 @@ function removeItemsFromList() {
                   }
               }
               if (showSecondSecreenFlg  !== false) {
+                  window.location.href = "https://maenalaraj.github.io/demoFaceRecognition/GC_MAll_Products.html";
                   var CCW_FaceResponse_LIST = info.split("：");
                   var userID = CCW_FaceResponse_LIST[1].replace(/\s/g, "");
                   setMessage("GCユーザー:" + CCW_FaceResponse_LIST[1], "user");
@@ -364,7 +366,7 @@ function removeItemsFromList() {
                   setBalance(userID);
               } else {
                   showSecondSecreenFlg  = true;
-              }*/
+              }
           }
           else if (numberOfFaces > 1) {
                updateBottomLeftText("",'');
