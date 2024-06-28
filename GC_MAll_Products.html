@@ -85,24 +85,7 @@
         
         
         
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.9); /* Transparent white background */
-            display: none; /* Initially hidden */
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            z-index: 999; /* Ensure it's above other content */
-        }
 
-        .overlay p {
-            font-size: 1.5em;
-            margin-top: 20px;
-        }
 
 
 
@@ -160,18 +143,8 @@
         <span class="text-content"></span>
     </div>
 </div>
-
-
-
-<div id="authTransit" style="display: none;">
-    <p>Processing....</p>
-    <div id="processingLBL">処理中・・・</div>
-</div>   
     
 <body>
-<div class="overlay" id="loadingOverlay">
-    <p>Processing....</p>
-</div>
 <div id="mainContainer" style="display: none;">
     <p id="user"></p>
 <p id="message"></p>
@@ -197,7 +170,6 @@
     </div>
 </div>
 <script>
-    var loadingOverlay = document.getElementById('loadingOverlay');
     var showSecondSecreenFlg = true;
     var gckid = "";
     var prefix = "93929";
@@ -349,12 +321,7 @@ function removeItemsFromList() {
               const base64String = facesArray[0].image64;
               console.log("Base64 string of the first face:", base64String);
              
-             // document.getElementById('authTransit').style.display = 'block';
-              // Set the S (Search Operation)
-               
-            
-              // Show the loading overlay before processing starts
-               //loadingOverlay.style.display = 'flex';
+              // Set the S (Search Operation)               
                var info = CCWalletInterface.SearchFaces(sbuser, gckid, "S", base64String);
                if (info.includes(errorsSubstring)) {
                   var qrstring = QRInterface.get_QRInfo("QR");
@@ -388,13 +355,9 @@ function removeItemsFromList() {
                   }
               }
               if (showSecondSecreenFlg  !== false) {
-                     // Hide the loading overlay if conditions are met
-                //loadingOverlay.style.display = 'none';
-
                   var CCW_FaceResponse_LIST = info.split("：");
                   var userID = CCW_FaceResponse_LIST[1].replace(/\s/g, "");
                   setMessage("GCユーザー:" + CCW_FaceResponse_LIST[1], "user");
-                  //document.getElementById('authTransit').style.display = 'none';
                   document.getElementById('authContainer').style.display = 'none';
                   document.getElementById('mainContainer').style.display = 'block';
                   removeItemsFromList();
