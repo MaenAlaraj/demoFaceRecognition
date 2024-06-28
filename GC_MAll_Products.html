@@ -286,13 +286,13 @@ function removeItemsFromList() {
      setTotal() 
 }
     
-  function updateBottomLeftText(text) {
+  function updateBottomLeftText(text, backgroundColor) {
             const bottomLeftText = document.getElementById('bottomLeftText');
             const textContent = bottomLeftText.querySelector('.text-content');
 
             textContent.textContent = text; // Set the text content
-            textContent.style.backgroundColor = "#0000FF";
-      textContent.style.fontWeight = 'bold'; // Set font weight to bold
+            textContent.style.backgroundColor = backgroundColor;
+             textContent.style.fontWeight = 'bold'; // Set font weight to bold
             textContent.style.fontSize = '15px';
         
             textContent.style.animation = 'none';
@@ -318,12 +318,13 @@ function removeItemsFromList() {
           //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000176","D");　//大橋さん
           // var info = CCWalletInterface.DelFaces(sbuser,"9392909000000176","D");　//会長
           //ToastInterface.showToast(info)           
-          updateBottomLeftText("処理中・・・　　　　　　　　");
+          updateBottomLeftText("処理中・・・　　　　　　　　",'#0000FF');
           var resultJsonString = FaceCaptureInterface.getFace("FaceCaptureInterface");
 
 
           // Check if resultJsonString is empty
         if (resultJsonString === "") {
+              updateBottomLeftText("",'');
             // Handle case where no face was detected
             message = "カメラの許可が拒否されたか、顔のキャプチャが停止されました。";
             console.log(message);
@@ -335,7 +336,7 @@ function removeItemsFromList() {
           
           // Conditional statements based on the number of faces
           if (numberOfFaces === 0) {
-              updateBottomLeftText("");
+              updateBottomLeftText("",'');
               message = "顔が検出されませんでしたので、再撮影してください。";
               console.log(message);
               setMessage(message,"show_message")
@@ -398,13 +399,13 @@ function removeItemsFromList() {
               }*/
           }
           else if (numberOfFaces > 1) {
-               updateBottomLeftText("");
+               updateBottomLeftText("",'');
                message = "複数の顔が検出されましたので、再撮影してください。";
               console.log(`More than one face detected. Number of faces: ${numberOfFaces}`);
               setMessage(message,"show_message")
           }
       } catch (error) {
-          updateBottomLeftText("");
+           updateBottomLeftText("",'');
            message = "Error processing face detection:"  + error.message;
            console.error(message, error);
           setMessage(message,"show_message")
