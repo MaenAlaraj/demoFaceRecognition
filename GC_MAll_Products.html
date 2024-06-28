@@ -293,7 +293,7 @@ function removeItemsFromList() {
           //updateBottomLeftText("処理中・・・　　　　　　　　",'#0000FF');
          
           window.location.href = "https://maenalaraj.github.io/demoFaceRecognition/demoSite.html";
-         //sleep(2000); // 2-second blocking delay
+           sleep(2000); // 2-second blocking delay
           var resultJsonString = FaceCaptureInterface.getFace("FaceCaptureInterface");
         
 
@@ -322,7 +322,7 @@ function removeItemsFromList() {
               const base64String = facesArray[0].image64;
               console.log("Base64 string of the first face:", base64String);
              
-              // Set the S (Search Operation)               
+              // Set the S (Search Operation)           
                var info = CCWalletInterface.SearchFaces(sbuser, gckid, "S", base64String);
                if (info.includes(errorsSubstring)) {
                   var qrstring = QRInterface.get_QRInfo("QR");
@@ -356,7 +356,6 @@ function removeItemsFromList() {
                   }
               }
               if (showSecondSecreenFlg  !== false) {
-                  window.location.href = "https://maenalaraj.github.io/demoFaceRecognition/GC_MAll_Products.html";
                   var CCW_FaceResponse_LIST = info.split("：");
                   var userID = CCW_FaceResponse_LIST[1].replace(/\s/g, "");
                   setMessage("GCユーザー:" + CCW_FaceResponse_LIST[1], "user");
