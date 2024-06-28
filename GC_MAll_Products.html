@@ -354,7 +354,7 @@ function removeItemsFromList() {
               // Show the loading overlay before processing starts
                //loadingOverlay.style.display = 'flex';
                //var info = CCWalletInterface.SearchFaces(sbuser, gckid, "S", base64String);
-               /*if (info.includes(errorsSubstring)) {
+               if (info.includes(errorsSubstring)) {
                   var qrstring = QRInterface.get_QRInfo("QR");
                   if (qrstring !== "Scanner stopped") {
                       var qrstr_list = qrstring.split(",");
@@ -369,17 +369,20 @@ function removeItemsFromList() {
                               setMessage(message, "show_message");
                               showSecondSecreenFlg  = false;
                           } else {
+                              updateBottomLeftText("",'');
                               message = "顔が登録されました。";
                               setMessage(message, "show_message");
                               info = CCWalletInterface.SearchFaces(sbuser, gckid, "S", base64String);
                           }
                       } else {
+                          updateBottomLeftText("",'');
                           message = "GC MAllのユーザーQR【識別番号・利用券番・利用者名】をご利用ください。";
                           setMessage(message, "show_message");
                           showSecondSecreenFlg  = false;
                       }
                   } else {
                       showSecondSecreenFlg  = false;
+                      updateBottomLeftText("",'');
                   }
               }
               if (showSecondSecreenFlg  !== false) {
@@ -396,7 +399,7 @@ function removeItemsFromList() {
                   setBalance(userID);
               } else {
                   showSecondSecreenFlg  = true;
-              }*/
+              }
           }
           else if (numberOfFaces > 1) {
                updateBottomLeftText("",'');
@@ -437,7 +440,10 @@ function removeItemsFromList() {
               message = "GC MAllのユーザーQR【識別番号・利用券番・利用者名】をご利用ください。";
               setMessage(message,"show_message")
           }
+      }else{
+           updateBottomLeftText("",'');
       }
+          
   }
   );
 
