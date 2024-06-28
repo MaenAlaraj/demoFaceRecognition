@@ -286,7 +286,7 @@ function removeItemsFromList() {
      setTotal() 
 }
     
-  /*function updateBottomLeftText(text) {
+  function updateBottomLeftText(text) {
             const bottomLeftText = document.getElementById('bottomLeftText');
             const textContent = bottomLeftText.querySelector('.text-content');
 
@@ -298,27 +298,7 @@ function removeItemsFromList() {
             textContent.style.animation = 'none';
             //textContent.getBoundingClientRect(); // Trigger reflow
             //textContent.style.animation = 'wipeAnimation 3s linear infinite';
-        }*/
-
-    function updateBottomLeftText(text) {
-    const bottomLeftText = document.getElementById('bottomLeftText');
-    const textContent = bottomLeftText.querySelector('.text-content');
-    let index = 0;
-
-    setInterval(() => {
-        // Update text content with the original text and add spaces based on the index
-        const newText = text + ' '.repeat(index % (text.length + 1));
-        textContent.textContent = newText;
-
-        // Set background color to blue and font weight to bold
-        textContent.style.backgroundColor = '#0000FF';
-        textContent.style.fontWeight = 'bold';
-        textContent.style.fontSize = '15px';
-        
-
-        index++;
-    }, 200);
-}
+        }
 
 
     function sleep(milliseconds) {
@@ -339,7 +319,6 @@ function removeItemsFromList() {
           // var info = CCWalletInterface.DelFaces(sbuser,"9392909000000176","D");　//会長
           //ToastInterface.showToast(info)           
           updateBottomLeftText("処理中・・・　　　　　　　　");
-          //updateBottomLeftText("Face button clicked!!!!!!!!!!!!!!!!!!");
           var resultJsonString = FaceCaptureInterface.getFace("FaceCaptureInterface");
 
 
@@ -373,7 +352,7 @@ function removeItemsFromList() {
               //sleep(2000); // 2-second blocking delay
               // Show the loading overlay before processing starts
                //loadingOverlay.style.display = 'flex';
-               var info = CCWalletInterface.SearchFaces(sbuser, gckid, "S", base64String);
+               //var info = CCWalletInterface.SearchFaces(sbuser, gckid, "S", base64String);
                /*if (info.includes(errorsSubstring)) {
                   var qrstring = QRInterface.get_QRInfo("QR");
                   if (qrstring !== "Scanner stopped") {
