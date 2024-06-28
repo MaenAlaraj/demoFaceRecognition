@@ -350,11 +350,11 @@ function removeItemsFromList() {
              // document.getElementById('authTransit').style.display = 'block';
               // Set the S (Search Operation)
                
-              //sleep(2000); // 2-second blocking delay
+              sleep(2000); // 2-second blocking delay
               // Show the loading overlay before processing starts
                //loadingOverlay.style.display = 'flex';
-               //var info = CCWalletInterface.SearchFaces(sbuser, gckid, "S", base64String);
-               /*if (info.includes(errorsSubstring)) {
+               var info = CCWalletInterface.SearchFaces(sbuser, gckid, "S", base64String);
+               if (info.includes(errorsSubstring)) {
                   var qrstring = QRInterface.get_QRInfo("QR");
                   if (qrstring !== "Scanner stopped") {
                       var qrstr_list = qrstring.split(",");
@@ -399,7 +399,7 @@ function removeItemsFromList() {
                   setBalance(userID);
               } else {
                   showSecondSecreenFlg  = true;
-              }*/
+              }
           }
           else if (numberOfFaces > 1) {
                updateBottomLeftText("",'');
