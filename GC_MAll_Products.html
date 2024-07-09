@@ -298,7 +298,7 @@ function removeItemsFromList() {
         
 
           // Check if resultJsonString is empty
-        if (resultJsonString === "") {
+        /*if (resultJsonString === "") {
               updateBottomLeftText("",'');
             // Handle case where no face was detected
             message = "カメラの許可が拒否されたか、顔のキャプチャが停止されました。";
@@ -372,7 +372,7 @@ function removeItemsFromList() {
                message = "複数の顔が検出されましたので、再撮影してください。";
               console.log(`More than one face detected. Number of faces: ${numberOfFaces}`);
               setMessage(message,"show_message")
-          }
+          }*/
       } catch (error) {
            updateBottomLeftText("",'');
            message = "Error processing face detection:"  + error.message;
