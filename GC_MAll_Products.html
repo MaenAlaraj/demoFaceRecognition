@@ -295,15 +295,14 @@ function removeItemsFromList() {
           //window.location.href = "https://maenalaraj.github.io/demoFaceRecognition/demoSite.html";
           // sleep(3000); // 2-second blocking delay
 
-          document.getElementById('authContainer').style.display = 'none';
-          document.getElementById('mainContainer').style.display = 'block';
+
          
           
           var resultJsonString = FaceCaptureInterface.getFace("FaceCaptureInterface");
         
 
           // Check if resultJsonString is empty
-        /*if (resultJsonString === "") {
+        if (resultJsonString === "") {
               updateBottomLeftText("",'');
             // Handle case where no face was detected
             message = "カメラの許可が拒否されたか、顔のキャプチャが停止されました。";
@@ -326,7 +325,13 @@ function removeItemsFromList() {
               console.log("One face detected.");
               const base64String = facesArray[0].image64;
               console.log("Base64 string of the first face:", base64String);
-             
+              
+              
+              document.getElementById('authContainer').style.display = 'none';
+              document.getElementById('mainContainer').style.display = 'block';
+
+
+              
               // Set the S (Search Operation)           
                var info = CCWalletInterface.SearchFaces(sbuser, gckid, "S", base64String);
                if (info.includes(errorsSubstring)) {
@@ -377,7 +382,7 @@ function removeItemsFromList() {
                message = "複数の顔が検出されましたので、再撮影してください。";
               console.log(`More than one face detected. Number of faces: ${numberOfFaces}`);
               setMessage(message,"show_message")
-          }*/
+          }
       } catch (error) {
            updateBottomLeftText("",'');
            message = "Error processing face detection:"  + error.message;
