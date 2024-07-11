@@ -300,23 +300,17 @@ document.getElementById("faceButton").addEventListener("click", function() {
 
     var resultJsonString = FaceCaptureInterface.getFace("FaceCaptureInterface");
     console.log(resultJsonString)
-
-    if (resultJsonString === "") {
-      setMessage("カメラの許可が拒否されたか、顔のキャプチャが停止されました。", "show_message");
-      return;
-    }
-
     const resultJsonObject = JSON.parse(resultJsonString);
     const facesArray = resultJsonObject.Faces;
     const numberOfFaces = facesArray.length;
 
     if (numberOfFaces === 0) {
-        document.getElementById('authContainer').style.display = 'block';
-        document.getElementById('transitContainer').style.display = 'none'
         setMessage("顔が検出されませんでしたので、再撮影してください。", "show_message");
     } else if (numberOfFaces === 1) {
       console.log("One face detected.");
       const base64String = facesArray[0].image64;
+     document.getElementById('authContainer').style.display = 'none';
+     document.getElementById('transitContainer').style.display = 'block';
 
       var info = CCWalletInterface.SearchFaces(sbuser, gckid, "S", base64String);
       console.log("SearchFaces info:", info);
