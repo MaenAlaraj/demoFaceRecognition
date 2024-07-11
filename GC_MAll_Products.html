@@ -122,18 +122,7 @@
 
 
 
-
-        /* Add styles for mainContainer */
-        #mainContainer {
-            overflow-y: auto;
-            height: 100vh; /* Or another height value to make it scrollable */
-        }
-
-
-
-
-
-        
+      
         
     </style>
 </head>
@@ -401,14 +390,8 @@ document.getElementById("faceButton").addEventListener("click", function() {
                   const extractedUserID = match ? match[1] : null;
                   if (extractedUserID !== null && numFlg==true) {
                       setMessage("GCユーザー:" + extractedUserID, "user");
-                      document.getElementById('authContainer').style.display = 'none';
-                      document.getElementById('mainContainer').style.display = 'block';
-                      
-                    setTimeout(function() {
-                        var mainContainer = document.getElementById('mainContainer');
-                        mainContainer.scrollTop = mainContainer.scrollHeight; // Scroll to the bottom
-                    }, 0); // Adding a small delay
-                      
+                      document.getElementById('transitContainer').style.display = 'none';
+                      document.getElementById('mainContainer').style.display = 'block';           
                       removeItemsFromList();
                       setBalance(extractedUserID);
                   }else{
