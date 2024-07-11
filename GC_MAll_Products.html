@@ -398,6 +398,7 @@ document.getElementById("faceButton").addEventListener("click", function() {
                       setMessage("GCユーザー:" + extractedUserID, "user");
                       document.getElementById('authContainer').style.display = 'none';
                       document.getElementById('mainContainer').style.display = 'block';
+                       document.getElementById('mainContainer').scrollTop = 0; // Scroll to the top
                       removeItemsFromList();
                       setBalance(extractedUserID);
                   }else{
