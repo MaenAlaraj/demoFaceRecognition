@@ -288,9 +288,9 @@ function removeItemsFromList() {
 
 
 document.getElementById("faceButton").addEventListener("click", function() {
-
-   // document.getElementById('authContainer').style.display = 'none';
-   // document.getElementById('transitContainer').style.display = 'block';
+    
+    document.getElementById('authContainer').style.display = 'none';
+    document.getElementById('transitContainer').style.display = 'block';
     requestAnimationFrame(function() {
     requestAnimationFrame(function() {
 
@@ -305,13 +305,14 @@ document.getElementById("faceButton").addEventListener("click", function() {
     const numberOfFaces = facesArray.length;
 
     if (numberOfFaces === 0) {
+        document.getElementById('transitContainer').style.display = 'none';
+        document.getElementById('authContainer').style.display = 'block';
         setMessage("顔が検出されませんでしたので、再撮影してください。", "show_message");
     } else if (numberOfFaces === 1) {
       console.log("One face detected.");
       const base64String = facesArray[0].image64;
      document.getElementById('authContainer').style.display = 'none';
      document.getElementById('transitContainer').style.display = 'block';
-
       var info = CCWalletInterface.SearchFaces(sbuser, gckid, "S", base64String);
       console.log("SearchFaces info:", info);
 
@@ -327,6 +328,8 @@ document.getElementById("faceButton").addEventListener("click", function() {
             var addFaceInfo = CCWalletInterface.AddFaces(sbuser, extractedUserID, "A", base64String);
             if (addFaceInfo.includes(errorsSubstring)) {
                setMessage("QRコードから抽出された情報が既に登録されたので顔が登録されませんでした。", "show_message");
+                document.getElementById('transitContainer').style.display = 'none';
+                document.getElementById('authContainer').style.display = 'block';
               showSecondScreenFlg = false;
             } else {
                setMessage("顔が登録されました。", "show_message");
@@ -334,10 +337,14 @@ document.getElementById("faceButton").addEventListener("click", function() {
             }
           } else {
              setMessage("GC MAllのユーザーQR【識別番号・利用券番・利用者名】をご利用ください。", "show_message");
-            showSecondScreenFlg = false;
+              document.getElementById('transitContainer').style.display = 'none';
+              document.getElementById('authContainer').style.display = 'block';
+              showSecondScreenFlg = false;
           }
         } else {
-          showSecondScreenFlg = false;
+            showSecondScreenFlg = false;
+            document.getElementById('transitContainer').style.display = 'none';
+            document.getElementById('authContainer').style.display = 'block';
         }
       }
 
