@@ -404,8 +404,9 @@ document.getElementById("faceButton").addEventListener("click", function() {
                       document.getElementById('authContainer').style.display = 'none';
                       document.getElementById('mainContainer').style.display = 'block';
                       
-                      setTimeout(function() {
-                          document.getElementById('mainContainer').scrollTop = 0; // Scroll to the top
+                    setTimeout(function() {
+                        var mainContainer = document.getElementById('mainContainer');
+                        mainContainer.scrollTop = mainContainer.scrollHeight; // Scroll to the bottom
                     }, 0); // Adding a small delay
                       
                       removeItemsFromList();
