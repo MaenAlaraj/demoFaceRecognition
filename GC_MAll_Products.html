@@ -234,9 +234,8 @@ function getValueFromCatList(category) {
 }
 
 
-
-function removeItemsFromList() {
     // Remove items from the list
+function removeItemsFromList() {
     const productList = document.getElementById('productList');
     const listItems = productList.querySelectorAll('li');
     
@@ -271,19 +270,13 @@ function removeItemsFromList() {
         }
 
 
-    function sleep(milliseconds) {
-        const start = new Date().getTime();
-        while (new Date().getTime() - start < milliseconds) {
-        // Busy-wait loop
-        }
-    }
-            
 
+            
 
 
 document.getElementById("faceButton").addEventListener("click", function() {
     //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000154","D"); //アララジ 
-    //ToastInterface.showToast("faceButton is clicked")   
+    ToastInterface.showToast("faceButton is clicked")   
     document.getElementById('authContainer').style.display = 'none';
     document.getElementById('transitContainer').style.display = 'block';
     requestAnimationFrame(function() {
