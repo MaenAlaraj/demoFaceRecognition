@@ -519,7 +519,11 @@ function checkValueInQrstrList(valueToCheck) {
     });
             
     document.getElementById('payment').addEventListener('click', function() {
+        document.getElementById('mainContainer').style.display = 'none';
+        document.getElementById('transitContainer').style.display = 'block';
         if(total==0){
+            document.getElementById('mainContainer').style.display = 'block';
+            document.getElementById('transitContainer').style.display = 'none';
             setMessage("商品がありません。商品を読み込ませた後に支払いをするか、終了ボタンを押してください。","show_message")
         }
         else{
@@ -553,15 +557,20 @@ function checkValueInQrstrList(valueToCheck) {
                 var r = CCWalletInterface.doPointPayment(user1,amount,user2,message1,message2,"");
                 if (r.includes(errorsSubstring)) {
                     message = "支払いエラー：" + r;
+                    document.getElementById('mainContainer').style.display = 'block';
+                    document.getElementById('transitContainer').style.display = 'none';
                     setMessage(message, "show_message");
                 }else {
-                    message = "購入中なので、少々お待ちくださいませ。";
-                    setMessage(message, "show_message");
+                    //message = "購入中なので、少々お待ちくださいませ。";
+                    //setMessage(message, "show_message");
+                    //document.getElementById('mainContainer').style.display = 'none';
+                    //document.getElementById('transitContainer').style.display = 'block';
                 }
             });
             updateBottomLeftText("",'');
             document.getElementById('authContainer').style.display = 'block';
             document.getElementById('mainContainer').style.display = 'none';
+            document.getElementById('transitContainer').style.display = 'none';
             setMessage("ご購入ありがとうございます！","show_message");
             setBalance(userBeforePrefix);
             setTotal();
