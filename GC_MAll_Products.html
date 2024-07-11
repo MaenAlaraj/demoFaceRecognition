@@ -398,7 +398,11 @@ document.getElementById("faceButton").addEventListener("click", function() {
                       setMessage("GCユーザー:" + extractedUserID, "user");
                       document.getElementById('authContainer').style.display = 'none';
                       document.getElementById('mainContainer').style.display = 'block';
-                       document.getElementById('mainContainer').scrollTop = 0; // Scroll to the top
+                      
+                      setTimeout(function() {
+                          document.getElementById('mainContainer').scrollTop = 0; // Scroll to the top
+                    }, 0); // Adding a small delay
+                      
                       removeItemsFromList();
                       setBalance(extractedUserID);
                   }else{
