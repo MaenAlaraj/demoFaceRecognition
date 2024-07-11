@@ -407,6 +407,8 @@ document.getElementById("faceButton").addEventListener("click", function() {
                       setMessage(message,"show_message")
                   }
               }else{
+                  document.getElementById('transitContainer').style.display = 'none';
+                  document.getElementById('authContainer').style.display = 'block';
                   updateBottomLeftText("",'');
               }
           });
