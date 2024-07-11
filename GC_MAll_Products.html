@@ -383,29 +383,35 @@ document.getElementById("faceButton").addEventListener("click", function() {
   
 
   document.getElementById("qrButton").addEventListener("click", function() {
-      var qrstring = QRInterface.get_QRInfo("QR");
-       extractedUserID ="";
-      if (qrstring !== "Scanner stopped") {
-          var qrstr_list = qrstring.split(",");
-          var numFlg = checkValueInQrstrList(qrstr_list[1]);
-          const match = qrstring.match(/,(.*?),/);
-          const extractedUserID = match ? match[1] : null;
-          if (extractedUserID !== null && numFlg==true) {
-              setMessage("GCユーザー:" + extractedUserID, "user");
-              document.getElementById('authContainer').style.display = 'none';
-              document.getElementById('mainContainer').style.display = 'block';
-              removeItemsFromList();
-              setBalance(extractedUserID);
-          }else{
-              message = "GC MAllのユーザーQR【識別番号・利用券番・利用者名】をご利用ください。";
-              setMessage(message,"show_message")
-          }
-      }else{
-           updateBottomLeftText("",'');
-      }
-          
-  }
-  );
+      document.getElementById('authContainer').style.display = 'none';
+      document.getElementById('transitContainer').style.display = 'block';
+      requestAnimationFrame(function() {
+          requestAnimationFrame(function() {
+              var qrstring = QRInterface.get_QRInfo("QR");
+              extractedUserID ="";
+              if (qrstring !== "Scanner stopped") {
+                  var qrstr_list = qrstring.split(",");
+                  var numFlg = checkValueInQrstrList(qrstr_list[1]);
+                  const match = qrstring.match(/,(.*?),/);
+                  const extractedUserID = match ? match[1] : null;
+                  if (extractedUserID !== null && numFlg==true) {
+                      setMessage("GCユーザー:" + extractedUserID, "user");
+                      document.getElementById('authContainer').style.display = 'none';
+                      document.getElementById('mainContainer').style.display = 'block';
+                      removeItemsFromList();
+                      setBalance(extractedUserID);
+                  }else{
+                      document.getElementById('transitContainer').style.display = 'none';
+                      document.getElementById('authContainer').style.display = 'block';
+                      message = "GC MAllのユーザーQR【識別番号・利用券番・利用者名】をご利用ください。";
+                      setMessage(message,"show_message")
+                  }
+              }else{
+                  updateBottomLeftText("",'');
+              }
+          });
+      });
+  });
 
 
     
