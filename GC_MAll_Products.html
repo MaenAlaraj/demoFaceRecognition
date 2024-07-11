@@ -292,7 +292,7 @@ document.getElementById("faceButton").addEventListener("click", function() {
     document.getElementById('authContainer').style.display = 'none';
     document.getElementById('transitContainer').style.display = 'block';
     requestAnimationFrame(function() {
-     requestAnimationFrame(function() {
+    requestAnimationFrame(function() {
 
   try {
     var showSecondScreenFlg = true;
@@ -311,9 +311,7 @@ document.getElementById("faceButton").addEventListener("click", function() {
     const numberOfFaces = facesArray.length;
 
     if (numberOfFaces === 0) {
-      requestAnimationFrame(() => {
         setMessage("顔が検出されませんでしたので、再撮影してください。", "show_message");
-      });
     } else if (numberOfFaces === 1) {
       console.log("One face detected.");
       const base64String = facesArray[0].image64;
