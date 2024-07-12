@@ -280,86 +280,80 @@ document.getElementById("faceButton").addEventListener("click", function() {
     document.getElementById('authContainer').style.display = 'none';
     document.getElementById('transitContainer').style.display = 'block';
     requestAnimationFrame(function() {
-    requestAnimationFrame(function() {
-
-  try {
-    var showSecondScreenFlg = true;
-    var extractedUserID = "";
-
-    var resultJsonString = FaceCaptureInterface.getFace("FaceCaptureInterface");
-    console.log(resultJsonString)
-    const resultJsonObject = JSON.parse(resultJsonString);
-    const facesArray = resultJsonObject.Faces;
-    const numberOfFaces = facesArray.length;
-
-    if (numberOfFaces === 0) {
-        document.getElementById('transitContainer').style.display = 'none';
-        document.getElementById('authContainer').style.display = 'block';
-        setMessage("顔が検出されませんでしたので、再撮影してください。", "show_message");
-    } else if (numberOfFaces === 1) {
-      console.log("One face detected.");
-      const base64String = facesArray[0].image64;
-     document.getElementById('authContainer').style.display = 'none';
-     document.getElementById('transitContainer').style.display = 'block';
-      var info = CCWalletInterface.SearchFaces(sbuser, gckid, "S", base64String);
-      console.log("SearchFaces info:", info);
-
-      if (info.includes(errorsSubstring)) {
-        var qrstring = QRInterface.get_QRInfo("QR");
-        if (qrstring !== "Scanner stopped") {
-          var qrstr_list = qrstring.split(",");
-          var numFlg = checkValueInQrstrList(qrstr_list[1]);
-          const match = qrstring.match(/,(.*?),/);
-          extractedUserID = match ? match[1] : null;
-          if (extractedUserID !== null && numFlg == true) {
-            extractedUserID = prefix + extractedUserID;
-            var addFaceInfo = CCWalletInterface.AddFaces(sbuser, extractedUserID, "A", base64String);
-            if (addFaceInfo.includes(errorsSubstring)) {
-               setMessage("QRコードから抽出された情報が既に登録されたので顔が登録されませんでした。", "show_message");
+        requestAnimationFrame(function() {
+            try {
+                var showSecondScreenFlg = true;
+                var extractedUserID = "";
+                var resultJsonString = FaceCaptureInterface.getFace("FaceCaptureInterface");
+                console.log(resultJsonString);
+                const resultJsonObject = JSON.parse(resultJsonString);
+                const facesArray = resultJsonObject.Faces;
+                const numberOfFaces = facesArray.length;
+                if (numberOfFaces === 0) {
+                    document.getElementById('transitContainer').style.display = 'none';
+                    document.getElementById('authContainer').style.display = 'block';
+                    setMessage("顔が検出されませんでしたので、再撮影してください。", "show_message");
+                } else if (numberOfFaces === 1) {
+                    console.log("One face detected.");
+                    const base64String = facesArray[0].image64;
+                    document.getElementById('authContainer').style.display = 'none';
+                    document.getElementById('transitContainer').style.display = 'block';
+                    var info = CCWalletInterface.SearchFaces(sbuser, gckid, "S", base64String);
+                    console.log("SearchFaces info:", info);
+                    if (info.includes(errorsSubstring)) {
+                        var qrstring = QRInterface.get_QRInfo("QR");
+                        if (qrstring !== "Scanner stopped") {
+                            var qrstr_list = qrstring.split(",");
+                            var numFlg = checkValueInQrstrList(qrstr_list[1]);
+                            const match = qrstring.match(/,(.*?),/);
+                            extractedUserID = match ? match[1] : null;
+                            if (extractedUserID !== null && numFlg == true) {
+                                extractedUserID = prefix + extractedUserID;
+                                var addFaceInfo = CCWalletInterface.AddFaces(sbuser, extractedUserID, "A", base64String);
+                                if (addFaceInfo.includes(errorsSubstring)) {
+                                    setMessage("QRコードから抽出された情報が既に登録されたので顔が登録されませんでした。", "show_message");
+                                    document.getElementById('transitContainer').style.display = 'none';
+                                    document.getElementById('authContainer').style.display = 'block';
+                                    showSecondScreenFlg = false;
+                                } else {
+                                    setMessage("顔が登録されました。", "show_message");
+                                    info = CCWalletInterface.SearchFaces(sbuser, gckid, "S", base64String);
+                                }
+                            } else {
+                                setMessage("GC MAllのユーザーQR【識別番号・利用券番・利用者名】をご利用ください。", "show_message");
+                                document.getElementById('transitContainer').style.display = 'none';
+                                document.getElementById('authContainer').style.display = 'block';
+                                showSecondScreenFlg = false;
+                            }
+                        } else {
+                            showSecondScreenFlg = false;
+                            document.getElementById('transitContainer').style.display = 'none';
+                            document.getElementById('authContainer').style.display = 'block';
+                        }
+                    }
+                    if (showSecondScreenFlg !== false) {
+                        var CCW_FaceResponse_LIST = info.split("：");
+                        var userID = CCW_FaceResponse_LIST[1].replace(/\s/g, "");
+                        setMessage("GCユーザー:" + CCW_FaceResponse_LIST[1], "user");
+                        document.getElementById('transitContainer').style.display = 'none';
+                        document.getElementById('mainContainer').style.display = 'block';
+                        removeItemsFromList();
+                        setBalance(userID);
+                    } else {
+                        showSecondScreenFlg = true;
+                    }
+                } else if (numberOfFaces > 1) {
+                    setMessage("複数の顔が検出されましたので、再撮影してください。", "show_message");
+                    document.getElementById('transitContainer').style.display = 'none';
+                    document.getElementById('authContainer').style.display = 'block';
+                }
+            } catch (error) {
+                setMessage("Error processing face detection: " + error.message, "show_message");
                 document.getElementById('transitContainer').style.display = 'none';
                 document.getElementById('authContainer').style.display = 'block';
-              showSecondScreenFlg = false;
-            } else {
-               setMessage("顔が登録されました。", "show_message");
-              info = CCWalletInterface.SearchFaces(sbuser, gckid, "S", base64String);
             }
-          } else {
-             setMessage("GC MAllのユーザーQR【識別番号・利用券番・利用者名】をご利用ください。", "show_message");
-              document.getElementById('transitContainer').style.display = 'none';
-              document.getElementById('authContainer').style.display = 'block';
-              showSecondScreenFlg = false;
-          }
-        } else {
-            showSecondScreenFlg = false;
-            document.getElementById('transitContainer').style.display = 'none';
-            document.getElementById('authContainer').style.display = 'block';
-        }
-      }
-
-      if (showSecondScreenFlg !== false) {
-        var CCW_FaceResponse_LIST = info.split("：");
-        var userID = CCW_FaceResponse_LIST[1].replace(/\s/g, "");
-          setMessage("GCユーザー:" + CCW_FaceResponse_LIST[1], "user");
-          document.getElementById('transitContainer').style.display = 'none';
-          document.getElementById('mainContainer').style.display = 'block';
-        removeItemsFromList();
-        setBalance(userID);
-      } else {
-        showSecondScreenFlg = true;
-      }
-    } else if (numberOfFaces > 1) {
-        setMessage("複数の顔が検出されましたので、再撮影してください。", "show_message");
-        document.getElementById('transitContainer').style.display = 'none';
-        document.getElementById('authContainer').style.display = 'block';
-    }
-  } catch (error) {
-      setMessage("Error processing face detection: " + error.message, "show_message");
-      document.getElementById('transitContainer').style.display = 'none';
-      document.getElementById('authContainer').style.display = 'block';
-  }
-  });
-  });
-
+        });
+    });
 });
 
 
