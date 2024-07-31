@@ -286,12 +286,17 @@ document.getElementById("faceButton").addEventListener("click", function() {
                 var extractedUserID = "";
                 var resultJsonString = FaceCaptureInterface.getFace("FaceCaptureInterface");
                 console.log(resultJsonString);
-                const resultJsonObject = JSON.parse(resultJsonString);
-                const facesArray = resultJsonObject.Faces;
-                const numberOfFaces = facesArray.length;
-                if (numberOfFaces === 0) {
-                    document.getElementById('transitContainer').style.display = 'none';
-                    document.getElementById('authContainer').style.display = 'block';
+                if (resultJsonString === "")
+                {
+                     document.getElementById('transitContainer').style.display = 'none';
+                        document.getElementById('authContainer').style.display = 'block';
+                }else{
+                    const resultJsonObject = JSON.parse(resultJsonString);
+                    const facesArray = resultJsonObject.Faces;
+                    const numberOfFaces = facesArray.length;
+                    if (numberOfFaces === 0) {
+                        document.getElementById('transitContainer').style.display = 'none';
+                        document.getElementById('authContainer').style.display = 'block';
                     setMessage("顔が検出されませんでしたので、再撮影してください。", "show_message");
                 } else if (numberOfFaces === 1) {
                     console.log("One face detected.");
@@ -346,6 +351,7 @@ document.getElementById("faceButton").addEventListener("click", function() {
                     setMessage("複数の顔が検出されましたので、再撮影してください。", "show_message");
                     document.getElementById('transitContainer').style.display = 'none';
                     document.getElementById('authContainer').style.display = 'block';
+                }
                 }
             } catch (error) {
                 setMessage("Error processing face detection: " + error.message, "show_message");
