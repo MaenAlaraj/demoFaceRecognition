@@ -119,47 +119,22 @@
         }
 
 
-#transitContainer {
-  display: none; /* Initially hidden */
-  text-align: center;
-  padding: 20px;
-  background-color: #0000FF;
-  color: #FFFFFF;
-  border-radius: 10px;
-  width: 300px;
-  margin: 0 auto;
-}
-
-#textContent {
-  display: block;
-  font-size: 24px;
-  margin-bottom: 20px; /* Adds space between text and progress bar */
-}
-
-#progress-bar {
-  width: 100%;
-  background-color: #f3f3f3;
-  border-radius: 5px;
-  height: 10px;
-  overflow: hidden;
-  position: relative;
-}
-
-#progress {
-  background-color: #00FF00;
-  height: 100%;
-  width: 0%; /* Start from 0% width */
-  border-radius: 5px;
-  animation: progressAnimation 3s linear infinite; /* Animation */
-}
-
-@keyframes progressAnimation {
-  from {
-    width: 0%;
+@keyframes wipeAnimation {
+  0% {
+    background-position: 100%;
   }
-  to {
-    width: 100%;
+  100% {
+    background-position: -100%;
   }
+}
+
+#transitContainer p {
+  background: linear-gradient(90deg, transparent, #0000FF, transparent);
+  background-size: 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: none; /* This will be dynamically applied */
 }
 
 
@@ -424,6 +399,7 @@ showLoadingScreen();
   document.getElementById("qrButton").addEventListener("click", function() {
       document.getElementById('authContainer').style.display = 'none';
       document.getElementById('transitContainer').style.display = 'block';
+      animateProcessingText();
       wipeAnimation();
       requestAnimationFrame(function() {
           requestAnimationFrame(function() {
@@ -457,9 +433,9 @@ showLoadingScreen();
 
 
 
-function showLoadingScreen() {
-    // Display the container
-    document.getElementById('transitContainer').style.display = 'block';
+function animateProcessingText() {
+    const processingText = document.querySelector('#transitContainer p');
+    processingText.style.animation = 'wipeAnimation 3s linear infinite';
 }
 
 
