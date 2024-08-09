@@ -143,7 +143,6 @@
   height: 10px;
   overflow: hidden;
   position: relative;
-  margin-top: 10px;
 }
 
 #progress {
@@ -182,7 +181,7 @@
     <p>処理中...</p>
 </div>
 <div id="transitContainer">
-  <span id="textContent">処理中..................</span>
+  <span id="textContent">処理中...</span>
   <div id="progress-bar">
     <div id="progress"></div>
   </div>
@@ -326,7 +325,8 @@ document.getElementById("faceButton").addEventListener("click", function() {
     //ToastInterface.showToast(info);
     document.getElementById('authContainer').style.display = 'none';
     document.getElementById('transitContainer').style.display = 'block';
-    animateProcessingText();
+    // Call the function to display and animate the progress bar and text
+showLoadingScreen();
    /* requestAnimationFrame(function() {
         requestAnimationFrame(function() {
             try {
@@ -453,6 +453,13 @@ document.getElementById("faceButton").addEventListener("click", function() {
 
 
 
+function showLoadingScreen() {
+    // Display the container
+    document.getElementById('transitContainer').style.display = 'block';
+
+    // Optional: You can trigger the text animation here if needed
+    wipeAnimation();
+}
 
 function wipeAnimation() {
     const textContent = document.getElementById('textContent');
@@ -469,6 +476,9 @@ function wipeAnimation() {
         }
     }, 100); // Adjust the timing as needed
 }
+
+
+
 
     
     
