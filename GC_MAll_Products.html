@@ -119,7 +119,23 @@
         }
 
 
+@keyframes wipeAnimation {
+  0% {
+    background-position: -100%;
+  }
+  100% {
+    background-position: 100%;
+  }
+}
 
+#transitContainer p {
+  background: linear-gradient(90deg, transparent, #0000FF, transparent);
+  background-size: 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: none; /* This will be dynamically applied */
+}
 
 
       
@@ -408,17 +424,9 @@ document.getElementById("faceButton").addEventListener("click", function() {
 
 
 function animateProcessingText() {
-    const transitContainer = document.getElementById('transitContainer');
-    const processingText = transitContainer.querySelector('p');
-
-    // Check if the authContainer is displayed as 'block'
-    if (document.getElementById('authContainer').style.display === 'block') {
-        processingText.style.animation = 'wipeAnimation 3s linear infinite';
-    } else {
-        processingText.style.animation = 'none';
-    }
+    const processingText = document.querySelector('#transitContainer p');
+    processingText.style.animation = 'wipeAnimation 3s linear infinite';
 }
-
 
     
     
