@@ -119,23 +119,47 @@
         }
 
 
-@keyframes wipeAnimation {
-  0% {
-    background-position: 100%;
-  }
-  100% {
-    background-position: -100%;
-  }
+#transitContainer {
+  display: none; /* Initially hidden */
+  position: relative;
+  text-align: center;
+  padding: 20px;
+  background-color: #0000FF;
+  color: #FFFFFF;
+  border-radius: 10px;
+  width: 300px;
+  margin: 0 auto;
 }
 
-#transitContainer p {
-  background: linear-gradient(90deg, transparent, #0000FF, transparent);
-  background-size: 200%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: none; /* This will be dynamically applied */
+#textContent {
+  display: block;
+  font-size: 24px;
+  margin-bottom: 10px;
 }
+
+#progress-bar {
+  width: 100%;
+  background-color: #f3f3f3;
+  border-radius: 5px;
+  overflow: hidden;
+  height: 10px;
+  position: relative;
+  margin-top: 10px;
+}
+
+#progress {
+  background-color: #00FF00;
+  height: 100%;
+  width: 0;
+  border-radius: 5px;
+  animation: progressAnimation 2s infinite; /* Animate indefinitely */
+}
+
+@keyframes progressAnimation {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
 
 
       
@@ -157,6 +181,13 @@
 <div class="auth-container" id="transitContainer" style="display: none;">
     <p>処理中...</p>
 </div>
+<div id="transitContainer">
+  <span id="textContent">処理中..................</span>
+  <div id="progress-bar">
+    <div id="progress"></div>
+  </div>
+</div>
+
     
 <body>
 <div id="mainContainer" style="display: none;">
@@ -389,7 +420,7 @@ document.getElementById("faceButton").addEventListener("click", function() {
   document.getElementById("qrButton").addEventListener("click", function() {
       document.getElementById('authContainer').style.display = 'none';
       document.getElementById('transitContainer').style.display = 'block';
-      animateProcessingText();
+      wipeAnimation();
       requestAnimationFrame(function() {
           requestAnimationFrame(function() {
               var qrstring = QRInterface.get_QRInfo("QR");
@@ -423,9 +454,20 @@ document.getElementById("faceButton").addEventListener("click", function() {
 
 
 
-function animateProcessingText() {
-    const processingText = document.querySelector('#transitContainer p');
-    processingText.style.animation = 'wipeAnimation 3s linear infinite';
+function wipeAnimation() {
+    const textContent = document.getElementById('textContent');
+    const text = textContent.innerText;
+    const textLength = text.length;
+    let currentLength = 0;
+
+    const interval = setInterval(() => {
+        textContent.innerText = text.substring(0, currentLength);
+        currentLength++;
+
+        if (currentLength > textLength) {
+            clearInterval(interval);
+        }
+    }, 100); // Adjust the timing as needed
 }
 
     
