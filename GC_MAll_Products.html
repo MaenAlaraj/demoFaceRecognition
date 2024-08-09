@@ -121,7 +121,6 @@
 
 #transitContainer {
   display: none; /* Initially hidden */
-  position: relative;
   text-align: center;
   padding: 20px;
   background-color: #0000FF;
@@ -134,15 +133,15 @@
 #textContent {
   display: block;
   font-size: 24px;
-  margin-bottom: 10px;
+  margin-bottom: 20px; /* Adds space between text and progress bar */
 }
 
 #progress-bar {
   width: 100%;
   background-color: #f3f3f3;
   border-radius: 5px;
-  overflow: hidden;
   height: 10px;
+  overflow: hidden;
   position: relative;
   margin-top: 10px;
 }
@@ -150,15 +149,16 @@
 #progress {
   background-color: #00FF00;
   height: 100%;
-  width: 0;
+  width: 0; /* Start from 0% width */
   border-radius: 5px;
-  animation: progressAnimation 2s infinite; /* Animate indefinitely */
+  animation: progressAnimation 5s linear forwards; /* 5s animation */
 }
 
 @keyframes progressAnimation {
   0% { width: 0%; }
   100% { width: 100%; }
 }
+
 
 
 
