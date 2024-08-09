@@ -119,23 +119,7 @@
         }
 
 
-@keyframes wipeAnimation {
-  0% {
-    background-position: 100%;
-  }
-  100% {
-    background-position: -100%;
-  }
-}
 
-#transitContainer p {
-  background: linear-gradient(90deg, transparent, #0000FF, transparent);
-  background-size: 200%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: none; /* This will be dynamically applied */
-}
 
 
 
@@ -394,7 +378,6 @@ document.getElementById("faceButton").addEventListener("click", function() {
   document.getElementById("qrButton").addEventListener("click", function() {
       document.getElementById('authContainer').style.display = 'none';
       document.getElementById('transitContainer').style.display = 'block';
-      animateProcessingText();
       requestAnimationFrame(function() {
           requestAnimationFrame(function() {
               var qrstring = QRInterface.get_QRInfo("QR");
@@ -425,18 +408,7 @@ document.getElementById("faceButton").addEventListener("click", function() {
       });
   });
 
-
-
-function animateProcessingText() {
-    const processingText = document.querySelector('#transitContainer p');
-    processingText.style.animation = 'wipeAnimation 3s linear infinite';
-}
-
-
-
-
-    
-    
+   
 function isPositiveInteger(str) {
     return /^[0-9]\d*$/.test(str);
 }
@@ -547,7 +519,6 @@ function checkValueInQrstrList(valueToCheck) {
     document.getElementById('payment').addEventListener('click', function() {
         document.getElementById('mainContainer').style.display = 'none';
         document.getElementById('transitContainer').style.display = 'block';
-        animateProcessingText();
         requestAnimationFrame(function() {
             requestAnimationFrame(function() {
                 if(total==0){
