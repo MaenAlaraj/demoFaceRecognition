@@ -279,7 +279,8 @@ document.getElementById("faceButton").addEventListener("click", function() {
     //ToastInterface.showToast(info);
     document.getElementById('authContainer').style.display = 'none';
     document.getElementById('transitContainer').style.display = 'block';
-    requestAnimationFrame(function() {
+    animateProcessingText();
+   /* requestAnimationFrame(function() {
         requestAnimationFrame(function() {
             try {
                 var showSecondScreenFlg = true;
@@ -359,7 +360,7 @@ document.getElementById("faceButton").addEventListener("click", function() {
                 document.getElementById('authContainer').style.display = 'block';
             }
         });
-    });
+    });*/
 });
 
 
@@ -372,6 +373,7 @@ document.getElementById("faceButton").addEventListener("click", function() {
   document.getElementById("qrButton").addEventListener("click", function() {
       document.getElementById('authContainer').style.display = 'none';
       document.getElementById('transitContainer').style.display = 'block';
+      animateProcessingText();
       requestAnimationFrame(function() {
           requestAnimationFrame(function() {
               var qrstring = QRInterface.get_QRInfo("QR");
@@ -403,6 +405,22 @@ document.getElementById("faceButton").addEventListener("click", function() {
   });
 
 
+
+
+function animateProcessingText() {
+    const transitContainer = document.getElementById('transitContainer');
+    const processingText = transitContainer.querySelector('p');
+
+    // Check if the authContainer is displayed as 'block'
+    if (document.getElementById('authContainer').style.display === 'block') {
+        processingText.style.animation = 'wipeAnimation 3s linear infinite';
+    } else {
+        processingText.style.animation = 'none';
+    }
+}
+
+
+    
     
 function isPositiveInteger(str) {
     return /^[0-9]\d*$/.test(str);
