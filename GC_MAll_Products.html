@@ -159,12 +159,7 @@
 <div class="auth-container" id="transitContainer" style="display: none;">
     <p>処理中...</p>
 </div>
-<div id="transitContainer">
-  <span id="textContent">処理中...</span>
-  <div id="progress-bar">
-    <div id="progress"></div>
-  </div>
-</div>
+
 
     
 <body>
@@ -304,8 +299,7 @@ document.getElementById("faceButton").addEventListener("click", function() {
     //ToastInterface.showToast(info);
     document.getElementById('authContainer').style.display = 'none';
     document.getElementById('transitContainer').style.display = 'block';
-    showLoadingScreen();
-showLoadingScreen();
+     animateProcessingText();
    /* requestAnimationFrame(function() {
         requestAnimationFrame(function() {
             try {
