@@ -148,14 +148,18 @@
 #progress {
   background-color: #00FF00;
   height: 100%;
-  width: 0; /* Start from 0% width */
+  width: 0%; /* Start from 0% width */
   border-radius: 5px;
-  animation: progressAnimation 5s linear forwards; /* 5s animation */
+  animation: progressAnimation 3s linear infinite; /* Animation */
 }
 
 @keyframes progressAnimation {
-  0% { width: 0%; }
-  100% { width: 100%; }
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
 }
 
 
@@ -325,7 +329,7 @@ document.getElementById("faceButton").addEventListener("click", function() {
     //ToastInterface.showToast(info);
     document.getElementById('authContainer').style.display = 'none';
     document.getElementById('transitContainer').style.display = 'block';
-    // Call the function to display and animate the progress bar and text
+    showLoadingScreen();
 showLoadingScreen();
    /* requestAnimationFrame(function() {
         requestAnimationFrame(function() {
@@ -456,25 +460,6 @@ showLoadingScreen();
 function showLoadingScreen() {
     // Display the container
     document.getElementById('transitContainer').style.display = 'block';
-
-    // Optional: You can trigger the text animation here if needed
-    wipeAnimation();
-}
-
-function wipeAnimation() {
-    const textContent = document.getElementById('textContent');
-    const text = textContent.innerText;
-    const textLength = text.length;
-    let currentLength = 0;
-
-    const interval = setInterval(() => {
-        textContent.innerText = text.substring(0, currentLength);
-        currentLength++;
-
-        if (currentLength > textLength) {
-            clearInterval(interval);
-        }
-    }, 100); // Adjust the timing as needed
 }
 
 
