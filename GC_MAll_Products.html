@@ -299,8 +299,8 @@ document.getElementById("faceButton").addEventListener("click", function() {
     //ToastInterface.showToast(info);
     document.getElementById('authContainer').style.display = 'none';
     document.getElementById('transitContainer').style.display = 'block';
-     animateProcessingText();
-   /* requestAnimationFrame(function() {
+    animateProcessingText();
+    requestAnimationFrame(function() {
         requestAnimationFrame(function() {
             try {
                 var showSecondScreenFlg = true;
@@ -324,6 +324,7 @@ document.getElementById("faceButton").addEventListener("click", function() {
                     const base64String = facesArray[0].image64;
                     document.getElementById('authContainer').style.display = 'none';
                     document.getElementById('transitContainer').style.display = 'block';
+                    animateProcessingText();
                     var info = CCWalletInterface.SearchFaces(sbuser, gckid, "S", base64String);
                     console.log("SearchFaces info:", info);
                     if (info.includes(errorsSubstring)) {
@@ -380,7 +381,7 @@ document.getElementById("faceButton").addEventListener("click", function() {
                 document.getElementById('authContainer').style.display = 'block';
             }
         });
-    });*/
+    });
 });
 
 
@@ -394,7 +395,6 @@ document.getElementById("faceButton").addEventListener("click", function() {
       document.getElementById('authContainer').style.display = 'none';
       document.getElementById('transitContainer').style.display = 'block';
       animateProcessingText();
-      wipeAnimation();
       requestAnimationFrame(function() {
           requestAnimationFrame(function() {
               var qrstring = QRInterface.get_QRInfo("QR");
@@ -547,6 +547,7 @@ function checkValueInQrstrList(valueToCheck) {
     document.getElementById('payment').addEventListener('click', function() {
         document.getElementById('mainContainer').style.display = 'none';
         document.getElementById('transitContainer').style.display = 'block';
+        animateProcessingText();
         requestAnimationFrame(function() {
             requestAnimationFrame(function() {
                 if(total==0){
@@ -590,11 +591,6 @@ function checkValueInQrstrList(valueToCheck) {
                             document.getElementById('mainContainer').style.display = 'block';
                             document.getElementById('transitContainer').style.display = 'none';
                             setMessage(message, "show_message");
-                        }else {
-                            //message = "購入中なので、少々お待ちくださいませ。";
-                            //setMessage(message, "show_message");
-                            //document.getElementById('mainContainer').style.display = 'none';
-                            //document.getElementById('transitContainer').style.display = 'block';
                         }
                     });
                     updateBottomLeftText("",'');
