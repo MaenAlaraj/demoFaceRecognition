@@ -541,8 +541,8 @@ function checkValueInQrstrList(valueToCheck) {
     });
             
     document.getElementById('payment').addEventListener('click', function() {
-        //document.getElementById('mainContainer').style.display = 'none';
-        //document.getElementById('transitContainer').style.display = 'block';
+        document.getElementById('mainContainer').style.display = 'none';
+        document.getElementById('transitContainer').style.display = 'block';
         requestAnimationFrame(function() {
             requestAnimationFrame(function() {
                 if(total==0){
@@ -593,7 +593,8 @@ function checkValueInQrstrList(valueToCheck) {
                     
                     // Call startTimer() to begin the countdown
                     startTimer();
-                    
+                    document.getElementById('mainContainer').style.display = 'block';
+                    document.getElementById('transitContainer').style.display = 'none';
                     //document.getElementById('authContainer').style.display = 'block';
                     //document.getElementById('mainContainer').style.display = 'none';
                    
