@@ -328,7 +328,16 @@ function removeItemsFromList() {
         console.log("Timer stopped.");
     }
 
-    
+document.getElementById("logoutButton").addEventListener("click", function() {
+    document.getElementById('authContainer').style.display = 'block';
+    document.getElementById('mainContainer').style.display = 'none';
+    document.getElementById('transitContainer').style.display = 'none';
+    userBeforePrefix = "";
+}
+
+
+
+                                                       
 document.getElementById("faceButton").addEventListener("click", function() {
     //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000154"); //アララジ 
     //ToastInterface.showToast(info);
