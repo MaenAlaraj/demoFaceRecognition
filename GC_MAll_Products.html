@@ -286,6 +286,7 @@ function removeItemsFromList() {
         document.getElementById('authContainer').style.display = 'block';
         document.getElementById('mainContainer').style.display = 'none';
          document.getElementById('transitContainer').style.display = 'none';
+         userBeforePrefix = "";
     }       
 
 
@@ -605,7 +606,7 @@ function checkValueInQrstrList(valueToCheck) {
                    
                     setMessage("ご購入ありがとうございます！","show_message");
                     setTotal();
-                    userBeforePrefix = "";
+                   
                 }
             });
         });
