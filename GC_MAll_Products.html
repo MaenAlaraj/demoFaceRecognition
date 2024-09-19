@@ -123,15 +123,27 @@
         }
 
 
- #user-container {
+ body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #mainContainer {
+            display: flex;
+            flex-direction: column;
+            width: 100%; /* Ensures full width */
+        }
+
+        #user-container {
             display: flex;
             justify-content: space-between; /* Aligns items to the edges */
-            width: 100%; /* Ensures full width */
             padding: 10px; /* Adds some padding */
         }
 
         #logoutButton {
-            margin-left: auto; /* Pushes the button to the right */
+            position: absolute; /* Positioning to move the button */
+            right: 10px; /* Distance from the right edge */
+            top: 10px; /* Distance from the top */
         }
 
 
