@@ -490,10 +490,10 @@ function checkValueInQrstrList(valueToCheck) {
         　　　　　//削除
                let removeBtn = document.createElement('div');
                 removeBtn.innerHTML = "❌";
-                removeBtn.className = 'remove-item';
-                document.getElementById('loadProduct').disabled=false
+                removeBtn.className = 'remove-item';    
                 removeBtn.onclick = function() {
                     list.removeChild(listItem);
+                    document.getElementById('loadProduct').disabled=false
                     const index = items.indexOf(item);
                     if (index > -1) {
                         items.splice(index, 1);
