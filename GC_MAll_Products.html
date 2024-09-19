@@ -414,11 +414,13 @@ function isPositiveInteger(str) {
 function setMessage(str,id="message") {
     if(id=="show_message"){
         ToastInterface.showToast(str)
+        
     }
     else{
         let message = document.getElementById(id);
         message.innerText=str
     }
+    console.log(str);
 }
 
 function containsOnlyNumbers(value) {
