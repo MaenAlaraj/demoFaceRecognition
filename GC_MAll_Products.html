@@ -310,7 +310,7 @@ document.getElementById("faceButton").addEventListener("click", function() {
                     var info = CCWalletInterface.SearchFaces(sbuser, gckid, base64String);
                     console.log("SearchFaces info:", info);
                     if (info.includes(errorsSubstring)) {
-                        var qrstring = QRInterface.get_QRInfo("QR");
+                        var qrstring = QRInterface.get_QRInfo();
                         if (qrstring !== "Scanner stopped") {
                             var qrstr_list = qrstring.split(",");
                             var numFlg = checkValueInQrstrList(qrstr_list[1]);
@@ -378,7 +378,7 @@ document.getElementById("faceButton").addEventListener("click", function() {
       document.getElementById('transitContainer').style.display = 'block';
       requestAnimationFrame(function() {
           requestAnimationFrame(function() {
-              var qrstring = QRInterface.get_QRInfo("QR");
+              var qrstring = QRInterface.get_QRInfo();
               extractedUserID ="";
               if (qrstring !== "Scanner stopped") {
                   var qrstr_list = qrstring.split(",");
@@ -443,7 +443,7 @@ function checkValueInQrstrList(valueToCheck) {
     
     
     document.getElementById('loadProduct').addEventListener('click', function() {
-        var qrstring = QRInterface.get_QRInfo("QR");
+        var qrstring = QRInterface.get_QRInfo();
          if (qrstring !== "Scanner stopped") {
                      var qrstr_list=qrstring.split(",");
         if(qrstr_list.length==6){
