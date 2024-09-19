@@ -285,6 +285,7 @@ function removeItemsFromList() {
         // Code to execute after 5 seconds
         document.getElementById('authContainer').style.display = 'block';
         document.getElementById('mainContainer').style.display = 'none';
+         document.getElementById('transitContainer').style.display = 'none';
     }       
 
 
@@ -595,7 +596,7 @@ function checkValueInQrstrList(valueToCheck) {
                     
                     //document.getElementById('authContainer').style.display = 'block';
                     //document.getElementById('mainContainer').style.display = 'none';
-                    document.getElementById('transitContainer').style.display = 'none';
+                   
                     setMessage("ご購入ありがとうございます！","show_message");
                     setBalance(userBeforePrefix);
                     setTotal();
