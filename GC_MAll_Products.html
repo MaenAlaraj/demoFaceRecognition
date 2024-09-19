@@ -297,7 +297,11 @@ function removeItemsFromList() {
         timerId = setTimeout(executeAfterDelay, 5000);
     }
 
-
+ function stopTimer() {
+        // Clear the timer
+        clearTimeout(timerId);
+        console.log("Timer stopped.");
+    }
 
     
 document.getElementById("faceButton").addEventListener("click", function() {
@@ -467,6 +471,7 @@ function checkValueInQrstrList(valueToCheck) {
     
     
     document.getElementById('loadProduct').addEventListener('click', function() {
+        stopTimer()
         var qrstring = QRInterface.get_QRInfo();
          if (qrstring !== "Scanner stopped") {
                      var qrstr_list=qrstring.split(",");
