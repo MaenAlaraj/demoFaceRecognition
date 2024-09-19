@@ -41,7 +41,7 @@
 
         .scroll-container {
             width: 300px;
-            height: calc(1 * (1.8em + 10px)); /* Assuming each item height is around 1.8em + padding/margin */
+            height: calc(2 * (1.8em + 10px)); /* Assuming each item height is around 1.8em + padding/margin */
             overflow-y: auto;
             border: 1px solid #ddd;
         }
@@ -491,7 +491,7 @@ function checkValueInQrstrList(valueToCheck) {
                let removeBtn = document.createElement('div');
                 removeBtn.innerHTML = "❌";
                 removeBtn.className = 'remove-item';
-                document.getElementById('loadProduct').disable=false
+                document.getElementById('loadProduct').disabled=false
                 removeBtn.onclick = function() {
                     list.removeChild(listItem);
                     const index = items.indexOf(item);
@@ -507,7 +507,7 @@ function checkValueInQrstrList(valueToCheck) {
                 listItem.appendChild(itemDate);
                 listItem.appendChild(removeBtn);       
                 list.appendChild(listItem);
-                document.getElementById('loadProduct').disable=true
+                document.getElementById('loadProduct').disabled=true
         }else{
             setMessage("残高が足りません。","show_message")
         }
@@ -567,7 +567,7 @@ function checkValueInQrstrList(valueToCheck) {
                         }
                     });
                     updateBottomLeftText("",'');
-                    document.getElementById('loadProduct').disable=false
+                    document.getElementById('loadProduct').disabled=false
                     document.getElementById('authContainer').style.display = 'block';
                     document.getElementById('mainContainer').style.display = 'none';
                     document.getElementById('transitContainer').style.display = 'none';
