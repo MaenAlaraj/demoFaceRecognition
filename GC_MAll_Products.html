@@ -123,7 +123,15 @@
         }
 
 
+ #user-container {
+            display: flex;
+            justify-content: space-between; /* Aligns items to the edges */
+            align-items: center; /* Centers items vertically */
+        }
 
+        #logoutButton {
+            margin-left: auto; /* Pushes the button to the right */
+        }
 
 
 
@@ -152,7 +160,10 @@
     
 <body>
 <div id="mainContainer" style="display: none;">
-    <p id="user"></p>
+     <div id="user-container">
+        <p id="user"></p>
+        <button id="logoutButton">Logout</button>
+    </div>
 <p id="message"></p>
     <button id="loadProduct">商品の読み込み</button>
 <div class="scroll-container">
