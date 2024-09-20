@@ -342,14 +342,18 @@ document.getElementById("logoutButton").addEventListener("click", function() {
             window.addEventListener('offline', updateWiFiStatus);
         };
 
-        function updateWiFiStatus() {
+
+
+
+         function updateWiFiStatus() {
             const wifiStatusElement = document.getElementById('wifiStatus');
             if (navigator.onLine) {
-                wifiStatusElement.textContent = "Wi-Fiの状態: 接続済み";
+                wifiStatusElement.textContent = "Wi-Fi Status: Connected";
             } else {
-                wifiStatusElement.textContent = "Wi-Fiの状態: 未接続";
+                wifiStatusElement.textContent = "Wi-Fi Status: Disconnected";
             }
         }
+
 
                                                        
 document.getElementById("faceButton").addEventListener("click", function() {
