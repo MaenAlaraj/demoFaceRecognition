@@ -244,10 +244,7 @@ function setBalance(userID){
            　　 var price=item.price
                 total += price;
             }
-        document.getElementById('totalAmount').innerText = 'トータル: ' + total + "円";
-        }
-
-
+        document.getElementById('totalAmount').innerText = 'トータル: ' + total + C
 
     
 //QR コードのキーに基づいて Cat_List から値を取得する関数
@@ -348,9 +345,9 @@ document.getElementById("logoutButton").addEventListener("click", function() {
         function updateWiFiStatus() {
             const wifiStatusElement = document.getElementById('wifiStatus');
             if (navigator.onLine) {
-                wifiStatusElement.textContent = "Wi-Fi Status: Connected";
+                wifiStatusElement.textContent = "Wi-Fiの状態: 接続済み";
             } else {
-                wifiStatusElement.textContent = "Wi-Fi Status: Disconnected";
+                wifiStatusElement.textContent = "Wi-Fiの状態: 未接続";
             }
         }
 
