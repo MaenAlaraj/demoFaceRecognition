@@ -125,19 +125,19 @@
             width: 100%; /* Ensures full width */
         }
 
-       #user-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end; /* Align items to the far right */
-    position: relative;
-    width: 100%;
-    padding-right: 10px; /* Optional: Add padding from the right edge */
-}
+   #user-container {
+            display: flex;
+            justify-content: space-between; /* Aligns items to the edges */
+            padding: 10px; /* Adds some padding */
+        }
+
 
 #wifiStatus {
     margin-bottom: 5px;  /* Space between Wi-Fi status and the next element */
     color: #007BFF;      /* Optional: Set color */
     font-size: 14px;     /* Optional: Adjust font size */
+    right: 10px; /* Distance from the right edge */
+    top: 5px; /* Distance from the top */
 }
 
         #logoutButton {
@@ -170,11 +170,12 @@
     
 <body>
 <div id="mainContainer" style="display: none;">
-    <div id="user-container" style="position: relative;">
+     <div id="user-container">
         <p id="wifiStatus">Wi-Fi Status: Checking...</p> <!-- Wi-Fi Status -->
         <p id="user"></p>
         <button id="logoutButton">ログアウト</button>
     </div>
+
     <p id="message"></p>
     <button id="loadProduct">商品の読み込み</button>
     <div class="scroll-container">
