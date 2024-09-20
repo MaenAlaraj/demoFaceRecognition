@@ -14,11 +14,7 @@
             display: flex;
             justify-content: center;
             margin-bottom: 10px; /* Adjust as needed */
-        }
-
-    
-
-        
+        }        
         body {
             font-family: 'Arial', sans-serif;
             height: 100vh;
@@ -125,31 +121,20 @@
             width: 100%; /* Ensures full width */
         }
 
-   #user-container {
+        #user-container {
             display: flex;
             justify-content: space-between; /* Aligns items to the edges */
             padding: 10px; /* Adds some padding */
         }
 
-
-#wifiStatus {
-    margin-bottom: 5px;  /* Space between Wi-Fi status and the next element */
-    color: #007BFF;      /* Optional: Set color */
-    font-size: 14px;     /* Optional: Adjust font size */
-    right: 10px; /* Distance from the right edge */
-    top: 2px; /* Distance from the top */
-}
-
         #logoutButton {
             position: absolute; /* Positioning to move the button */
             right: 10px; /* Distance from the right edge */
-            top: 37px; /* Distance from the top */
-        }       
+            top: 10px; /* Distance from the top */
+        }
+        
     </style>
 </head>
-
-
-    
 <div class="auth-container" id="authContainer">
     <p>GC Mallアプリ</p>
     <p>GCのQRか顔を読み込ませてください</p>
@@ -172,31 +157,30 @@
 <div id="mainContainer" style="display: none;">
      <div id="user-container">
         <p id="user"></p>
-          <p id="wifiStatus">Wi-Fi Status: Checking...</p> <!-- Wi-Fi Status -->
         <button id="logoutButton">ログアウト</button>
     </div>
-
-    <p id="message"></p>
+<p id="message"></p>
     <button id="loadProduct">商品の読み込み</button>
-    <div class="scroll-container">
-        <ul id="productList">
-            <li class="header-item">
-                <span>コード</span>
-                <span>商品名</span>
-                <span>値段</span>
-                <span>CAT.</span>
-                <span>日付</span>
-                <span>削除</span>
-            </li>
-        </ul>
-    </div>
+<div class="scroll-container">
+    <ul id="productList">
+         <li class="header-item">
+            <span>コード      </span>
+            <span>商品名</span>
+            <span>値段</span>
+            <span>CAT.</span>
+            <span>日付</span>
+            <span>削除</span>
+
+        <!-- ここに読み込んだ商品をリストとして表示します -->
+        </li>
+    </ul>
+</div>
     <p id="Balance"></p>
-    <div id="totalAmount">トータル: 0円</div>
-    <div class="vertical">
-        <button id="payment">支払い</button>
+<div id="totalAmount">トータル: 0円</div>
+    <div class=".vertical">
+<button id="payment">支払い</button>
     </div>
 </div>
-
     
 <script>
     var showSecondSecreenFlg = true;
@@ -244,7 +228,10 @@ function setBalance(userID){
            　　 var price=item.price
                 total += price;
             }
-        document.getElementById('totalAmount').innerText = 'トータル: ' + total + C
+        document.getElementById('totalAmount').innerText = 'トータル: ' + total + "円";
+        }
+
+
 
     
 //QR コードのキーに基づいて Cat_List から値を取得する関数
@@ -342,10 +329,7 @@ document.getElementById("logoutButton").addEventListener("click", function() {
             window.addEventListener('offline', updateWiFiStatus);
         };
 
-
-
-
-         function updateWiFiStatus() {
+        function updateWiFiStatus() {
             const wifiStatusElement = document.getElementById('wifiStatus');
             if (navigator.onLine) {
                 wifiStatusElement.textContent = "Wi-Fi Status: Connected";
@@ -353,7 +337,6 @@ document.getElementById("logoutButton").addEventListener("click", function() {
                 wifiStatusElement.textContent = "Wi-Fi Status: Disconnected";
             }
         }
-
 
                                                        
 document.getElementById("faceButton").addEventListener("click", function() {
