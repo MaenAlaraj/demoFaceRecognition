@@ -138,13 +138,17 @@
         }
 
 
-        #wifiStatus {
-            position: absolute; /* Allows positioning relative to the parent container */
-            right: 10px; /* Align to the far right */
-            top: -25px; /* Position above the logoutButton */
+        #status-and-logout {
+            display: flex;
+            flex-direction: column; /* Stack Wi-Fi status above logoutButton */
+            align-items: flex-end;  /* Align both to the far right */
+             }
+    
+    #wifiStatus {
+            margin-bottom: 5px; /* Add space between Wi-Fi status and the logout button */
             color: #007BFF; /* Optional: Set color */
             font-size: 14px; /* Optional: Set font size */
-        }
+            }
         
     </style>
 </head>
