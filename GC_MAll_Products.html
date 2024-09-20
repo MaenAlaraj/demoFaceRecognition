@@ -119,7 +119,7 @@
             padding: 0;
         }
 
-        #mainContainer {
+      #mainContainer {
             display: flex;
             flex-direction: column;
             width: 100%; /* Ensures full width */
@@ -136,13 +136,6 @@
             right: 10px; /* Distance from the right edge */
             top: 10px; /* Distance from the top */
         }
-
-
-        #status-and-logout {
-            display: flex;
-            flex-direction: column; /* Stack Wi-Fi status above logoutButton */
-            align-items: flex-end;  /* Align both to the far right */
-             }
     
     #wifiStatus {
             margin-bottom: 5px; /* Add space between Wi-Fi status and the logout button */
@@ -172,10 +165,12 @@
     
 <body>
 <div id="mainContainer" style="display: none;">
-     <div id="user-container">
-          <button id="logoutButton">ログアウト</button>           
-    </div>
+      <div id="user-container">
         <p id="user"></p>
+        <button id="logoutButton">ログアウト</button>
+    </div>
+
+    
        
     </div>
 <p id="message"></p>
