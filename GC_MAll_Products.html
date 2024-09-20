@@ -86,15 +86,6 @@
             margin-top: 20px;
             font-size: 1.2em;
         }
-        
-        
-        
-
-
-
-
-
-
 
  #bottomLeftText {
             position: absolute;
@@ -145,11 +136,6 @@
             right: 10px; /* Distance from the right edge */
             top: 10px; /* Distance from the top */
         }
-
-
-
-
-      
         
     </style>
 </head>
@@ -174,6 +160,7 @@
 <body>
 <div id="mainContainer" style="display: none;">
      <div id="user-container">
+         <p id="wifiStatus">Wi-Fi Status: Checking...</p> <!-- Added Wi-Fi status -->
         <p id="user"></p>
         <button id="logoutButton">ログアウト</button>
     </div>
@@ -337,6 +324,23 @@ document.getElementById("logoutButton").addEventListener("click", function() {
 });
 
 
+
+    window.onload = function() {
+            updateWiFiStatus();  // Call function when the page loads
+
+            // Listen for changes in network status
+            window.addEventListener('online', updateWiFiStatus);
+            window.addEventListener('offline', updateWiFiStatus);
+        };
+
+        function updateWiFiStatus() {
+            const wifiStatusElement = document.getElementById('wifiStatus');
+            if (navigator.onLine) {
+                wifiStatusElement.textContent = "Wi-Fi Status: Connected";
+            } else {
+                wifiStatusElement.textContent = "Wi-Fi Status: Disconnected";
+            }
+        }
 
                                                        
 document.getElementById("faceButton").addEventListener("click", function() {
