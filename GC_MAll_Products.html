@@ -127,6 +127,20 @@
             padding: 10px; /* Adds some padding */
         }
 
+        
+        #wifiStatus {
+            margin-bottom: 5px;  /* Space between Wi-Fi status and the next element */
+            color: #007BFF;      /* Optional: Set color */
+            font-size: 14px;     /* Optional: Adjust font size */
+            right: 10px; /* Distance from the right edge */
+            top: 2px; /* Distance from the top */
+        }
+
+
+
+
+        
+
         #logoutButton {
             position: absolute; /* Positioning to move the button */
             right: 10px; /* Distance from the right edge */
@@ -149,14 +163,12 @@
 
 <div class="auth-container" id="transitContainer" style="display: none;">
     <p>処理中...</p>
-</div>
-
-
-    
+</div>    
 <body>
 <div id="mainContainer" style="display: none;">
      <div id="user-container">
         <p id="user"></p>
+         <p id="wifiStatus">Wi-Fi Status: Checking...</p> <!-- Wi-Fi Status -->
         <button id="logoutButton">ログアウト</button>
     </div>
 <p id="message"></p>
