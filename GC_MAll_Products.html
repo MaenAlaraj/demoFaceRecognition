@@ -168,7 +168,7 @@
 <div id="mainContainer" style="display: none;">
      <div id="user-container">
         <p id="user"></p>
-         <p id="wifiStatus">Wi-Fi Status: Checking...</p> <!-- Wi-Fi Status -->
+         <p id="wifiStatus">Wi-Fiの状態: 確認中...</p> <!-- Wi-Fi Status -->
         <button id="logoutButton">ログアウト</button>
     </div>
 <p id="message"></p>
@@ -344,9 +344,9 @@ document.getElementById("logoutButton").addEventListener("click", function() {
         function updateWiFiStatus() {
             const wifiStatusElement = document.getElementById('wifiStatus');
             if (navigator.onLine) {
-                wifiStatusElement.textContent = "Wi-Fi Status: Connected";
+                wifiStatusElement.textContent = "Wi-Fiの状態: 接続済み";
             } else {
-                wifiStatusElement.textContent = "Wi-Fi Status: Disconnected";
+                wifiStatusElement.textContent = "Wi-Fiの状態: 切断されました";
             }
         }
 
