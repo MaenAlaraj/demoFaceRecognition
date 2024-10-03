@@ -6,9 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GC Mall 商品読み込みページ</title>
     <style>
-         /* Maximize font size in authContainer */
-        .auth-container p {
-            font-size: 0.8em !important; /* Force large font size */
+       .auth-container {
+            max-width: 300px; /* Limit width */
+            padding: 10px;
+            margin: 10px auto;
+            text-align: center;
+        }
+
+        .auth-container p:first-of-type {
+            font-size: 3em !important; /* Maximize font size for "GC Mall デモアプリ" */
+        }
+
+        .auth-container p:nth-of-type(2) {
+            font-size: 2em !important; /* Maximize font size for "GCのQRか顔を読み込ませてください" */
         }
 
          /* Add larger space between QR and 顔 buttons */
@@ -167,7 +177,7 @@
     </div>
    <div id="bottomLeftText">
         <span class="text-content"></span>
-    </div>
+   </div>
 </div>
 
 <div class="auth-container" id="transitContainer" style="display: none;">
