@@ -6,33 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GC Mall 商品読み込みページ</title>
     <style>
-       .auth-container {
+        .auth-container {
             max-width: 300px; /* Limit width */
             padding: 10px;
             margin: 10px auto;
-            text-align: center;.
+            text-align: center;
         }
 
         .auth-container p:first-of-type {
-            font-size: 1.1em !important; /* Maximize font size for "GC Mall デモアプリ" */
+            font-size: 1.1em !important; /* Maximize font size for "GC Mall アプリ" */
         }
 
         .auth-container p:nth-of-type(2) {
             font-size: 1.1em !important; /* Maximize font size for "GCのQRか顔を読み込ませてください" */
         }
 
-         /* Add larger space between QR and 顔 buttons */
+        /* Add larger space between QR and 顔 buttons */
         #qrButton, #faceButton {
             margin: 10px 70px !important; /* Add a larger horizontal margin */
         }
-
-        
 
         .button-container {
             display: flex;
             justify-content: center;
             margin-bottom: 10px; /* Adjust as needed */
-        }        
+        }
+
         body {
             font-family: 'Arial', sans-serif;
             height: 100vh;
@@ -41,6 +40,7 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
+            position: relative;
         }
 
         button {
@@ -54,8 +54,8 @@
             transition: background-color 0.3s;
         }
 
-        button:disabled{
-           background-color: #A9A9A9;
+        button:disabled {
+            background-color: #A9A9A9;
         }
 
         .scroll-container {
@@ -65,10 +65,8 @@
             border: 1px solid #ddd;
         }
 
-        .vertical{
-        display:flex;
-
-
+        .vertical {
+            display: flex;
         }
 
         ul {
@@ -97,12 +95,13 @@
             cursor: pointer;
             color: white;
         }
-         #totalAmount {
+
+        #totalAmount {
             margin-top: 20px;
             font-size: 1.2em;
         }
 
- #bottomLeftText {
+        #bottomLeftText {
             position: absolute;
             bottom: 13px;
             left: 1px;
@@ -110,28 +109,22 @@
             white-space: nowrap;
         }
 
-         .text-content {
+        .text-content {
             display: inline-block;
             animation: wipeAnimation 3s linear infinite;
             color: #FFFFFF; /* White text */
             padding: 1px 5px;
             border-radius: 2px;
-            font-size: 50px; 
+            font-size: 50px;
         }
 
-       @keyframes wipeAnimation {
+        @keyframes wipeAnimation {
             0% {
                 transform: translateX(0);
             }
             100% {
                 transform: translateX(100%);
             }
-        }
-
-
- body {
-            margin: 0;
-            padding: 0;
         }
 
         #mainContainer {
@@ -146,72 +139,81 @@
             padding: 10px; /* Adds some padding */
         }
 
-        
         #wifiStatus {
-            margin-bottom: 5px;  /* Space between Wi-Fi status and the next element */
-            color: #007BFF;      /* Optional: Set color */
-            font-size: 14px;     /* Optional: Adjust font size */
+            margin-bottom: 5px; /* Space between Wi-Fi status and the next element */
+            color: #007BFF; /* Optional: Set color */
+            font-size: 14px; /* Optional: Adjust font size */
             right: 10px; /* Distance from the right edge */
             top: 2px; /* Distance from the top */
         }
-
-
-
-
-        
 
         #logoutButton {
             position: absolute; /* Positioning to move the button */
             right: 10px; /* Distance from the right edge */
             top: 37px; /* Distance from the top */
         }
-        
+
+        /* Button placed in the bottom left corner */
+        #registerFaceButton {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            padding: 10px 20px;
+            font-size: 1.1em;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
     </style>
 </head>
-<div class="auth-container" id="authContainer">
-    <p>GC Mallアプリ</p>
-    <p>GCのQRか顔を読み込ませてください</p>
-    <div class="button-container">
-        <button id="qrButton">QR</button>
-        <button id="faceButton">顔</button>
-    </div>
-   <div id="bottomLeftText">
-        <span class="text-content"></span>
-   </div>
-</div>
 
-<div class="auth-container" id="transitContainer" style="display: none;">
-    <p>処理中...</p>
-</div>    
 <body>
-<div id="mainContainer" style="display: none;">
-     <div id="user-container">
-        <p id="user"></p>
-         <p id="wifiStatus">Wi-Fiの状態: 確認中...</p> <!-- Wi-Fi Status -->
-        <button id="logoutButton">ログアウト</button>
+    <div class="auth-container" id="authContainer">
+        <p>GC Mallアプリ</p>
+        <p>GCのQRか顔を読み込ませてください</p>
+        <div class="button-container">
+            <button id="qrButton">QR認証</button>
+            <button id="faceButton">顔認証</button>
+        </div>
+        <div id="bottomLeftText">
+            <span class="text-content"></span>
+        </div>
     </div>
-<p id="message"></p>
-    <button id="loadProduct">商品の読み込み</button>
-<div class="scroll-container">
-    <ul id="productList">
-         <li class="header-item">
-            <span>コード      </span>
-            <span>商品名</span>
-            <span>値段</span>
-            <span>CAT.</span>
-            <span>日付</span>
-            <span>削除</span>
 
-        <!-- ここに読み込んだ商品をリストとして表示します -->
-        </li>
-    </ul>
-</div>
-    <p id="Balance"></p>
-<div id="totalAmount">トータル: 0円</div>
-    <div class=".vertical">
-<button id="payment">支払い</button>
+    <div class="auth-container" id="transitContainer" style="display: none;">
+        <p>処理中...</p>
     </div>
-</div>
+
+    <div id="mainContainer" style="display: none;">
+        <div id="user-container">
+            <p id="user"></p>
+            <p id="wifiStatus">Wi-Fiの状態: 確認中...</p> <!-- Wi-Fi Status -->
+            <button id="logoutButton">ログアウト</button>
+        </div>
+        <p id="message"></p>
+        <button id="loadProduct">商品の読み込み</button>
+        <div class="scroll-container">
+            <ul id="productList">
+                <li class="header-item">
+                    <span>コード</span>
+                    <span>商品名</span>
+                    <span>値段</span>
+                    <span>CAT.</span>
+                    <span>日付</span>
+                    <span>削除</span>
+                </li>
+            </ul>
+        </div>
+        <p id="Balance"></p>
+        <div id="totalAmount">トータル: 0円</div>
+        <div class=".vertical">
+            <button id="payment">支払い</button>
+        </div>
+    </div>
+
+ <!-- Button at the bottom left corner -->
+    <button id="registerFaceButton">顔認証登録</button>
     
 <script>
     var showSecondSecreenFlg = true;
