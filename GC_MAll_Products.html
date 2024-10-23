@@ -397,7 +397,7 @@ document.getElementById("registerFaceButton").addEventListener("click", function
             try {
                 var showSecondScreenFlg = true;
                 var extractedUserID = "";
-                var resultJsonString = getCapturedFace.getFace();
+                var resultJsonString = FaceCaptureInterface.getCapturedFace();
                 console.log(resultJsonString);
                 if (resultJsonString === "")
                 {
