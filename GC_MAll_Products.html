@@ -30,6 +30,7 @@
             display: flex;
             justify-content: center;
             margin-bottom: 10px; /* Adjust as needed */
+            margin-bottom: 10px;
         }
 
         body {
@@ -200,7 +201,7 @@
                 <li class="header-item">
                     <span>コード</span>
                     <span>商品名</span>
-                    <span>値段</span>
+                    <span>ポイント</span>
                     <span>CAT.</span>
                     <span>日付</span>
                     <span>削除</span>
@@ -250,7 +251,7 @@ function setBalance(userID){
     var user1 = prefix + userID
     var Balance_STR=CCWalletInterface.Balance(user1,payment_terminalID)
     var Balance_LIST=Balance_STR.split(" ")
-    document.getElementById('message').innerText="円残高:"+Balance_LIST[0].split(":")[1]+"円(残高の下限:"+Balance_LIST[1].split(":")[1]+"円)"
+    document.getElementById('message').innerText="pt残高:"+Balance_LIST[0].split(":")[1]+"pt(残高の下限:"+Balance_LIST[1].split(":")[1]+"pt)"
     Balance=parseInt(Balance_LIST[0].split(":")[1])-parseInt(Balance_LIST[1].split(":")[1])
 }
 
@@ -262,7 +263,7 @@ function setBalance(userID){
            　　 var price=item.price
                 total += price;
             }
-        document.getElementById('totalAmount').innerText = 'トータル: ' + total + "円";
+        document.getElementById('totalAmount').innerText = 'トータル: ' + total + "pt";
         }
 
 
@@ -695,7 +696,7 @@ function checkValueInQrstrList(valueToCheck) {
                 item.listItem=listItem;
                 items.push(item);
                 total+=price;
-                document.getElementById('totalAmount').innerText = 'トータル: ' + total + '円';
+                document.getElementById('totalAmount').innerText = 'トータル: ' + total + 'pt';
                 let list = document.getElementById('productList');
 
                     //コード
@@ -706,7 +707,7 @@ function checkValueInQrstrList(valueToCheck) {
                 itemProduct.textContent = item.product;
         　　　　　　　//値段
                 let itemPrice = document.createElement('span');
-                itemPrice.textContent = item.price+" 円";
+                itemPrice.textContent = item.price+" pt";
         　　　　　　　//カテゴリー
                 let itemCat = document.createElement('span');
                 itemCat.textContent = item.category;
