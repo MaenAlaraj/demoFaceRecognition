@@ -438,7 +438,7 @@ document.getElementById("registerFaceButton").addEventListener("click", function
                                     showSecondScreenFlg = false;
                                 } else {
                                     setMessage("顔が登録されました。", "show_message");
-                                    info = CCWalletInterface.SearchFaces(sbuser, gckid, base64String);
+                                    //info = CCWalletInterface.SearchFaces(sbuser, gckid, base64String);
                                 }
                             } else {
                                 setMessage("GC MAllのユーザーQR【識別番号・利用券番・利用者名】をご利用ください。", "show_message");
@@ -453,13 +453,15 @@ document.getElementById("registerFaceButton").addEventListener("click", function
                         }
                     }
                     if (showSecondScreenFlg !== false) {
-                        var CCW_FaceResponse_LIST = info.split("：");
+                        document.getElementById('transitContainer').style.display = 'none';
+                        document.getElementById('authContainer').style.display = 'block';
+                        /*var CCW_FaceResponse_LIST = info.split("：");
                         var userID = CCW_FaceResponse_LIST[1].replace(/\s/g, "");
                         setMessage("GCユーザー:" + CCW_FaceResponse_LIST[1], "user");
                         document.getElementById('transitContainer').style.display = 'none';
                         document.getElementById('mainContainer').style.display = 'block';
                         removeItemsFromList();
-                        setBalance(userID);
+                        setBalance(userID);*/
                     } else {
                         showSecondScreenFlg = true;
                     }
@@ -580,15 +582,13 @@ document.getElementById("faceButton").addEventListener("click", function() {
                         }
                     }
                     if (showSecondScreenFlg !== false) {
-                             document.getElementById('transitContainer').style.display = 'none';
-                             document.getElementById('authContainer').style.display = 'block';
-                        /*var CCW_FaceResponse_LIST = info.split("：");
+                        var CCW_FaceResponse_LIST = info.split("：");
                         var userID = CCW_FaceResponse_LIST[1].replace(/\s/g, "");
                         setMessage("GCユーザー:" + CCW_FaceResponse_LIST[1], "user");
                         document.getElementById('transitContainer').style.display = 'none';
                         document.getElementById('mainContainer').style.display = 'block';
                         removeItemsFromList();
-                        setBalance(userID);*/
+                        setBalance(userID);
                     } else {
                         showSecondScreenFlg = true;
                     }
