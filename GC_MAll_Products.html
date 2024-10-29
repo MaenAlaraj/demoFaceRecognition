@@ -383,9 +383,6 @@ document.getElementById("logoutButton").addEventListener("click", function() {
 
 
 document.getElementById("registerFaceButton").addEventListener("click", function() {
-  
-    //var info = CCWalletInterface.DelFaces(sbuser,"9392909000000154"); //アララジ 
-    //ToastInterface.showToast(info);
     document.getElementById('authContainer').style.display = 'none';
     document.getElementById('transitContainer').style.display = 'block';
     requestAnimationFrame(function() {
@@ -410,13 +407,11 @@ document.getElementById("registerFaceButton").addEventListener("click", function
                 } else if (numberOfFaces === 1) {
                     console.log("One face detected.");
                     const base64String = facesArray[0].image64;
-                    document.getElementById('authContainer').style.display = 'block';
-                    document.getElementById('transitContainer').style.display = 'none';
-                    //document.getElementById('authContainer').style.display = 'none';
-                    //document.getElementById('transitContainer').style.display = 'block';
-                    var info = CCWalletInterface.SearchFaces(sbuser, gckid, base64String);
-                    console.log("SearchFaces info:", info);
-                    if (info.includes(errorsSubstring)) {
+                    document.getElementById('authContainer').style.display = 'none';
+                    document.getElementById('transitContainer').style.display = 'block';
+                    //var info = CCWalletInterface.SearchFaces(sbuser, gckid, base64String);
+                    //console.log("SearchFaces info:", info);
+                    //if (info.includes(errorsSubstring)) {
                         var qrstring = QRInterface.get_QRInfo();
                         if (qrstring !== "Scanner stopped") {
                             var qrstr_list = qrstring.split(",");
@@ -446,7 +441,8 @@ document.getElementById("registerFaceButton").addEventListener("click", function
                             document.getElementById('transitContainer').style.display = 'none';
                             document.getElementById('authContainer').style.display = 'block';
                         }
-                    }
+                    //}
+
                     if (showSecondScreenFlg !== false) {
                         document.getElementById('transitContainer').style.display = 'none';
                         document.getElementById('authContainer').style.display = 'block';
