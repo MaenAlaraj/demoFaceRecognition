@@ -525,7 +525,7 @@ document.getElementById("faceButton").addEventListener("click", function() {
                 if (resultJsonString === "")
                 {
                      document.getElementById('transitContainer').style.display = 'none';
-                        document.getElementById('authContainer').style.display = 'block';
+                     document.getElementById('authContainer').style.display = 'block';
                 }else{
                     const resultJsonObject = JSON.parse(resultJsonString);
                     const facesArray = resultJsonObject.Faces;
@@ -541,36 +541,43 @@ document.getElementById("faceButton").addEventListener("click", function() {
                     document.getElementById('transitContainer').style.display = 'block';
                     var info = CCWalletInterface.SearchFaces(sbuser, gckid, base64String);
                     console.log("SearchFaces info:", info);
-                    if (info.includes(errorsSubstring)) {
-                        var qrstring = QRInterface.get_QRInfo();
-                        if (qrstring !== "Scanner stopped") {
-                            var qrstr_list = qrstring.split(",");
-                            var numFlg = checkValueInQrstrList(qrstr_list[1]);
-                            const match = qrstring.match(/,(.*?),/);
-                            extractedUserID = match ? match[1] : null;
-                            if (extractedUserID !== null && numFlg == true) {
-                                extractedUserID = prefix + extractedUserID;
-                                var addFaceInfo = CCWalletInterface.AddFaces(sbuser, extractedUserID, base64String);
-                                if (addFaceInfo.includes(errorsSubstring)) {
-                                    setMessage("QRコードから抽出された情報が既に登録されたので顔が登録されませんでした。", "show_message");
-                                    document.getElementById('transitContainer').style.display = 'none';
-                                    document.getElementById('authContainer').style.display = 'block';
-                                    showSecondScreenFlg = false;
-                                } else {
-                                    setMessage("顔が登録されました。", "show_message");
-                                    info = CCWalletInterface.SearchFaces(sbuser, gckid, base64String);
-                                }
-                            } else {
-                                setMessage("GC MAllのユーザーQR【識別番号・利用券番・利用者名】をご利用ください。", "show_message");
-                                document.getElementById('transitContainer').style.display = 'none';
-                                document.getElementById('authContainer').style.display = 'block';
-                                showSecondScreenFlg = false;
-                            }
-                        } else {
-                            showSecondScreenFlg = false;
-                            document.getElementById('transitContainer').style.display = 'none';
-                            document.getElementById('authContainer').style.display = 'block';
-                        }
+                    if (info.includes(errorsSubstring)) 
+                    {
+                        showSecondScreenFlg = false;
+                        setMessage("顔が登録されませんので、「顔認証登録」ボタンで顔を登録してください。。", "show_message");
+                         document.getElementById('transitContainer').style.display = 'none';
+                          document.getElementById('authContainer').style.display = 'block';
+
+                        //var qrstring = QRInterface.get_QRInfo();
+                        //if (qrstring !== "Scanner stopped") {
+                            //var qrstr_list = qrstring.split(",");
+                            //var numFlg = checkValueInQrstrList(qrstr_list[1]);
+                           // const match = qrstring.match(/,(.*?),/);
+                            //extractedUserID = match ? match[1] : null;
+                            //if (extractedUserID !== null && numFlg == true) {
+                                //extractedUserID = prefix + extractedUserID;
+                                //var addFaceInfo = CCWalletInterface.AddFaces(sbuser, extractedUserID, base64String);
+                                //if (addFaceInfo.includes(errorsSubstring)) {
+                                    //setMessage("QRコードから抽出された情報が既に登録されたので顔が登録されませんでした。", "show_message");
+                                    //document.getElementById('transitContainer').style.display = 'none';
+                                    //document.getElementById('authContainer').style.display = 'block';
+                                    //showSecondScreenFlg = false;
+                                //} else {
+                                    //setMessage("顔が登録されました。", "show_message");
+                                    //info = CCWalletInterface.SearchFaces(sbuser, gckid, base64String);
+                                //}
+                            //} else {
+                                //setMessage("GC MAllのユーザーQR【識別番号・利用券番・利用者名】をご利用ください。", "show_message");
+                                //document.getElementById('transitContainer').style.display = 'none';
+                                //document.getElementById('authContainer').style.display = 'block';
+                                //showSecondScreenFlg = false;
+                            //}
+                       // } else 
+                        //{
+                           // showSecondScreenFlg = false;
+                           // document.getElementById('transitContainer').style.display = 'none';
+                           // document.getElementById('authContainer').style.display = 'block';
+                       // }
                     }
                     if (showSecondScreenFlg !== false) {
                         var CCW_FaceResponse_LIST = info.split("：");
