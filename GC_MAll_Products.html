@@ -403,7 +403,7 @@ document.getElementById("registerFaceButton").addEventListener("click", function
                     if (numberOfFaces === 0) {
                         document.getElementById('authContainer').style.display = 'block';
                         document.getElementById('transitContainer').style.display = 'none';
-                    setMessage("顔が検出されませんでしたので、再撮影してください。", "show_message");
+                    setMessage("顔を認証できませんでした。もう一度やり直してください。", "show_message");
                 } else if (numberOfFaces === 1) {
                     console.log("One face detected.");
                     const base64String = facesArray[0].image64;
@@ -422,7 +422,7 @@ document.getElementById("registerFaceButton").addEventListener("click", function
                                 extractedUserID = prefix + extractedUserID;
                                 var addFaceInfo = CCWalletInterface.AddFaces(sbuser, extractedUserID, base64String);
                                 if (addFaceInfo.includes(errorsSubstring)) {
-                                    setMessage("QRコードから抽出された情報が既に登録されたので顔が登録されませんでした。", "show_message");
+                                    setMessage("既に登録済みのユーザーのため、登録できませんでした。", "show_message");
                                     document.getElementById('transitContainer').style.display = 'none';
                                     document.getElementById('authContainer').style.display = 'block';
                                     showSecondScreenFlg = false;
@@ -431,7 +431,7 @@ document.getElementById("registerFaceButton").addEventListener("click", function
                                     //info = CCWalletInterface.SearchFaces(sbuser, gckid, base64String);
                                 }
                             } else {
-                                setMessage("GC MAllのユーザーQR【識別番号・利用券番・利用者名】をご利用ください。", "show_message");
+                                setMessage("QRコードの読取りに失敗しました。GC MALL発行のQRコードをかざしてください。", "show_message");
                                 document.getElementById('transitContainer').style.display = 'none';
                                 document.getElementById('authContainer').style.display = 'block';
                                 showSecondScreenFlg = false;
@@ -457,7 +457,7 @@ document.getElementById("registerFaceButton").addEventListener("click", function
                         showSecondScreenFlg = true;
                     }
                 } else if (numberOfFaces > 1) {
-                    setMessage("複数の顔が検出されましたので、再撮影してください。", "show_message");
+                    setMessage("複数の顔が検出されたため、顔を認証できませんでした。もう一度やり直してください。", "show_message");
                     document.getElementById('transitContainer').style.display = 'none';
                     document.getElementById('authContainer').style.display = 'block';
                 }
@@ -533,7 +533,7 @@ document.getElementById("faceButton").addEventListener("click", function() {
                     if (numberOfFaces === 0) {
                         document.getElementById('transitContainer').style.display = 'none';
                         document.getElementById('authContainer').style.display = 'block';
-                    setMessage("顔が検出されませんでしたので、再撮影してください。", "show_message");
+                    setMessage("顔を認証できませんでした。もう一度やり直してください。", "show_message");
                 } else if (numberOfFaces === 1) {
                     console.log("One face detected.");
                     const base64String = facesArray[0].image64;
@@ -544,7 +544,7 @@ document.getElementById("faceButton").addEventListener("click", function() {
                     if (info.includes(errorsSubstring)) 
                     {
                         showSecondScreenFlg = false;
-                        setMessage("顔が登録されませんので、「顔認証登録」ボタンで顔を登録してください。。", "show_message");
+                        setMessage("顔を認証できませんでした。「顔認証登録」ボタンから顔を登録してください。", "show_message");
                          document.getElementById('transitContainer').style.display = 'none';
                           document.getElementById('authContainer').style.display = 'block';
 
@@ -591,7 +591,7 @@ document.getElementById("faceButton").addEventListener("click", function() {
                         showSecondScreenFlg = true;
                     }
                 } else if (numberOfFaces > 1) {
-                    setMessage("複数の顔が検出されましたので、再撮影してください。", "show_message");
+                    setMessage("複数の顔が検出されたため、顔を認証できませんでした。もう一度やり直してください。", "show_message");
                     document.getElementById('transitContainer').style.display = 'none';
                     document.getElementById('authContainer').style.display = 'block';
                 }
@@ -633,7 +633,7 @@ document.getElementById("faceButton").addEventListener("click", function() {
                   }else{
                       document.getElementById('transitContainer').style.display = 'none';
                       document.getElementById('authContainer').style.display = 'block';
-                      message = "GC MAllのユーザーQR【識別番号・利用券番・利用者名】をご利用ください。";
+                      message = "QRコードの読取りに失敗しました。GC MALL発行のQRコードをかざしてください。";
                       setMessage(message,"show_message")
                   }
               }else{
@@ -766,7 +766,7 @@ function checkValueInQrstrList(valueToCheck) {
                 if(total==0){
                     document.getElementById('mainContainer').style.display = 'block';
                     document.getElementById('transitContainer').style.display = 'none';
-                    setMessage("商品がありません。商品を読み込ませた後に支払いをするか、終了ボタンを押してください。","show_message")
+                    setMessage("商品が読み込まれていません。商品を読み込んでください。","show_message")
                 }
                 else{
                     let isFirstIteration = true;
