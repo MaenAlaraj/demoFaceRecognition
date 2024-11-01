@@ -426,17 +426,23 @@ document.getElementById("registerFaceButton").addEventListener("click", function
                                     document.getElementById('transitContainer').style.display = 'none';
                                     document.getElementById('authContainer').style.display = 'block';
                                     showSecondScreenFlg = false;
-                                } else {
+                                } 
+                                else 
+                                {
                                     setMessage("顔が登録されました。", "show_message");
                                     //info = CCWalletInterface.SearchFaces(sbuser, gckid, base64String);
                                 }
-                            } else {
+                            } 
+                            else 
+                            {
                                 setMessage("QRコードの読取りに失敗しました。GC MALL発行のQRコードをかざしてください。", "show_message");
                                 document.getElementById('transitContainer').style.display = 'none';
                                 document.getElementById('authContainer').style.display = 'block';
                                 showSecondScreenFlg = false;
                             }
-                        } else {
+                        } 
+                        else 
+                        {
                             showSecondScreenFlg = false;
                             document.getElementById('transitContainer').style.display = 'none';
                             document.getElementById('authContainer').style.display = 'block';
