@@ -383,6 +383,7 @@ document.getElementById("logoutButton").addEventListener("click", function() {
 
 
 document.getElementById("registerFaceButton").addEventListener("click", function() {
+    document.getElementById('registerFaceButton').disabled = true
     document.getElementById('authContainer').style.display = 'none';
     document.getElementById('transitContainer').style.display = 'block';
     requestAnimationFrame(function() {
@@ -394,6 +395,7 @@ document.getElementById("registerFaceButton").addEventListener("click", function
                 console.log(resultJsonString);
                 if (resultJsonString === "")
                 {
+                        document.getElementById('registerFaceButton').disabled = false
                         document.getElementById('authContainer').style.display = 'block';
                          document.getElementById('transitContainer').style.display = 'none';
                 }else{
@@ -401,6 +403,7 @@ document.getElementById("registerFaceButton").addEventListener("click", function
                     const facesArray = resultJsonObject.Faces;
                     const numberOfFaces = facesArray.length;
                     if (numberOfFaces === 0) {
+                        document.getElementById('registerFaceButton').disabled = false
                         document.getElementById('authContainer').style.display = 'block';
                         document.getElementById('transitContainer').style.display = 'none';
                     setMessage("顔を認証できませんでした。もう一度やり直してください。", "show_message");
@@ -446,12 +449,14 @@ document.getElementById("registerFaceButton").addEventListener("click", function
                             showSecondScreenFlg = false;
                             document.getElementById('transitContainer').style.display = 'none';
                             document.getElementById('authContainer').style.display = 'block';
+                            document.getElementById('registerFaceButton').disabled = false
                         }
                     //}
 
                     if (showSecondScreenFlg !== false) {
                         document.getElementById('transitContainer').style.display = 'none';
                         document.getElementById('authContainer').style.display = 'block';
+                        document.getElementById('registerFaceButton').disabled = false
                         /*var CCW_FaceResponse_LIST = info.split("：");
                         var userID = CCW_FaceResponse_LIST[1].replace(/\s/g, "");
                         setMessage("GCユーザー:" + CCW_FaceResponse_LIST[1], "user");
@@ -466,6 +471,7 @@ document.getElementById("registerFaceButton").addEventListener("click", function
                     setMessage("複数の顔が検出されたため、顔を認証できませんでした。もう一度やり直してください。", "show_message");
                     document.getElementById('transitContainer').style.display = 'none';
                     document.getElementById('authContainer').style.display = 'block';
+                    document.getElementById('registerFaceButton').disabled = false
                 }
                 }
             } catch (error) {
