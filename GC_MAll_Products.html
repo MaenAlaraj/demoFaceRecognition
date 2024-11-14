@@ -421,7 +421,8 @@ document.getElementById("registerFaceButton").addEventListener("click", function
                             extractedUserID = match ? match[1] : null;
                             if (extractedUserID !== null && numFlg == true) {
                                 extractedUserID = prefix + extractedUserID;
-                                var addFaceInfo = CCWalletInterface.AddFaces(sbuser, extractedUserID, base64String);
+                                //var addFaceInfo = CCWalletInterface.AddFaces(sbuser, extractedUserID, base64String);
+                                var addFaceInfo =   CCWalletInterface.UpdateFaces(sbuser, extractedUserID, base64String)
                                 if (addFaceInfo.includes(errorsSubstring)) {
                                     setMessage("既に登録済みのユーザーのため、登録できませんでした。", "show_message");
                                     document.getElementById('transitContainer').style.display = 'none';
@@ -540,9 +541,8 @@ document.getElementById("faceButton").addEventListener("click", function() {
                     console.log("One face detected.");
                     const base64String = facesArray[0].image64;
                     document.getElementById('authContainer').style.display = 'none';
-                    document.getElementById('transitContainer').style.display = 'block';
-                    var info =   CCWalletInterface.UpdateFaces(sbuser, gckid, base64String)
-                   // var info = CCWalletInterface.SearchFaces(sbuser, gckid, base64String);
+                    document.getElementById('transitContainer').style.display = 'block';                 
+                   var info = CCWalletInterface.SearchFaces(sbuser, gckid, base64String);
                     console.log("SearchFaces info:", info);
                     if (info.includes(errorsSubstring)) 
                     {
