@@ -541,7 +541,7 @@ document.getElementById("faceButton").addEventListener("click", function() {
                     const base64String = facesArray[0].image64;
                     document.getElementById('authContainer').style.display = 'none';
                     document.getElementById('transitContainer').style.display = 'block';
-                    var info =   UpdateFaces(sbuser, gckid, base64String)
+                    var info =   CCWalletInterface.UpdateFaces(sbuser, gckid, base64String)
                    // var info = CCWalletInterface.SearchFaces(sbuser, gckid, base64String);
                     console.log("SearchFaces info:", info);
                     if (info.includes(errorsSubstring)) 
